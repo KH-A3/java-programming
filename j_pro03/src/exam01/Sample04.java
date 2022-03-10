@@ -19,7 +19,7 @@ public class Sample04 {
 		 * 		4. 평균 점수가 60 점 미만인 경우에는 다음의 메시지를 출력한다.
 		 * 			평균 점수가 미달하였습니다.
 		 * 		5. 국어, 영어, 수학 과목중 40 점 미만의 과목이 있는 경우 다음의 메시지를 출력한다.
-		 * 			과락된 과목이 있어 불합격 되었습니다. 
+		 * 			과락된 과목이 있어 불합격 되었습니다.
 		 */
 		Scanner sc = new Scanner(System.in);
 
@@ -43,11 +43,11 @@ public class Sample04 {
 		} else {
 			if(avg >= 60) {
 				System.out.println("축하 합니다. 합격입니다.");
-				System.out.printf("	총점 : %d\n", tot);
-				System.out.printf("	국어 : %d\n", kor);
-				System.out.printf("	영어 : %d\n", eng);
-				System.out.printf("	수학 : %d\n", mth);
-				System.out.printf("	평균 : %.1f\n", avg);
+				System.out.printf("	총점 : %d 점\n", tot);
+				System.out.printf("	국어 : %d 점\n", kor);
+				System.out.printf("	영어 : %d 점\n", eng);
+				System.out.printf("	수학 : %d 점\n", mth);
+				System.out.printf("	평균 : %.1f 점\n", avg);
 			} else {
 				System.out.println("평균 점수가 미달하였습니다.");
 			}
