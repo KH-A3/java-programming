@@ -11,6 +11,7 @@ public class Sample15 {
 		String name = "", player = "", sCom = "";
 		int computer = 0;
 		int result = 0;
+		int wCnt = 0, dCnt = 0, lCnt = 0;
 		
 		System.out.print("당신의 이름을 입력하세요. : ");
 		name = sc.nextLine();
@@ -29,6 +30,7 @@ public class Sample15 {
 			}
 			
 			if(player.equals("exit")) {
+				System.out.printf("%d전 %d승 %d무 %d패\n", wCnt + dCnt + lCnt, wCnt, dCnt, lCnt);
 				break;
 			} else if(player.equals("가위") || player.equals("바위") || player.equals("보")) {
 				System.out.println("컴퓨터 : " + sCom);
@@ -61,11 +63,14 @@ public class Sample15 {
 				
 				switch(result) {
 					case -1:
-						System.out.println("졌습니다.");	break;
+						System.out.println("졌습니다.");
+						lCnt++;	break;
 					case 0:
-						System.out.println("비겼습니다.");	break;
+						System.out.println("비겼습니다.");
+						dCnt++;	break;
 					case 1:
 						System.out.println("이겼습니다.");
+						wCnt++;
 				}
 			} else {
 				System.out.println("잘못 입력했습니다. 다시 입력하세요.");
