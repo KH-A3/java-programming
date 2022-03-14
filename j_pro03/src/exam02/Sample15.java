@@ -35,10 +35,10 @@ public class Sample15 {
 			} else if(player.equals("가위") || player.equals("바위") || player.equals("보")) {
 				System.out.println("컴퓨터 : " + sCom);
 				System.out.println(name + " : " + player);
+				
+				result = 0;
 				if(player.equals("가위")) {
-					if(computer == 0) {
-						result = 0;
-					} else if(computer == 1) {
+					if(computer == 1) {
 						result = -1;
 					} else if(computer == 2) {
 						result = 1;
@@ -46,8 +46,6 @@ public class Sample15 {
 				} else if(player.equals("바위")) {
 					if(computer == 0) {
 						result = 1;
-					} else if(computer == 1) {
-						result = 0;
 					} else if(computer == 2) {
 						result = -1;
 					}
@@ -56,8 +54,6 @@ public class Sample15 {
 						result = -1;
 					} else if(computer == 1) {
 						result = 1;
-					} else if(computer == 2) {
-						result = 0;
 					}
 				}
 				
