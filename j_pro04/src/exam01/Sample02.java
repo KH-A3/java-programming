@@ -54,9 +54,9 @@ public class Sample02 {
 		 * 배열의 크기가 5 인 문자 배열을 선언하고 'A' ~ 'E' 까지의 문자값으로 초기화 한다.
 		 */
 		char[] arr4 = new char[5];
-		char init3 = 'A';
+		
 		for(int i = 0; i < 5; i++) {
-			arr4[i] = init3++;
+			arr4[i] = (char)('A' + i);
 		}
 		
 		// 결과 확인용 출력
