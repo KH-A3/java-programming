@@ -30,10 +30,19 @@ public class Sample11 {
 		int i = 0;
 		for(;;) {
 			System.out.printf("%d 번째 정수값 입력 : ", i + 1);
-			int num = sc.nextInt();
 			
-			if(num == -1) {
-				break;
+			int num = 0;
+			String other = "";
+			if(sc.hasNextInt()) {
+				num = sc.nextInt();	sc.nextLine();
+			} else {
+				other = sc.nextLine();
+				if(other.equals("exit")) {
+					break;
+				} else {
+					System.out.println("정수 값 또는 exit 를 입력하세요.");
+					continue;
+				}
 			}
 			
 			int[] temp = Arrays.copyOf(arr1, arr1.length + 1);
