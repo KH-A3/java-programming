@@ -194,6 +194,36 @@ public class Sample01 {
 		System.out.println("3. 출력 결과");
 		System.out.println("\t" + Arrays.toString(arr4));
 		System.out.println("\t" + Arrays.toString(arr5));
+		
+		/*
+		 * 4. 짝수/홀수 배열에 있는 값들중 중복된 값이 있는 경우 하나의 값만 남겨 새로운 배열로 만들고 출력한다.
+		 */
+		int[] arr6 = new int[0];
+		int[] arr7 = new int[0];
+		
+		for(int i = 0; i < arr4.length - 1; i++) {
+			if(arr4[i] != -1) {
+				for(int j = i + 1; j < arr4.length; j++) {
+					if(arr4[i] == arr4[j]) {
+						arr4[j] = -1;
+					}
+				}
+			}
+		}
+		
+		for(int i = 0; i < arr4.length; i++) {
+			if(arr4[i] != -1) {
+				int[] temp = new int[arr6.length + 1];
+				System.arraycopy(arr6, 0, temp, 0, arr6.length);
+				arr6 = temp;
+				
+				arr6[arr6.length - 1] = arr4[i];
+			}
+		}
+		
+		System.out.println("4. 출력 결과");
+		System.out.println("\t" + Arrays.toString(arr6));
+//		System.out.println("\t" + Arrays.toString(arr5));
 	}
 
 }
