@@ -44,6 +44,9 @@ public class Sample01 {
 		 * 3. 2번 문제까지 진행하여 만들어진 3개의 배열을 이용하여 짝수값만 저장되어 있는 배열과 홀수값만 저장
 		 *    되어 있는 배열을 만들고 짝수 배열과 홀수 배열을 출력한다.
 		 */
+		
+		// 첫번째 방법
+		/*
 		int[] arr4 = new int[30];
 		int[] arr5 = new int[30];
 		int idx1 = 0, idx2 = 0;
@@ -80,6 +83,63 @@ public class Sample01 {
 		
 		arr4 = Arrays.copyOf(arr4, idx1);
 		arr5 = Arrays.copyOf(arr5, idx2);
+		*/
+		
+		// 두번째 방법
+		/*
+		int[] arr4;
+		int[] arr5;
+		int cnt1 = 0, cnt2 = 0;
+		for(int i = 0; i < arr1.length; i++) {
+			if(arr1[i] % 2 == 0) {
+				cnt1++;
+			} else {
+				cnt2++;
+			}
+			
+			if(arr2[i] % 2 == 0) {
+				cnt1++;
+			} else {
+				cnt2++;
+			}
+			
+			if(arr3[i] % 2 == 0) {
+				cnt1++;
+			} else {
+				cnt2++;
+			}
+		}
+		
+		arr4 = new int[cnt1];
+		arr5 = new int[cnt2];
+		int idx1 = 0, idx2 = 0;
+		
+		for(int i = 0; i < arr1.length; i++) {
+			if(arr1[i] % 2 == 0) {
+				arr4[idx1] = arr1[i];
+				idx1++;
+			} else {
+				arr5[idx2] = arr1[i];
+				idx2++;
+			}
+			
+			if(arr2[i] % 2 == 0) {
+				arr4[idx1] = arr2[i];
+				idx1++;
+			} else {
+				arr5[idx2] = arr2[i];
+				idx2++;
+			}
+			
+			if(arr3[i] % 2 == 0) {
+				arr4[idx1] = arr3[i];
+				idx1++;
+			} else {
+				arr5[idx2] = arr3[i];
+				idx2++;
+			}
+		}
+		*/
 		
 		System.out.println("3. 출력 결과");
 		System.out.println("\t" + Arrays.toString(arr4));
