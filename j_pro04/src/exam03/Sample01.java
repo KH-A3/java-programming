@@ -199,7 +199,7 @@ public class Sample01 {
 		 * 4. 짝수/홀수 배열에 있는 값들중 중복된 값이 있는 경우 하나의 값만 남겨 새로운 배열로 만들고 출력한다.
 		 */
 		int[] arr6 = new int[0];
-		int[] arr7 = new int[0];
+		int[] arr7 = new int[1];
 		
 		for(int i = 0; i < arr4.length - 1; i++) {
 			if(arr4[i] != -1) {
@@ -221,9 +221,24 @@ public class Sample01 {
 			}
 		}
 		
+		arr7[0] = arr5[0];
+		for(int i = 1; i < arr5.length; i++) {
+			boolean dup = false;
+			for(int j = 0; j < arr7.length; j++) {
+				if(arr7[j] == arr5[i]) {
+					dup = true;
+					break;
+				}
+			}
+			if(!dup) {
+				arr7 = Arrays.copyOf(arr7, arr7.length + 1);
+				arr7[arr7.length - 1] = arr5[i];
+			}
+		}
+		
 		System.out.println("4. 출력 결과");
 		System.out.println("\t" + Arrays.toString(arr6));
-//		System.out.println("\t" + Arrays.toString(arr5));
+		System.out.println("\t" + Arrays.toString(arr7));
 	}
 
 }
