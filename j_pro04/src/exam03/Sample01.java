@@ -239,6 +239,46 @@ public class Sample01 {
 		System.out.println("4. 출력 결과");
 		System.out.println("\t" + Arrays.toString(arr6));
 		System.out.println("\t" + Arrays.toString(arr7));
+		
+		/*
+		 * 5. 짝수/홀수 배열에 있는 값을 작은값 부터 큰값 순으로 정렬된 배열을 만들고 출력한다.
+		 */
+		int[] arr8 = arr6.clone();
+		int[] arr9 = arr7.clone();
+		
+		for(int i = 0; i < arr8.length - 1; i++) {
+			for(int j = i + 1; j < arr8.length; j++) {
+				if(arr8[i] > arr8[j]) {
+					int temp = arr8[j];
+					arr8[j] = arr8[i];
+					arr8[i] = temp;
+				}
+			}
+		}
+		
+		for(int i = 0; i < arr9.length - 1; i++) {
+			for(int j = i + 1; j < arr9.length; j++) {
+				if(arr9[i] > arr9[j]) {
+					int temp = arr9[j];
+					arr9[j] = arr9[i];
+					arr9[i] = temp;
+				}
+			}
+		}
+		
+		System.out.println("5. 출력 결과");
+		System.out.println("\t" + Arrays.toString(arr8));
+		System.out.println("\t" + Arrays.toString(arr9));
+		
+		/*
+		 * 6. 짝수/홀수 배열로 나누어져 있는 것을 하나의 배열로 합쳐서 하나의 배열로 만들고 출력한다.
+		 */
+		int[] arr10 = new int[arr8.length + arr9.length];
+		System.arraycopy(arr8, 0, arr10, 0, arr8.length);
+		System.arraycopy(arr9, 0, arr10, arr8.length, arr9.length);
+		
+		System.out.println("6. 출력 결과");
+		System.out.println("\t" + Arrays.toString(arr10));
 	}
 
 }
