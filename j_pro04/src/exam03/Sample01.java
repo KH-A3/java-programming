@@ -141,6 +141,56 @@ public class Sample01 {
 		}
 		*/
 		
+		// 세번째 방법
+		int[] arr4 = new int[0];
+		int[] arr5 = new int[0];
+		
+		for(int i = 0; i < arr1.length; i++) {
+			int[] temp;
+			
+			if(arr1[i] % 2 == 0) {
+				temp = new int[arr4.length + 1];
+				System.arraycopy(arr4, 0, temp, 0, arr4.length);
+				arr4 = temp;
+				
+				arr4[arr4.length - 1] = arr1[i];
+			} else {
+				temp = new int[arr5.length + 1];
+				System.arraycopy(arr5, 0, temp, 0, arr5.length);
+				arr5 = temp;
+				
+				arr5[arr5.length - 1] = arr1[i];
+			}
+			
+			if(arr2[i] % 2 == 0) {
+				temp = new int[arr4.length + 1];
+				System.arraycopy(arr4, 0, temp, 0, arr4.length);
+				arr4 = temp;
+				
+				arr4[arr4.length - 1] = arr2[i];
+			} else {
+				temp = new int[arr5.length + 1];
+				System.arraycopy(arr5, 0, temp, 0, arr5.length);
+				arr5 = temp;
+				
+				arr5[arr5.length - 1] = arr2[i];
+			}
+			
+			if(arr3[i] % 2 == 0) {
+				temp = new int[arr4.length + 1];
+				System.arraycopy(arr4, 0, temp, 0, arr4.length);
+				arr4 = temp;
+				
+				arr4[arr4.length - 1] = arr3[i];
+			} else {
+				temp = new int[arr5.length + 1];
+				System.arraycopy(arr5, 0, temp, 0, arr5.length);
+				arr5 = temp;
+				
+				arr5[arr5.length - 1] = arr3[i];
+			}
+		}
+		
 		System.out.println("3. 출력 결과");
 		System.out.println("\t" + Arrays.toString(arr4));
 		System.out.println("\t" + Arrays.toString(arr5));
