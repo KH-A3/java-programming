@@ -1,8 +1,25 @@
 package exam02;
 
 public class Page {
-	private int pageNumber;	// 페이지 번호
+	private int pageNumber;			// 페이지 번호
 	private int limitPageNumber;	// 최대 페이지 번호
+	
+	public Page(int limitPageNumber) {
+		this.limitPageNumber = limitPageNumber;
+	}
+	
+	public Page(int pageNumber, int limitPageNumber) {
+		this.pageNumber = pageNumber;
+		this.limitPageNumber = limitPageNumber;
+	}
+	
+	public int getPageNumber() {
+		return this.pageNumber;
+	}
+	
+	public int getLimitPageNumber() {
+		return this.limitPageNumber;
+	}
 	
 	public void movePage(int pageNumber) {
 		if(pageNumber <= limitPageNumber && pageNumber >= 1) {
