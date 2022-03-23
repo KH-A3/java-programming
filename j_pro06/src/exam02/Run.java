@@ -1,5 +1,7 @@
 package exam02;
 
+import java.util.Arrays;
+
 public class Run {
 
 	public static void main(String[] args) {
@@ -28,6 +30,12 @@ public class Run {
 		
 		report.add("사회", 92.4);	// 배열에 해당 정보를 추가
 		System.out.println(report.getGrade("사회"));
+		
+		System.out.println(Arrays.toString(report.getSubjects()));
+		report.remove(2);
+		System.out.println(Arrays.toString(report.getSubjects()));
+		report.remove("과학");
+		System.out.println(Arrays.toString(report.getSubjects()));
 	}
 
 }

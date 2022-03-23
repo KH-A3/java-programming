@@ -59,8 +59,43 @@ public class ReportGrade {
 		this.grades[len] = grade;
 	}
 	
-	private int _findIndex(String subject) {
+	public void remove(String subject) {
+		// 기본 배열에 저장되어 있는 과목 정보와 점수 정보를 삭제.
+		// 배열에 없는 과목명의 경우. "해당 과목이 존재하지 않습니다." 출력
+		
+		int index = this._findIndex(subject);
+		if(index == -1) {
+			System.out.println("해당 과목이 존재하지 않습니다.");
+		}
+		this.remove(index);
+	}
+	
+	public void remove(int index) {
+		// 기본 배열에 저장되어 있는 과목 정보와 점수 정보를 삭제.
+		// 인덱스의 범위를 벗어나는 경우. "인덱스의 범위를 벗어났습니다." 출력
+		
+		if(index >= this.subjects.length && index < 0) {
+			System.out.println("인덱스의 범위를 벗어났습니다.");
+			return;	// 메서드 종료
+		}
+		
+		String[] temp1 = new String[this.subjects.length - 1];
+		double[] temp2 = new double[this.grades.length - 1];
 		int idx = 0;
+		
+		for(int i = 0; i < this.subjects.length; i++) {
+			if(i != index) {
+				temp1[idx] = this.subjects[i];
+				temp2[idx] = this.grades[i];
+				idx++;
+			}
+		}
+		this.subjects = temp1;
+		this.grades = temp2;
+	}
+	
+	private int _findIndex(String subject) {
+		int idx = -1;
 		for(int i = 0; i < this.subjects.length; i++) {
 			String s = this.subjects[i];
 			if(subject.equals(s)) {
