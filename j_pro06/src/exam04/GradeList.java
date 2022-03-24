@@ -5,6 +5,10 @@ import java.util.Arrays;
 public class GradeList {
 	private Grade[] gList;
 	
+	public GradeList() {
+		this.gList = new Grade[0];
+	}
+	
 	// 추가
 	public void add(Grade grade) {
 		this.gList = Arrays.copyOf(this.gList, length() + 1);
@@ -108,6 +112,31 @@ public class GradeList {
 	}
 	
 	// 조회
+	//     - 과목명으로 점수 조회
+	//     - 인덱스로 과목명 조회
+	//     - 인덱스로 과목명, 점수 조회
+	public double getScore(String name) {
+		int idx = findIndex(name);
+		if(idx >= 0) {
+			return this.gList[idx].getScore();
+		}
+		return 0;
+	}
+	
+	public String getName(int index) {
+		if(_validIndex(index)) {
+			return this.gList[index].getName();
+		}
+		return null;
+	}
+	
+	public Grade getGrade(int index) {
+		if(_validIndex(index)) {
+			Grade data = new Grade(this.gList[index].getName(), this.gList[index].getScore());
+			return data;
+		}
+		return null;
+	}
 	
 	public int findIndex(String name) {
 		for(int i = 0; i < length(); i++) {
