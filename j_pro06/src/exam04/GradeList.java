@@ -83,7 +83,29 @@ public class GradeList {
 	}
 	
 	// 삭제
+	public void remove(String name) {
+		int index = findIndex(name);
+		if(index >= 0) {
+			_remove(index);
+		}
+	}
 	
+	public void remove(int index) {
+		if(_validIndex(index)) {
+			_remove(index);
+		}
+	}
+	
+	private void _remove(int index) {
+		int idx = 0;
+		Grade[] temp = new Grade[length() - 1];
+		for(int i = 0; i < length(); i++) {
+			if(i != index) {
+				temp[idx++] = this.gList[i];
+			}
+		}
+		this.gList = temp;
+	}
 	
 	// 조회
 	
