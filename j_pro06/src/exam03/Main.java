@@ -51,9 +51,13 @@ public class Main {
 		System.out.println(pList.findIndex("강지원"));
 		
 		// PersonList에 저장된 Person 객체를 삭제
-		// pList.remove(1);	// 1번 인덱스에 있는 객체 삭제
-		// pList.remove("박지수");	// 박지수 이름을 찾아서 삭제
+		System.out.println(pList.get(1).getName());
+		pList.remove(1);	// 1번 인덱스에 있는 객체 삭제
+		System.out.println(pList.get(1).getName());
 		
+		System.out.println(pList.findIndex("박지수"));
+		pList.remove("박지수");	// 박지수 이름을 찾아서 삭제
+		System.out.println(pList.findIndex("박지수"));
 	}
 
 }
