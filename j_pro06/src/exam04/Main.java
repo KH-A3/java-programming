@@ -1,6 +1,8 @@
 package exam04;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
@@ -30,6 +32,41 @@ public class Main {
 		
 		for(int i = 0; i < datas.length(); i++) {
 			System.out.println(datas.getName(i) + ":" + datas.getScore(i));
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		GradeList gList = new GradeList();
+		
+		while(true) {
+			do {
+				System.out.println("1. 조회");
+				System.out.println("2. 추가");
+				System.out.println("3. 수정");
+				System.out.println("4. 삭제");
+				System.out.println("9. 종료");
+				System.out.print(": ");
+			} while(!sc.hasNextInt());
+			
+			int menu = sc.nextInt();	sc.nextLine();
+			
+			switch(menu) {
+				case 1:
+					System.out.println("조회 기능 수행");
+					break;
+				case 2:
+					System.out.println("추가 기능 수행");
+					break;
+				case 3:
+					System.out.println("수정 기능 수행");
+					break;
+				case 4:
+					System.out.println("삭제 기능 수행");
+					break;
+				case 9:
+					System.out.println("프로그램 종료");
+					System.exit(0);
+			}
+			System.out.println("\n\n\n\n\n");
 		}
 	}
 
