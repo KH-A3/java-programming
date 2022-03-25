@@ -116,47 +116,111 @@ public class GradeList {
 	//     - 인덱스로 과목명 조회
 	//     - 인덱스로 과목명, 점수 조회
 	public double getScore(int index) {
-		return 0;
+		return this.gList[index].getScore();
 	}
 	
 	public double getAvg() {
 		// 과목 배열에 있는 점수들의 평균
-		return 0;
+		return getTotal() / length();
 	}
 	
 	public double getTotal() {
 		// 과목 배열에 있는 모든 점수들의 합
-		return 0;
+		double tot = 0;
+		for(int i = 0; i < length(); i++) {
+			tot += this.gList[i].getScore();
+		}
+		return tot;
 	}
 	
 	public String[] getUnder() {
 		// 100점 만점을 기준으로 40점 미만에 해당하는 과목 정보를 구함
-		return null;
+		return getUnder(40);
 	}
 	
 	public String[] getUnder(double score) {
 		// 제시한 score 미만에 해당하는 과목 정보를 구함
-		return null;
+		String[] result = new String[0];
+		
+		for(int i = 0; i < length(); i++) {
+			if(this.gList[i].getScore() < score) {
+				result = Arrays.copyOf(result, result.length + 1);
+				result[result.length - 1] = this.gList[i].getName();
+			}
+		}
+		return result;
 	}
 	
 	public String getTop() {
 		// 최고 득점 과목을 구함
-		return null;
+		Grade high = this.gList[0];
+		
+		for(int i = 1; i < length(); i++) {
+			if(high.getScore() < this.gList[i].getScore()) {
+				high = this.gList[i];
+			}
+		}
+		return high.getName();
 	}
 	
 	public String[] getTop(int count) {
 		// 최고 득점 과목을 count 만큼 구함
-		return null;
+		Grade[] tArr = this.gList.clone();
+		
+		for(int i = 0; i < tArr.length - 1; i++) {
+			for(int j = i + 1; j < tArr.length; j++) {
+				if(tArr[i].getScore() < tArr[j].getScore()) {
+					Grade temp = tArr[j];
+					tArr[j] = tArr[i];
+					tArr[i] = temp;
+				}
+			}
+		}
+		
+		Grade[] high = Arrays.copyOf(tArr, count);
+		
+		String[] result = new String[count];
+		for(int i = 0; i < high.length; i++) {
+			result[i] = high[i].getName();
+		}
+		
+		return result;
 	}
 	
 	public String getBottom() {
 		// 최저 득점 과목을 구함
-		return null;
+		Grade low = this.gList[0];
+		
+		for(int i = 1; i < length(); i++) {
+			if(low.getScore() > this.gList[i].getScore()) {
+				low = this.gList[i];
+			}
+		}
+		return low.getName();
 	}
 	
 	public String[] getBottom(int count) {
 		// 최저 득점 과목을 count 만큼 구함
-		return null;
+		Grade[] tArr = this.gList.clone();
+		
+		for(int i = 0; i < tArr.length - 1; i++) {
+			for(int j = i + 1; j < tArr.length; j++) {
+				if(tArr[i].getScore() > tArr[j].getScore()) {
+					Grade temp = tArr[j];
+					tArr[j] = tArr[i];
+					tArr[i] = temp;
+				}
+			}
+		}
+		
+		Grade[] low = Arrays.copyOf(tArr, count);
+		
+		String[] result = new String[count];
+		for(int i = 0; i < low.length; i++) {
+			result[i] = low[i].getName();
+		}
+		
+		return result;
 	}
 	
 	public double getScore(String name) {

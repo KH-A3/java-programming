@@ -1,5 +1,7 @@
 package exam04;
 
+import java.util.Arrays;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -13,12 +15,17 @@ public class Main {
 		 *        만든다. 
 		 */
 		GradeList datas = new GradeList();
-		datas.add(new Grade("국어", 67.8));
-		System.out.println("국어 : " + datas.getScore("국어"));
+		datas.add("영어", 56);
+		datas.add("국어", 37);
+		datas.add("수학", 67);
+		datas.add("과학", 39);
 		
-		Grade g = datas.getGrade(0);
-		g.setName("영어");	g.setScore(78.7);
-		System.out.println("영어 : " + g.getScore());
+		System.out.println(Arrays.toString(datas.getUnder()));
+		System.out.println(Arrays.toString(datas.getUnder(60)));
+		System.out.println(datas.getTop());
+		System.out.println(Arrays.toString(datas.getTop(2)));
+		System.out.println(datas.getBottom());
+		System.out.println(Arrays.toString(datas.getBottom(2)));
 	}
 
 }
