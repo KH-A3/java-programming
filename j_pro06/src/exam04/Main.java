@@ -26,6 +26,11 @@ public class Main {
 		System.out.println(Arrays.toString(datas.getTop(2)));
 		System.out.println(datas.getBottom());
 		System.out.println(Arrays.toString(datas.getBottom(2)));
+		datas.sort(false);
+		
+		for(int i = 0; i < datas.length(); i++) {
+			System.out.println(datas.getName(i) + ":" + datas.getScore(i));
+		}
 	}
 
 }

@@ -153,31 +153,13 @@ public class GradeList {
 	
 	public String getTop() {
 		// 최고 득점 과목을 구함
-		Grade high = this.gList[0];
-		
-		for(int i = 1; i < length(); i++) {
-			if(high.getScore() < this.gList[i].getScore()) {
-				high = this.gList[i];
-			}
-		}
-		return high.getName();
+		return getTop(1)[0];
 	}
 	
 	public String[] getTop(int count) {
 		// 최고 득점 과목을 count 만큼 구함
-		Grade[] tArr = this.gList.clone();
-		
-		for(int i = 0; i < tArr.length - 1; i++) {
-			for(int j = i + 1; j < tArr.length; j++) {
-				if(tArr[i].getScore() < tArr[j].getScore()) {
-					Grade temp = tArr[j];
-					tArr[j] = tArr[i];
-					tArr[i] = temp;
-				}
-			}
-		}
-		
-		Grade[] high = Arrays.copyOf(tArr, count);
+		sort(true);
+		Grade[] high = Arrays.copyOf(this.gList, count);
 		
 		String[] result = new String[count];
 		for(int i = 0; i < high.length; i++) {
@@ -189,31 +171,13 @@ public class GradeList {
 	
 	public String getBottom() {
 		// 최저 득점 과목을 구함
-		Grade low = this.gList[0];
-		
-		for(int i = 1; i < length(); i++) {
-			if(low.getScore() > this.gList[i].getScore()) {
-				low = this.gList[i];
-			}
-		}
-		return low.getName();
+		return getBottom(1)[0];
 	}
 	
 	public String[] getBottom(int count) {
 		// 최저 득점 과목을 count 만큼 구함
-		Grade[] tArr = this.gList.clone();
-		
-		for(int i = 0; i < tArr.length - 1; i++) {
-			for(int j = i + 1; j < tArr.length; j++) {
-				if(tArr[i].getScore() > tArr[j].getScore()) {
-					Grade temp = tArr[j];
-					tArr[j] = tArr[i];
-					tArr[i] = temp;
-				}
-			}
-		}
-		
-		Grade[] low = Arrays.copyOf(tArr, count);
+		sort();
+		Grade[] low = Arrays.copyOf(this.gList, count);
 		
 		String[] result = new String[count];
 		for(int i = 0; i < low.length; i++) {
@@ -260,6 +224,36 @@ public class GradeList {
 		return this.gList.length;
 	}
 	
+	// 기존에 정렬과 관련된 기능은 다음의 sort 를 사용하는 것으로 변경한다.
+	public void sort() {
+		// 오름차순으로 정렬
+		for(int i = 0; i < length() - 1; i++) {
+			for(int j = i + 1; j < length(); j++) {
+				if(this.gList[i].getScore() > this.gList[j].getScore()) {
+					Grade temp = this.gList[j];
+					this.gList[j] = this.gList[i];
+					this.gList[i] = temp;
+				}
+			}
+		}
+	}
+	
+	public void sort(boolean descending) {
+		// 내림차순으로 정렬
+		if(descending) {
+			for(int i = 0; i < length() - 1; i++) {
+				for(int j = i + 1; j < length(); j++) {
+					if(this.gList[i].getScore() < this.gList[j].getScore()) {
+						Grade temp = this.gList[j];
+						this.gList[j] = this.gList[i];
+						this.gList[i] = temp;
+					}
+				}
+			}
+		} else {
+			sort();
+		}
+	}
 	
 	
 	// 유효한 범위의 인덱스 인지 확인하는 메서드
