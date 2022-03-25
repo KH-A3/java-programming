@@ -115,6 +115,50 @@ public class GradeList {
 	//     - 과목명으로 점수 조회
 	//     - 인덱스로 과목명 조회
 	//     - 인덱스로 과목명, 점수 조회
+	public double getScore(int index) {
+		return 0;
+	}
+	
+	public double getAvg() {
+		// 과목 배열에 있는 점수들의 평균
+		return 0;
+	}
+	
+	public double getTotal() {
+		// 과목 배열에 있는 모든 점수들의 합
+		return 0;
+	}
+	
+	public String[] getUnder() {
+		// 100점 만점을 기준으로 40점 미만에 해당하는 과목 정보를 구함
+		return null;
+	}
+	
+	public String[] getUnder(double score) {
+		// 제시한 score 미만에 해당하는 과목 정보를 구함
+		return null;
+	}
+	
+	public String getTop() {
+		// 최고 득점 과목을 구함
+		return null;
+	}
+	
+	public String[] getTop(int count) {
+		// 최고 득점 과목을 count 만큼 구함
+		return null;
+	}
+	
+	public String getBottom() {
+		// 최저 득점 과목을 구함
+		return null;
+	}
+	
+	public String[] getBottom(int count) {
+		// 최저 득점 과목을 count 만큼 구함
+		return null;
+	}
+	
 	public double getScore(String name) {
 		int idx = findIndex(name);
 		if(idx >= 0) {
@@ -151,6 +195,8 @@ public class GradeList {
 	public int length() {
 		return this.gList.length;
 	}
+	
+	
 	
 	// 유효한 범위의 인덱스 인지 확인하는 메서드
 	private boolean _validIndex(int index) {
