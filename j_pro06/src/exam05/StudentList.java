@@ -45,10 +45,50 @@ public class StudentList {
 	
 	public void remove(String findName) {
 		int idx = this._findIndex(findName);
-		Student[] temp = new Student[sArr.length - 1];
-		System.arraycopy(sArr, 0, temp, 0, idx);
-		System.arraycopy(sArr, idx + 1, temp, idx, sArr.length - (idx + 1));
-		sArr = temp;
+		this._remove(idx);
+	}
+		
+	public void remove(int classLevel) {
+		while(_findIndex(classLevel) != -1) {
+			int idx = _findIndex(classLevel);
+			this._remove(idx);
+		}
+	}
+	
+	public int[] getClassLevelRoom(String name) {
+		int idx = _findIndex(name);
+		return new int[] {sArr[idx].getClassLevel(), sArr[idx].getClassRoom()};
+	}
+	
+	public String[] getNames(int classLevel) {
+		String[] result = null;
+		for(int i = 0; i < sArr.length; i++) {
+			if(classLevel == sArr[i].getClassLevel()) {
+				if(result == null) {
+					result = new String[0];
+				}
+				result = Arrays.copyOf(result, result.length + 1);
+				result[result.length - 1] = sArr[i].getName();
+			}
+		}
+		
+		return result;
+	}
+	
+	public String[] getNames(int classLevel, int classRoom) {
+		String[] result = null;
+		for(int i = 0; i < sArr.length; i++) {
+			if(classLevel == sArr[i].getClassLevel() &&
+					classRoom == sArr[i].getClassRoom()) {
+				if(result == null) {
+					result = new String[0];
+				}
+				result = Arrays.copyOf(result, result.length + 1);
+				result[result.length - 1] = sArr[i].getName();
+			}
+		}
+		
+		return result;
 	}
 	
 	public int length() {
@@ -59,9 +99,25 @@ public class StudentList {
 		return this._findIndex(name);
 	}
 	
+	private void _remove(int index) {
+		Student[] temp = new Student[sArr.length - 1];
+		System.arraycopy(sArr, 0, temp, 0, index);
+		System.arraycopy(sArr, index + 1, temp, index, sArr.length - (index + 1));
+		sArr = temp;
+	}
+	
 	private int _findIndex(String name) {
 		for(int i = 0; i < sArr.length; i++) {
 			if(name.equals(sArr[i].getName())) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	private int _findIndex(int classLevel) {
+		for(int i = 0; i < sArr.length; i++) {
+			if(classLevel == sArr[i].getClassLevel()) {
 				return i;
 			}
 		}
