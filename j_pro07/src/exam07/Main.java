@@ -18,6 +18,7 @@ public class Main {
 		empArr[3] = e4;	empArr[4] = e5;
 		
 		((DepartmentManager)e3).setTeamManager(true);
+		((DeputyGeneralManager)e4).setHeadManager(true);
 		((Director)e5).setHeadManager(true);
 		
 		for(int m = 1; m <= 30; m++) {
