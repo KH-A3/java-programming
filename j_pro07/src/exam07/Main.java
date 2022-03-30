@@ -34,7 +34,7 @@ public class Main {
 			
 			if((rand.nextInt(9) + 1) % 4 == 0) {
 				int idx = rand.nextInt(4) + 1;
-				System.out.println(empArr[idx].getName() + "이 법카 쏜다~");
+				System.out.println(empArr[idx].getName() + "가(이) 법카 쏜다~");
 				((AssistantManager)empArr[idx]).corpCard(100000);
 			}
 			
