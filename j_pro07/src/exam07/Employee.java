@@ -1,7 +1,7 @@
 package exam07;
 
 // 직원
-public class Employee {
+public abstract class Employee {
 	private String name;
 	private int age;
 	private char gender;
@@ -17,10 +17,7 @@ public class Employee {
 		System.out.printf("월급 %,d 원 지급하였습니다.\n", (int)(pay * 10000));
 	}
 	
-	public void bonus(int month) {
-		double bonus = getSalary() * 0.25;
-		System.out.printf("보너스 %,d 원 지급하였습니다.\n", (int)(bonus * 10000));
-	}
+	public abstract void bonus(int month);
 
 	public String getName() {
 		return name;

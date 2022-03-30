@@ -12,7 +12,8 @@ public class Director extends DeputyGeneralManager {
 	public void bonus(int month) {
 		switch(month) {
 			case 12:
-				super.bonus(month);
+				double bonus = getSalary() * 0.25;
+				System.out.printf("보너스 %,d 원 지급하였습니다.\n", (int)(bonus * 10000));
 		}
 	}
 	
