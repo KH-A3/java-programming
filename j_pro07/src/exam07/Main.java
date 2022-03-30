@@ -1,8 +1,12 @@
 package exam07;
 
+import java.util.Random;
+
 public class Main {
 
 	public static void main(String[] args) {
+		Random rand = new Random();
+		
 		Employee e1 = new Staff("김사원", 28);
 		Employee e2 = new AssistantManager("박대리", 32);
 		Employee e3 = new DepartmentManager("이과장", 38);
@@ -16,19 +20,22 @@ public class Main {
 		((DepartmentManager)e3).setTeamManager(true);
 		((Director)e5).setHeadManager(true);
 		
-		for(int i = 0; i < empArr.length; i++) {			
-			System.out.println(empArr[i].getName() + "의 연봉은 " + empArr[i].getSalary() + "만원");
-			empArr[i].payMonth();
-			empArr[i].bonus();
+		for(int m = 1; m <= 30; m++) {
+			int month = m % 12 == 0 ? 12 : m % 12;
+			System.out.printf("%d 월 급여 지급 내역\n", month);
+			System.out.println("-------------------------------");
+			for(int i = 0; i < empArr.length; i++) {
+				empArr[i].payMonth();
+				empArr[i].bonus(month);
+				
+				
+				System.out.println("-------------------------------");
+			}
 			
-			if(empArr[i] instanceof AssistantManager) {
-				((AssistantManager)empArr[i]).corpCard(5000000);
-			} else if(empArr[i] instanceof DepartmentManager) {
-				((DepartmentManager)empArr[i]).corpCard(5000000);
-			} else if(empArr[i] instanceof DeputyGeneralManager) {
-				((DeputyGeneralManager)empArr[i]).corpCard(5000000);
-			} else if(empArr[i] instanceof Director) {
-				((Director)empArr[i]).corpCard(5000000);
+			if((rand.nextInt(9) + 1) % 4 == 0) {
+				int idx = rand.nextInt(4) + 1;
+				System.out.println(empArr[idx].getName() + "이 법카 쏜다~");
+				((AssistantManager)empArr[idx]).corpCard(100000);
 			}
 			
 			System.out.println("===============================");
