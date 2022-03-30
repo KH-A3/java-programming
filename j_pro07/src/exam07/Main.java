@@ -14,10 +14,23 @@ public class Main {
 		empArr[3] = e4;	empArr[4] = e5;
 		
 		((DepartmentManager)e3).setTeamManager(true);
+		((Director)e5).setHeadManager(true);
 		
 		for(int i = 0; i < empArr.length; i++) {			
 			System.out.println(empArr[i].getName() + "의 연봉은 " + empArr[i].getSalary() + "만원");
 			empArr[i].payMonth();
+			empArr[i].bonus();
+			
+			if(empArr[i] instanceof AssistantManager) {
+				((AssistantManager)empArr[i]).corpCard(5000000);
+			} else if(empArr[i] instanceof DepartmentManager) {
+				((DepartmentManager)empArr[i]).corpCard(5000000);
+			} else if(empArr[i] instanceof DeputyGeneralManager) {
+				((DeputyGeneralManager)empArr[i]).corpCard(5000000);
+			} else if(empArr[i] instanceof Director) {
+				((Director)empArr[i]).corpCard(5000000);
+			}
+			
 			System.out.println("===============================");
 		}
 	}
