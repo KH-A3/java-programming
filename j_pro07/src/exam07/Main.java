@@ -29,6 +29,12 @@ public class Main {
 				empArr[i].payMonth();
 				empArr[i].bonus(month);
 				
+				if(empArr[i] instanceof TeamManager) {
+					((TeamManager)empArr[i]).teamPayBonus();
+				}
+				if(empArr[i] instanceof HeadManager) {
+					((HeadManager)empArr[i]).headPayBonus();
+				}
 				
 				System.out.println("-------------------------------");
 			}
