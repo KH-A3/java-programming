@@ -1,6 +1,6 @@
 package exam09;
 
-public abstract class Customer {
+public abstract class Customer implements Basket, Delivery, Payment {
 	private String name;
 	private int age;
 	private char gender;
@@ -14,20 +14,17 @@ public abstract class Customer {
 	
 	public abstract void buy(String productName, double price);
 	
-	// 환불
-	public abstract boolean refund(String productName);
+	@Override
+	public void add(String productName) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	// 장바구니
-	public abstract boolean basket(String productName, int count);
-	
-	// 배송조회
-	public abstract String searchDelivery(String orderCode);
-	
-	// 포인트적립
-	public abstract int addPoint(int price);
-	
-	// 추천상품
-	public abstract String[] suggestionProduct();
+	@Override
+	public void add(String productName, int count) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public String getName() {
 		return name;

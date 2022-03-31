@@ -32,33 +32,59 @@ public class PremiumCustomer extends Customer {
 	}
 
 	@Override
-	public boolean refund(String productName) {
+	public void modify(String productName, int count) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public boolean basket(String productName, int count) {
+	public void remove(String productName) {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
 
 	@Override
-	public String searchDelivery(String orderCode) {
+	public String[] listUp() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int addPoint(int price) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public String[] suggestionProduct() {
+	public String[] listUp(int count) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public String search(String orderCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String pay(String productCode, int count) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void cancel(String produtCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void confirm(String payCode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void refund(String productName) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 }
