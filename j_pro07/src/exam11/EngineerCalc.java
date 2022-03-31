@@ -1,6 +1,6 @@
 package exam11;
 
-public class EngineerCalc extends BasicCalculator implements EngineerOper {
+public class EngineerCalc extends Calculator implements EngineerOper {
 
 	@Override
 	public int mod(int n1, int n2) {
