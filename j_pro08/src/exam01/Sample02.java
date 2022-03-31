@@ -58,8 +58,9 @@ public class Sample02 {
 		 */
 		System.out.print("전화번호 입력 : ");
 		String input = sc.nextLine();
-		
-		String masking = input.replace(input.substring(input.length() - 4, input.length()), "****");
+		String[] sArr = input.split("-");
+		sArr[2] = "****";
+		String masking = String.join("-", sArr);
 		System.out.println(masking);
 	}
 	
@@ -104,7 +105,7 @@ public class Sample02 {
 		// s2.ex01();
 		// s2.ex02();
 		// s2.ex03();
-		s2.ex04();
+		// s2.ex04();
 	}
 
 }
