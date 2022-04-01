@@ -1,8 +1,15 @@
 package exam01;
 
-public class Sample07 {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
 
-	public static void main(String[] args) {
+public class Sample07 {
+	
+	public void ex01() {
 		/*
 		 * 현재 날짜를 구하고 다음 형식에 맞추어 출력하시오.
 		 *     1. 2022/01/01
@@ -10,7 +17,24 @@ public class Sample07 {
 		 *     3. 1월 1일
 		 *     4. 오전 12시 00분 월요일
 		 */
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy/MM/dd");
+		String strDate = sFormat.format(new Date());
+		System.out.println(strDate);
 		
+		sFormat.applyPattern("yyyy년 MM월 dd일");
+		strDate = sFormat.format(new Date());
+		System.out.println(strDate);
+		
+		sFormat.applyPattern("M월 d일");
+		strDate = sFormat.format(new Date());
+		System.out.println(strDate);
+		
+		sFormat.applyPattern("a hh시 mm분 E요일");
+		strDate = sFormat.format(new Date());
+		System.out.println(strDate);
+	}
+	
+	public void ex02() {
 		/*
 		 * 사용자 입력을 이용하여 현재 날짜에서 n일 을 추가하거나 뺐을 때의
 		 * 날짜가 언제인지를 확인할 수 있게 출력하시오.
@@ -21,11 +45,55 @@ public class Sample07 {
 		 *         일자 : -10
 		 *         현재 날짜에서 10일 전 날짜는 2022년 03월 22일 입니다.
 		 */
+		Scanner sc = new Scanner(System.in);
+		System.out.print("일자 : ");
+		String input = sc.nextLine();
+		int addDay = Integer.parseInt(input);
 		
+		GregorianCalendar g = new GregorianCalendar();
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+		g.add(Calendar.DATE, addDay);
+		
+		String strDate = sFormat.format(g.getTime());
+		String result = "";
+		if(addDay > 0) {
+			result = String.format("현재 날짜에서 %d일 후 날짜는 %s 입니다.", addDay, strDate);
+		} else {
+			result = String.format("현재 날짜에서 %d일 전 날짜는 %s 입니다.", -addDay, strDate);
+		}
+		System.out.println(result);
+	}
+	
+	public void ex03() {
 		/*
 		 * 주민등록 앞 번호의 생년월일을 입력하면 날짜로 변환되어 출력할 수
 		 * 있도록 하시오.
 		 */
+		Scanner sc = new Scanner(System.in);
+		String input = "";
+		while(true) {
+			System.out.print("주민번호 앞자리만 입력 : ");
+			input = sc.nextLine();
+			if(input.matches("\\d{6}")) {
+				break;
+			}
+			System.out.println("주민번호 앞자리 6자만 입력하세요.");
+		}
+		
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyMMdd");
+		try {
+			Date d = sFormat.parse(input);
+			System.out.println(d);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		Sample07 sample = new Sample07();
+		// sample.ex01();
+		// sample.ex02();
+		sample.ex03();
 		
 		/*
 		 * 자신의 올해 생일이 몇일 남았는지 알 수 있도록 해주는 코드를 작성하시오.
