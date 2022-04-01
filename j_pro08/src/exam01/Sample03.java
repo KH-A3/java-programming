@@ -9,9 +9,15 @@ public class Sample03 {
 		 *       추가, 수정, 삭제 하는 작업을 할 수 없다.
 		 *     - StringBuilder, StringBuffer 는 가변의 특징을 가지며, 특정 문자 똔느 문자열을 기존 객체에
 		 *       추가, 수정, 삭제 하는 작업을 할 수 있다.
+		 *     - StringBuilder와 StringBuffer 는 동일한 기능을 제공한다. 단, 멀티쓰레드 관련 기능 중 Thread Safe 기능
+		 *       을 StringBuffer 만 지원을 한다.
+		 *     - Thread Safe 기능은 멀티쓰레드에서 발생할 수 있는 문제중 공유자원에 대한 접근을 하나의 쓰레드만 접근하여
+		 *       사용하도록 Lock 을 걸어 다른 쓰레드가 작업을 하지 못하게 막아주는 기능이다.
 		 */
 		
-		StringBuilder sb = new StringBuilder();
+		// StringBuilder sb = new StringBuilder();
+		StringBuffer sb = new StringBuffer();
+		
 		sb.append("문자열");
 		sb.append("을 뒤에");
 		sb.append(" 추가하는");
