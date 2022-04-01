@@ -88,16 +88,44 @@ public class Sample07 {
 			e.printStackTrace();
 		}
 	}
+	
+	public void ex04() {
+		/*
+		 * 자신의 올해 생일이 몇일 남았는지 알 수 있도록 해주는 코드를 작성하시오.
+		 */
+		GregorianCalendar now = new GregorianCalendar();
+		GregorianCalendar birthDay = new GregorianCalendar();
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy.MM.dd");
+		Scanner sc = new Scanner(System.in);
+		
+		String input = "";
+		while(true) {
+			System.out.print("자신의 생일을 \"월.일\" 형식으로 입력하세요 : ");
+			input = sc.nextLine();
+			
+			if(input.matches("\\d{1,2}\\.\\d{1,2}")) {
+				break;
+			}
+			System.out.println("입력 형식을 다시 확인하세요.");
+		}
+		
+		try {
+			birthDay.setTime(sFormat.parse(now.get(Calendar.YEAR) + "." + input));
+			System.out.println(birthDay.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(now.after(birthDay));
+		System.out.println(now.before(birthDay));
+	}
 
 	public static void main(String[] args) {
 		Sample07 sample = new Sample07();
 		// sample.ex01();
 		// sample.ex02();
-		sample.ex03();
-		
-		/*
-		 * 자신의 올해 생일이 몇일 남았는지 알 수 있도록 해주는 코드를 작성하시오.
-		 */
+		// sample.ex03();
+		sample.ex04();
 		
 		/*
 		 * 프로그램이 동작한 후 부터 종료할 때까지의 시간 기록을 남기기 위한 코드를 작성하시오.
