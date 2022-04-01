@@ -21,6 +21,19 @@ public class Sample05 {
 		long l1 = Long.parseLong("100");
 		float f1 = Float.parseFloat("100");
 		double d1 = Double.parseDouble("100");
+		
+		// 기본 자료형을 문자열로 변경
+		String s3;
+		s3 = Boolean.valueOf(true).toString();
+		s3 = Byte.valueOf((byte)100).toString();
+		s3 = Short.valueOf((short)100).toString();
+		s3 = Character.valueOf('a').toString();
+		s3 = Integer.valueOf(100).toString();
+		s3 = Long.valueOf(100).toString();
+		s3 = Float.valueOf(100.0f).toString();
+		s3 = Double.valueOf(100.0).toString();
+		
+		s3 = "" + true + 100 + 10.0 + 'c';
 	}
 
 }
