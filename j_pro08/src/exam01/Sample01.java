@@ -85,6 +85,14 @@ public class Sample01 {
 		s6 = "Meth";
 		System.out.println("s5.substring(7, 11) -> " + s5.substring(s5.indexOf(s6), s5.indexOf(s6) + s6.length()));
 		
+		
+		// System.out.printf("포멧형식이 있는 문자열", 포멧형식에사용할값....)
+		s6 = String.format("%d / %s / %.1f", 10, "포멧문자열", 10.123);
+		System.out.println(s6);
+		
+		s6 = "02-ertf-5678";
+		boolean isMatch = s6.matches("\\d{3}-\\d{4}-\\d{4}");
+		System.out.println("전화번호 형식과 일치합니까? -> " + isMatch);
 	}
 
 }
