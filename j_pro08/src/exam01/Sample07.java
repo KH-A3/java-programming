@@ -210,6 +210,29 @@ public class Sample07 {
 		}
 		
 	}
+	
+	public void ex09() {
+		/*
+		 * D-Day 계산기를 만들어 보시오.
+		 *     1. 현재 시간보다 과거의 시간을 입력한 경우 "D-Day n일 지남" 으로 출력
+		 *     2. 현재 시간보다 미래의 시간을 입력한 경우 "D-Day n일 남음" 으로 출력
+		 */
+		SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
+		GregorianCalendar userInputDate = new GregorianCalendar(2023, 4 - 1, 4);
+		Date now = new Date();
+		
+		System.out.println("입력한 날짜 : " + sFormat.format(userInputDate.getTime()));
+		System.out.println("현재 날짜 : " + sFormat.format(now));
+		
+		int dDayTime = (int)((now.getTime() - userInputDate.getTime().getTime()) / 1000);
+		String t = "지남";
+		
+		if(dDayTime < 0) {
+			t = "남음";
+			dDayTime = -dDayTime;
+		}
+		System.out.printf("D-Day %d일 %s", dDayTime / (60 * 60 * 24), t);
+	}
 
 	public static void main(String[] args) {
 		Sample07 sample = new Sample07();
@@ -220,13 +243,8 @@ public class Sample07 {
 		// sample.ex05();
 		// sample.ex06();
 		// sample.ex07();
-		sample.ex08();
-		
-		/*
-		 * D-Day 계산기를 만들어 보시오.
-		 *     1. 현재 시간보다 과거의 시간을 입력한 경우 "D-Day n일 지남" 으로 출력
-		 *     2. 현재 시간보다 미래의 시간을 입력한 경우 "D-Day n일 남음" 으로 출력
-		 */
+		// sample.ex08();
+		sample.ex09();
 		
 	}
 
