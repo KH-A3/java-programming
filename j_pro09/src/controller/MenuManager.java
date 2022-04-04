@@ -3,6 +3,7 @@ package controller;
 import java.util.Scanner;
 
 import model.vo.Grade;
+import model.vo.Student;
 
 public class MenuManager {
 	
@@ -47,15 +48,52 @@ public class MenuManager {
 	}
 	
 	public void studentDeleteMenu() {
-		System.out.println("학생 정보 삭제 메뉴 동작!");
+		while(true) {
+			System.out.print("삭제 할 학생의 이름 : ");
+			String name = sc.nextLine();
+			boolean result = db.remove(name);
+			if(result) {
+				System.out.println("삭제 작업이 완료되었습니다.");
+				break;
+			} else {
+				System.out.println("삭제할 학생 정보가 존재하지 않습니다. 다른 이름을 입력하세요.");
+			}
+		}
 	}
 
 	public void subjectModifyMenu() {
-		System.out.println("성적 정보 수정 메뉴 동작!");
+		while(true) {
+			System.out.print("학생명 : ");
+			String name = sc.nextLine();
+			
+			System.out.print("과목명 : ");
+			String subject = sc.nextLine();
+			
+			System.out.print("점수 : ");
+			int score = Integer.parseInt(sc.nextLine());
+			
+			Student result = db.modify(name, subject, score);
+			if(result != null) {
+				System.out.println("수정 작업이 완료되었습니다.");
+				break;
+			} else {
+				System.out.println("학생명, 과목명이 잘못입력하였습니다. 다시 확인하세요.");
+			}
+		}
 	}
 
 	public void studentAddMenu() {
-		System.out.println("학생 정보 추가 메뉴 동작!");
+		while(true) {
+			System.out.print("추가 할 학생의 이름 : ");
+			String name = sc.nextLine();
+			boolean result = db.add(name);
+			if(result) {
+				System.out.println("추가 작업이 완료되었습니다.");
+				break;
+			} else {
+				System.out.println("중복된 이름이 존재합니다. 다른 학생을 추가하세요.");
+			}
+		}
 	}
 
 	public void searchMenu() {
