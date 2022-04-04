@@ -231,6 +231,7 @@ public class Sample07 {
 			t = "남음";
 			dDayTime = -dDayTime;
 		}
+		
 		System.out.printf("D-Day %d일 %s", dDayTime / (60 * 60 * 24), t);
 	}
 
