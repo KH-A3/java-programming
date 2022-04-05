@@ -1,9 +1,9 @@
-import controller.MenuManager;
+import controller.LoginMenuManager;
 
 public class Main {
 
 	public static void main(String[] args) {
-		MenuManager run = new MenuManager();
+		LoginMenuManager run = new LoginMenuManager();
 		run.main();
 	}
 

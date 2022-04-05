@@ -2,27 +2,42 @@ package controller;
 
 import java.util.Scanner;
 
+import model.vo.Account;
 import model.vo.Grade;
 import model.vo.Student;
+import model.vo.Teacher;
 
 public class MenuManager {
 	
 	private Scanner sc = new Scanner(System.in);
 	private DatabaseManager db = new DatabaseManager();
+	private Account loginAccount;
+	
+	public MenuManager(Account loginAccount) {
+		this.loginAccount = loginAccount;
+	}
 	
 	public void main() {
+		if(loginAccount instanceof Teacher) {
+			teacherMenuList();
+		} else {
+			studentMenuList();
+		}
+	}
+	
+	public void teacherMenuList() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("1. 성적 조회\n");
 		sb.append("2. 학생 정보 추가\n");
 		sb.append("3. 성적 정보 수정\n");
 		sb.append("4. 학생 정보 삭제\n");
-		sb.append("9. 프로그램 종료\n");
+		sb.append("9. 로그아웃\n");
 		sb.append(">>> ");
 		
+		boolean logout = false;
 		while(true) {
 			System.out.print(sb.toString());
 			int menuNumber = Integer.parseInt(sc.nextLine());
-			
 			switch(menuNumber) {
 				case 1:
 					searchMenu();	break;
@@ -33,18 +48,36 @@ public class MenuManager {
 				case 4:
 					studentDeleteMenu();	break;
 				case 9:
-					System.exit(0);
+					logout = true;
+			}
+			if(logout) {
+				break;
 			}
 		}
+	}
+	
+	public void studentMenuList() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("1. 성적 조회\n");
+		sb.append("9. 로그아웃\n");
+		sb.append(">>> ");
 		
-		/*
-		 * 사용자 입력을 받아서 위의 메뉴에 해당하는 번호를 입력하면 다음의 메서드를 동작
-		 *     - 성적 조회 : searchMenu();
-		 *     - 학생 정보 추가 : studentAddMenu();
-		 *     - 성적 정보 수정 : subjectModifyMenu();
-		 *     - 학생 정보 삭제 : studentDeleteMenu();
-		 *     - 프로그램 종료 : System.exit(0); <- 이 코드를 그대로 사용하면 프로그램이 종료 됨.
-		 */
+		boolean logout = false;
+		while(true) {
+			System.out.print(sb.toString());
+			int menuNumber = Integer.parseInt(sc.nextLine());
+			
+			switch(menuNumber) {
+				case 1:
+					searchMenu();	break;
+				case 9:
+					logout = true;
+			}
+			
+			if(logout) {
+				break;
+			}
+		}
 	}
 	
 	public void studentDeleteMenu() {

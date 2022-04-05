@@ -94,5 +94,14 @@ public class DatabaseManager implements ImplDatabaseManager {
 		}
 		return idx;
 	}
+	
+	public Student login(String username, String password) {
+		for(int i = 0; i < datas.length; i++) {
+			if(username.equals(datas[i].getName()) && password.equals(datas[i].getPassword())) {
+				return datas[i];
+			}
+		}
+		return null;
+	}
 
 }
