@@ -63,22 +63,41 @@ public class MenuManager {
 
 	public void subjectModifyMenu() {
 		while(true) {
-			System.out.print("학생명 : ");
-			String name = sc.nextLine();
-			
-			System.out.print("과목명 : ");
-			String subject = sc.nextLine();
+			String name;
+			Grade[] grades = new Grade[0];
+			while(true) {
+				System.out.print("학생 이름 : ");
+				name = sc.nextLine();
+				grades = db.search(name);
+				if(grades == null) {
+					System.out.println("해당 학생 정보가 존재하지 않습니다. 다시 입력하세요.");
+				} else {
+					StringBuilder sb = new StringBuilder();
+					sb.append("--------------------\n");
+					for(int i = 0; i < grades.length; i++) {
+						sb.append(grades[i].getName() + "\t");
+					}
+					sb.append("\n--------------------\n");
+					
+					System.out.println(sb.toString());
+					break;
+				}
+			}
 			
 			System.out.print("점수 : ");
-			int score = Integer.parseInt(sc.nextLine());
+			String[] inputArr = sc.nextLine().split(" ");
+			int[] scoreArr = new int[grades.length];
 			
-			Student result = db.modify(name, subject, score);
-			if(result != null) {
-				System.out.println("수정 작업이 완료되었습니다.");
-				break;
-			} else {
-				System.out.println("학생명, 과목명이 잘못입력하였습니다. 다시 확인하세요.");
+			for(int i = 0; i < grades.length; i++) {
+				scoreArr[i] = Integer.parseInt(inputArr[i]);
+				Student result = db.modify(name, grades[i].getName(), scoreArr[i]);
+				if(result != null) {
+					System.out.printf("%s 과목의 점수를 수정 하였습니다.\n", grades[i].getName());
+				} else {
+					System.out.println("수정 작업에 문제가 발생하였습니다.");
+				}
 			}
+			break;
 		}
 	}
 
