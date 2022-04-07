@@ -27,6 +27,7 @@ public class LoginMenuManager {
 			String menuNumber = sc.nextLine();
 			switch(menuNumber.charAt(0)) {
 				case '1':
+					System.out.println("실행됨.");
 					teacherLoginMenu(); break;
 				case '2':
 					studentLoginMenu(); break;
@@ -90,16 +91,12 @@ public class LoginMenuManager {
 			System.out.print("패스워드 : ");
 			String password = sc.nextLine();
 			
-			Account loginAccount = tDB.login(username, password);
+			Teacher loginAccount = tDB.login(username, password);
 			
 			if(loginAccount != null) {
-				if(((Teacher)loginAccount).getLoginDate() != null) {
-					System.out.println("최근 접속 시간 : " + ((Teacher)loginAccount).getLoginDateFormat());
-				} else {
-					System.out.println("첫 로그인을 환영합니다.");
-				}
+				System.out.println("최근 접속 시간 : " + loginAccount.getLoginDateFormat());
 				
-				((Teacher)loginAccount).setLoginDate(new Date());
+				loginAccount.setLoginDate(new Date());
 				
 				SimpleDateFormat sFormat = new SimpleDateFormat("yyyy년 MM월 dd일 a hh시 mm분 ss초");
 				System.out.println("현재 접속 시간 : " + sFormat.format(new Date()));
@@ -122,7 +119,7 @@ public class LoginMenuManager {
 			System.out.print("패스워드 : ");
 			String password = sc.nextLine();
 			
-			Account loginAccount = sDB.login(username, password);
+			Student loginAccount = sDB.login(username, password);
 			
 			if(loginAccount != null) {
 				MenuManager m = new MenuManager(loginAccount);

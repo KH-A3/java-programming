@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Teacher extends Account {
 	
-	private Date loginDate;
+	private Date loginDate = new Date();
 	
 	public Teacher(String name) {
 		setName(name);
