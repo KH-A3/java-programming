@@ -31,6 +31,7 @@ public class MenuManager {
 		sb.append("2. 학생 정보 추가\n");
 		sb.append("3. 성적 정보 수정\n");
 		sb.append("4. 학생 정보 삭제\n");
+		sb.append("5. 패스워드 변경\n");
 		sb.append("9. 로그아웃\n");
 		sb.append(">>> ");
 		
@@ -47,6 +48,8 @@ public class MenuManager {
 					subjectModifyMenu();	break;
 				case 4:
 					studentDeleteMenu();	break;
+				case 5:
+					passwordChangeMenu();	break;
 				case 9:
 					logout = true;
 			}
@@ -59,6 +62,7 @@ public class MenuManager {
 	public void studentMenuList() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("1. 성적 조회\n");
+		sb.append("2. 패스워드 변경\n");
 		sb.append("9. 로그아웃\n");
 		sb.append(">>> ");
 		
@@ -74,6 +78,8 @@ public class MenuManager {
 							((Student)loginAccount).getGrades()
 					);
 					break;
+				case 2:
+					passwordChangeMenu();	break;
 				case 9:
 					logout = true;
 			}
@@ -81,6 +87,22 @@ public class MenuManager {
 			if(logout) {
 				break;
 			}
+		}
+	}
+	
+	public void passwordChangeMenu() {
+		System.out.print("현재 패스워드 : ");
+		String curPass = sc.nextLine();
+		
+		System.out.print("변경 패스워드 : ");
+		String changePass = sc.nextLine();
+		
+		boolean result = loginAccount.changePassword(curPass, changePass);
+		
+		if(result) {
+			System.out.println("패스워드 변경이 완료되었습니다.");
+		} else {
+			System.out.println("패스워드 변경에 실패하였습니다. 현재 패스워드를 다시 확인하세요.");
 		}
 	}
 	

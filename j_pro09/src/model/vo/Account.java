@@ -20,4 +20,12 @@ public abstract class Account {
 		this.password = password;
 	}
 	
+	public boolean changePassword(String currPass, String changePass) {
+		if(currPass.equals(getPassword())) {
+			setPassword(changePass);
+			return true;
+		}
+		return false;
+	}
+	
 }
