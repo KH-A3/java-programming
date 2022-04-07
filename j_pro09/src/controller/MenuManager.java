@@ -69,7 +69,11 @@ public class MenuManager {
 			
 			switch(menuNumber) {
 				case 1:
-					searchMenu();	break;
+					printGrades(
+							((Student)loginAccount).getName(),
+							((Student)loginAccount).getGrades()
+					);
+					break;
 				case 9:
 					logout = true;
 			}
@@ -169,31 +173,35 @@ public class MenuManager {
 			if(grades == null) {
 				System.out.println("해당 학생 정보가 존재하지 않습니다. 다시 입력하세요.");
 			} else {
-				StringBuilder sb = new StringBuilder();
-				sb.append("이름 : " + name + "\n");
-				sb.append("--------------------\n");
-				for(int i = 0; i < grades.length; i++) {
-					sb.append(grades[i].getName() + "\t");
-				}
-				sb.append("\n");
-				double avg = 0;
-				for(int i = 0; i < grades.length; i++) {
-					sb.append(grades[i].getScore() + "점\t");
-					avg += grades[i].getScore();
-				}
-				avg /= grades.length;
-				sb.append("\n");
-				for(int i = 0; i < grades.length; i++) {
-					sb.append(grades[i].getLevel() + "등급\t");
-				}
-				sb.append("\n");
-				sb.append("--------------------\n");
-				sb.append("평균 : " + avg + "\n");
-				sb.append("--------------------\n");
-				
-				System.out.println(sb.toString());
+				printGrades(name, grades);
 				break;
 			}
 		}
+	}
+	
+	public void printGrades(String name, Grade[] grades) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("이름 : " + name + "\n");
+		sb.append("--------------------\n");
+		for(int i = 0; i < grades.length; i++) {
+			sb.append(grades[i].getName() + "\t");
+		}
+		sb.append("\n");
+		double avg = 0;
+		for(int i = 0; i < grades.length; i++) {
+			sb.append(grades[i].getScore() + "점\t");
+			avg += grades[i].getScore();
+		}
+		avg /= grades.length;
+		sb.append("\n");
+		for(int i = 0; i < grades.length; i++) {
+			sb.append(grades[i].getLevel() + "등급\t");
+		}
+		sb.append("\n");
+		sb.append("--------------------\n");
+		sb.append("평균 : " + avg + "\n");
+		sb.append("--------------------\n");
+		
+		System.out.println(sb.toString());
 	}
 }
