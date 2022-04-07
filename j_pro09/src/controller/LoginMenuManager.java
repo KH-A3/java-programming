@@ -18,6 +18,7 @@ public class LoginMenuManager {
 		StringBuilder sb = new StringBuilder();
 		sb.append("1. 교사용 로그인\n");
 		sb.append("2. 학생용 로그인\n");
+		sb.append("3. 패스워드 초기화\n");
 		sb.append("9. 프로그램 종료\n");
 		sb.append(">>> ");
 		
@@ -26,13 +27,58 @@ public class LoginMenuManager {
 			String menuNumber = sc.nextLine();
 			switch(menuNumber.charAt(0)) {
 				case '1':
-					teacherLoginMenu();	break;
+					teacherLoginMenu(); break;
 				case '2':
-					studentLoginMenu();	break;
+					studentLoginMenu(); break;
+				case '3':
+					resetPasswordMenu(); break;
 				case '9':
 					System.out.println("프로그램을 종료합니다.");
 					System.exit(0);
 			}
+		}
+	}
+	
+	private void resetPasswordMenu() {
+		System.out.print("1. 교사용\n");
+		System.out.print("2. 학생용\n");
+		System.out.print(">>> ");
+		
+		String type = sc.nextLine();
+		
+		switch(type.charAt(0)) {
+			case '1':
+				teacherResetPassword(); break;
+			case '2':
+				studentResetPassword(); break;
+		}
+	}
+	
+	private void teacherResetPassword() {
+		System.out.print("이름 : ");
+		String name = sc.nextLine();
+		
+		boolean existed  = tDB.isExisted(name);
+		if(existed) {
+			Teacher teacher = tDB.getTeacher(name);
+			String newPass = teacher.resetPassword();
+			System.out.println(newPass + " 로 초기화 하였습니다.");
+		} else {
+			System.out.println("해당하는 계정이 존재하지 않습니다.");
+		}
+	}
+	
+	private void studentResetPassword() {
+		System.out.print("이름 : ");
+		String name = sc.nextLine();
+		
+		boolean existed = sDB.isExisted(name);
+		if(existed) {
+			Student student = sDB.getStudent(name);
+			String newPass = student.resetPassword();
+			System.out.println(newPass + " 로 초기화 하였습니다.");
+		} else {
+			System.out.println("해당하는 계정이 존재하지 않습니다.");
 		}
 	}
 

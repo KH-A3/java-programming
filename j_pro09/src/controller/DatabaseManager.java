@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import model.vo.Grade;
 import model.vo.Student;
+import model.vo.Teacher;
 
 public class DatabaseManager implements ImplDatabaseManager {
 
@@ -82,6 +83,18 @@ public class DatabaseManager implements ImplDatabaseManager {
 		}
 		
 		return false;
+	}
+	
+	public boolean isExisted(String name) {
+		boolean result = false;
+		if(_findIndex(name) != -1) {
+			result = true;
+		}
+		return result;
+	}
+	
+	public Student getStudent(String name) {
+		return datas[_findIndex(name)];
 	}
 	
 	private int _findIndex(String name) {
