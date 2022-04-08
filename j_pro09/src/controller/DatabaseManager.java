@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 import model.vo.Grade;
 import model.vo.Student;
-import model.vo.Teacher;
 
 public class DatabaseManager implements ImplDatabaseManager {
-
+	
 	private Student[] datas;
 	
 	// 초기화 블록
