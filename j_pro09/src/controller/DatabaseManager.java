@@ -22,7 +22,7 @@ public class DatabaseManager implements ImplDatabaseManager {
 			});
 		}
 	}
-			
+	
 	@Override
 	public Grade[] search(String name) {
 		int idx = _findIndex(name);

@@ -1,5 +1,6 @@
 package model.vo;
 
+import exception.GradeLevelException;
 import exception.GradeScoreException;
 
 public class Grade extends Subject {
@@ -36,6 +37,9 @@ public class Grade extends Subject {
 	}
 
 	public void setLevel(char level) {
+		if(!(level >= 'A' && level <= 'F')) {
+			throw new GradeLevelException("등급은 'A' ~ 'F' 사이로만 설정하세요.");
+		}
 		this.level = level;
 	}
 	

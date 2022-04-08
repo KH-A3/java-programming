@@ -10,7 +10,7 @@ public class Teacher extends Account {
 	
 	public Teacher(String name) {
 		setName(name);
-		setPassword("1111");
+		setPassword("A1111a");
 	}
 	
 	public Teacher(String name, String password) {

@@ -1,6 +1,6 @@
 package exception;
 
-public class GradeScoreException extends RuntimeException {
+public class GradeScoreException extends GradeException {
 
 	public GradeScoreException() {
 		super();

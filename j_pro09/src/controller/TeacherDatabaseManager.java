@@ -8,7 +8,7 @@ public class TeacherDatabaseManager {
 	
 	{
 		datas = new Teacher[2];
-		datas[0] = new Teacher("고명환", "1234");
+		datas[0] = new Teacher("고명환", "A1234a");
 		datas[1] = new Teacher("김수덕");
 	}
 	
