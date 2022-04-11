@@ -35,20 +35,11 @@ public class Main {
 			System.out.print("가위/바위/보 >>> ");
 			String userInput = sc.nextLine();
 			
-			if(userInput.equals("가위")) {
-				uHand = new Gawi();
-			} else if(userInput.equals("바위")) {
-				uHand = new Bawi();
-			} else if(userInput.equals("보")) {
-				uHand = new Bo();
-			} else {
-				uHand = uPlay.randomCardHand();
-			}
+			uPlay.setHand(userInput);
+			cPlay.randomCardHand();
 			
-			cHand = cPlay.randomCardHand();
-			
-			uRes = uPlay.versus(uHand, cHand);
-			cRes = cPlay.versus(cHand, uHand);
+			uRes = uPlay.versus(cPlay.getHand());
+			cRes = cPlay.versus(uPlay.getHand());
 			
 			switch(uRes) {
 				case -1:

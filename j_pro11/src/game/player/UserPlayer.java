@@ -10,10 +10,10 @@ import game.card.Hand;
 public class UserPlayer implements Player {
 	
 	private Random rand = new Random();
+	private Hand hand;
 
 	@Override
-	public Hand randomCardHand() {
-		Hand hand = null;
+	public void randomCardHand() {
 		int r = rand.nextInt(3);
 		switch(r) {
 			case 0:
@@ -23,12 +23,27 @@ public class UserPlayer implements Player {
 			case 2:
 				hand = new Bo(); break;
 		}
-		return hand;
 	}
 
 	@Override
-	public int versus(Hand h1, Hand h2) {
-		return h1.compare(h2);
+	public int versus(Hand h1) {
+		return hand.compare(h1);
+	}
+	
+	public Hand getHand() {
+		return hand;
+	}
+	
+	public void setHand(String handName) {
+		if(handName.equals("가위")) {
+			hand = new Gawi();
+		} else if(handName.equals("바위")) {
+			hand = new Bawi();
+		} else if(handName.equals("보")) {
+			hand = new Bo();
+		} else {
+			this.randomCardHand();
+		}
 	}
 
 }
