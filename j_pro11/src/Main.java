@@ -24,7 +24,6 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		UserPlayer uPlay = new UserPlayer();
 		ComPlayer cPlay = new ComPlayer();
-		Hand uHand, cHand;
 		String uRes, cRes;
 		
 		System.out.println("가위 바위 보 게임을 진행합니다.");
