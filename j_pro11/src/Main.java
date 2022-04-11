@@ -44,6 +44,9 @@ public class Main {
 			System.out.println("플레이어 " + uRes);
 			System.out.println("컴퓨터 " + cRes);
 			
+			System.out.println("플레이어 치트 횟수 : " + uPlay.getCheatCnt());
+			System.out.println("컴퓨터 치트 횟수 : " + cPlay.getCheatCnt());
+			
 			System.out.println(uPlay.getTotalRecord());
 		}
 	}
