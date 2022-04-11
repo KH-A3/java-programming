@@ -45,6 +45,6 @@ public class Record {
 	
 	public double getWinRate() {
 		// 승률 정보를 반환한다.
-		return score[0] / getRecordCount() * 100;
+		return (double)score[0] / getRecordCount() * 100;
 	}
 }

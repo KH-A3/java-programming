@@ -25,7 +25,7 @@ public class Main {
 		UserPlayer uPlay = new UserPlayer();
 		ComPlayer cPlay = new ComPlayer();
 		Hand uHand, cHand;
-		int uRes, cRes;
+		String uRes, cRes;
 		
 		System.out.println("가위 바위 보 게임을 진행합니다.");
 		System.out.println("가위 바위 보 중 하나를 입력하세요.");
@@ -41,29 +41,10 @@ public class Main {
 			uRes = uPlay.versus(cPlay.getHand());
 			cRes = cPlay.versus(uPlay.getHand());
 			
-			switch(uRes) {
-				case -1:
-					System.out.println("플레이어 패!");
-					break;
-				case 0:
-					System.out.println("무승부");
-					break;
-				case 1:
-					System.out.println("플레이어 승!");
-					break;
-			}
+			System.out.println("플레이어 " + uRes);
+			System.out.println("컴퓨터 " + cRes);
 			
-			switch(cRes) {
-				case -1:
-					System.out.println("컴퓨터 패!");
-					break;
-				case 0:
-					System.out.println("무승부");
-					break;
-				case 1:
-					System.out.println("컴퓨터 승!");
-					break;
-			}
+			System.out.println(uPlay.getTotalRecord());
 		}
 	}
 
