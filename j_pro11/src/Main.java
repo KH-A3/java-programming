@@ -1,3 +1,11 @@
+import java.util.Scanner;
+
+import game.card.Bawi;
+import game.card.Bo;
+import game.card.Gawi;
+import game.card.Hand;
+import game.player.ComPlayer;
+import game.player.UserPlayer;
 
 public class Main {
 
@@ -13,6 +21,59 @@ public class Main {
 		 *     - 매 대결이 진행될 때마다 승, 패, 무 결과와 승률을 출력한다.(컴퓨터, 사용자 모두)
 		 *     - 기본 제공하는 메서드와 클래스 외에 추가로 만들 기능이 있으면 더 추가하여도 된다.
 		 */
+		Scanner sc = new Scanner(System.in);
+		UserPlayer uPlay = new UserPlayer();
+		ComPlayer cPlay = new ComPlayer();
+		Hand uHand, cHand;
+		int uRes, cRes;
+		
+		System.out.println("가위 바위 보 게임을 진행합니다.");
+		System.out.println("가위 바위 보 중 하나를 입력하세요.");
+		System.out.println("입력하지 않고 Enter 키를 누른 경우 랜덤으로 생성합니다.");
+		
+		while(true) {
+			System.out.print("가위/바위/보 >>> ");
+			String userInput = sc.nextLine();
+			
+			if(userInput.equals("가위")) {
+				uHand = new Gawi();
+			} else if(userInput.equals("바위")) {
+				uHand = new Bawi();
+			} else if(userInput.equals("보")) {
+				uHand = new Bo();
+			} else {
+				uHand = uPlay.randomCardHand();
+			}
+			
+			cHand = cPlay.randomCardHand();
+			
+			uRes = uPlay.versus(uHand, cHand);
+			cRes = cPlay.versus(cHand, uHand);
+			
+			switch(uRes) {
+				case -1:
+					System.out.println("플레이어 패!");
+					break;
+				case 0:
+					System.out.println("무승부");
+					break;
+				case 1:
+					System.out.println("플레이어 승!");
+					break;
+			}
+			
+			switch(cRes) {
+				case -1:
+					System.out.println("컴퓨터 패!");
+					break;
+				case 0:
+					System.out.println("무승부");
+					break;
+				case 1:
+					System.out.println("컴퓨터 승!");
+					break;
+			}
+		}
 	}
 
 }
