@@ -40,6 +40,7 @@ public class Sample02 {
 				bytes = Arrays.copyOf(bytes, bytes.length + i);
 				System.arraycopy(buffer, 0, bytes, bytes.length - i, i);
 			}
+			
 			System.out.println(new String(bytes));
 			
 		} catch (FileNotFoundException e) {
