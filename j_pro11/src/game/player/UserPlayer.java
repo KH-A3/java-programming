@@ -82,4 +82,12 @@ public class UserPlayer implements Player {
 		return cheatCnt;
 	}
 
+	public void setRecord(int[] record) {
+		this.record.setRecord(record);
+	}
+
+	public int[] getRecord() {
+		return this.record.getScore();
+	}
+
 }

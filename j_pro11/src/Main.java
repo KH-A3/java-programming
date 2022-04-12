@@ -4,6 +4,7 @@ import game.card.Bawi;
 import game.card.Bo;
 import game.card.Gawi;
 import game.card.Hand;
+import game.db.Database;
 import game.player.ComPlayer;
 import game.player.UserPlayer;
 
@@ -20,19 +21,31 @@ public class Main {
 		 *     - 게임은 사용자가 종료하기 원할 때 까지 계속 진행하도록 한다.
 		 *     - 매 대결이 진행될 때마다 승, 패, 무 결과와 승률을 출력한다.(컴퓨터, 사용자 모두)
 		 *     - 기본 제공하는 메서드와 클래스 외에 추가로 만들 기능이 있으면 더 추가하여도 된다.
+		 *     - 전적 기록을 저장하고 불러오게 한다.
 		 */
 		Scanner sc = new Scanner(System.in);
 		UserPlayer uPlay = new UserPlayer();
 		ComPlayer cPlay = new ComPlayer();
+		Database db = new Database();
 		String uRes, cRes;
+		
+		int[] record = db.load();
+		uPlay.setRecord(record);
 		
 		System.out.println("가위 바위 보 게임을 진행합니다.");
 		System.out.println("가위 바위 보 중 하나를 입력하세요.");
+		System.out.println("프로그램을 종료하려면 \"종료\" 라고 입력하세요.");
 		System.out.println("입력하지 않고 Enter 키를 누른 경우 랜덤으로 생성합니다.");
 		
 		while(true) {
 			System.out.print("가위/바위/보 >>> ");
 			String userInput = sc.nextLine();
+			
+			if(userInput.equals("종료")) {
+				System.out.println("전적 기록을 저장 합니다.");
+				db.save(uPlay.getRecord());
+				break;
+			}
 			
 			uPlay.setHand(userInput);
 			cPlay.randomCardHand();

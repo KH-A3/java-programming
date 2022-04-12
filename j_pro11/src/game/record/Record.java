@@ -47,4 +47,8 @@ public class Record {
 		// 승률 정보를 반환한다.
 		return (double)score[0] / getRecordCount() * 100;
 	}
+	
+	public void setRecord(int[] score) {
+		this.score = score;
+	}
 }
