@@ -43,6 +43,8 @@ public class Sample02 {
 			
 			System.out.println(new String(bytes));
 			
+			fis.close();	// 안하면 메모리 누수의 원인이 됨.
+			
 		} catch (FileNotFoundException e) {
 			System.out.println("해당 파일을 찾지 못하였습니다.");
 			e.printStackTrace();
