@@ -22,6 +22,14 @@ public class Main {
 		 *     - 매 대결이 진행될 때마다 승, 패, 무 결과와 승률을 출력한다.(컴퓨터, 사용자 모두)
 		 *     - 기본 제공하는 메서드와 클래스 외에 추가로 만들 기능이 있으면 더 추가하여도 된다.
 		 *     - 전적 기록을 저장하고 불러오게 한다.
+		 *     이름 : 홍길동
+				이전 전적 기록을 찾았습니다. 현재 게임에 반영하여 진행합니다.
+				....
+				
+				
+				이름 : 최무원
+				이전 전적 기록이 없습니다. 새로운 전적 기록으로 진행합니다.
+				....
 		 */
 		Scanner sc = new Scanner(System.in);
 		UserPlayer uPlay = new UserPlayer();
@@ -29,8 +37,20 @@ public class Main {
 		Database db = new Database();
 		String uRes, cRes;
 		
-		int[] record = db.load();
+		System.out.print("이름 : ");
+		String userInput = sc.nextLine();
+		
+		int[] record = db.load(userInput);
+		
+		if(record == null) {
+			System.out.println("이전 전적 기록이 없습니다. 새로운 전적 기록으로 진행합니다.");
+			record = new int[3];
+		} else {
+			System.out.println("이전 전적 기록을 찾았습니다. 현재 게임에 반영하여 진행합니다.");
+		}
+		
 		uPlay.setRecord(record);
+		
 		
 		System.out.println("가위 바위 보 게임을 진행합니다.");
 		System.out.println("가위 바위 보 중 하나를 입력하세요.");
@@ -39,7 +59,7 @@ public class Main {
 		
 		while(true) {
 			System.out.print("가위/바위/보 >>> ");
-			String userInput = sc.nextLine();
+			userInput = sc.nextLine();
 			
 			if(userInput.equals("종료")) {
 				System.out.println("전적 기록을 저장 합니다.");

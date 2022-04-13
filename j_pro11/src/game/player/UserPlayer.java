@@ -11,6 +11,7 @@ import game.record.Record;
 public class UserPlayer implements Player {
 	
 	private Random rand = new Random();
+	private String name;
 	private Hand hand;
 	private Record record = new Record();
 	private int loseCont;

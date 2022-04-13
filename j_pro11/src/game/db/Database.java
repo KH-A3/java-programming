@@ -20,9 +20,9 @@ public class Database {
 		this.file = file;
 	}
 	
-	public int[] load() {
+	public int[] load(String name) {
 		// 파일을 읽고 배열로 반환
-		int[] iArr2 = new int[3];
+		int[] iArr2 = null;
 		
 		if(file.exists()) {
 			try (FileReader fr = new FileReader(file)) {
@@ -40,16 +40,23 @@ public class Database {
 					System.arraycopy(buff, 0, data, data.length - rSize, rSize);
 				}
 				
-				StringTokenizer st = new StringTokenizer(new String(data), " ");
-				iArr2 = new int[st.countTokens()];
+				StringTokenizer st = new StringTokenizer(new String(data), "\r\n");
+				String[] temp = new String[st.countTokens()];
 				int i = 0;
 				
 				while(st.hasMoreTokens()) {
-					iArr2[i++] = Integer.parseInt(st.nextToken());
+					temp[i++] = st.nextToken();
 				}
-				
-				System.out.println(Arrays.toString(iArr2));
-				
+								
+				for(i = 0; i < temp.length; i++) {
+					if(temp[i].contains(name)) {
+						String[] t = temp[i].split(" ");
+						for(int j = 1; j < t.length; j++) {
+							iArr2[j - 1] = Integer.parseInt(t[j]);							
+						}
+						return iArr2;
+					}
+				}
 			} catch (FileNotFoundException e) {
 				System.out.println("해당 파일이 존재하지 않습니다.");
 				e.printStackTrace();
