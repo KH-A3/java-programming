@@ -56,6 +56,14 @@ public class UserPlayer implements Player {
 		return res;
 	}
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
 	public String getTotalRecord() {
 		String res = String.format("총 전적 : %d 전\n", record.getRecordCount());
 		res += String.format("%d 승 %d 패 %d 무\n", record.getWin(), record.getLose(), record.getDraw());

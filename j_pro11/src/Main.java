@@ -49,8 +49,8 @@ public class Main {
 			System.out.println("이전 전적 기록을 찾았습니다. 현재 게임에 반영하여 진행합니다.");
 		}
 		
+		uPlay.setName(userInput);
 		uPlay.setRecord(record);
-		
 		
 		System.out.println("가위 바위 보 게임을 진행합니다.");
 		System.out.println("가위 바위 보 중 하나를 입력하세요.");
@@ -63,7 +63,7 @@ public class Main {
 			
 			if(userInput.equals("종료")) {
 				System.out.println("전적 기록을 저장 합니다.");
-				db.save(uPlay.getRecord());
+				db.save(uPlay.getName(), uPlay.getRecord());
 				break;
 			}
 			
