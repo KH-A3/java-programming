@@ -7,6 +7,7 @@ import db.PenaltyDatabase;
 public class SettingMenu {
 
 	private Scanner sc = new Scanner(System.in);
+	private PenaltyDatabase pDB = new PenaltyDatabase();
 	
 	public void show() {
 		String menu = "";
@@ -34,6 +35,7 @@ public class SettingMenu {
 					removeMenu();
 					break;
 				case '4':
+					pDB.save();
 					return;
 			}
 		}
@@ -45,6 +47,7 @@ public class SettingMenu {
 		menu += ": ";
 		
 		while(true) {
+			System.out.println(penaltyListUp());
 			System.out.print(menu);
 			String input = sc.nextLine();
 			
@@ -53,18 +56,18 @@ public class SettingMenu {
 				break;
 			}
 			
-			PenaltyDatabase pDB = new PenaltyDatabase();
 			pDB.add(input);
 			System.out.println("입력한 벌칙을 추가하였습니다.");
 		}
 	}
 
 	private void modifyMenu() {
-		String menu = penaltyListUp() + "\n";
+		String menu = "";
 		menu += "수정할 벌칙을 다음 항목에 맞추어 입력하세요. 입력을 중단하려면 exit 를 입력하세요.\n";
 		menu += "수정 할 벌칙의 번호 : ";
 		
 		while(true) {
+			System.out.println(penaltyListUp());
 			System.out.print(menu);
 			String input = sc.nextLine();
 			
@@ -78,18 +81,18 @@ public class SettingMenu {
 			System.out.print("벌칙 입력 : ");
 			input = sc.nextLine();
 			
-			PenaltyDatabase pDB = new PenaltyDatabase();
 			pDB.modify(number, input);
 			System.out.println("벌칙을 수정하였습니다.");
 		}
 	}
 
 	private void removeMenu() {
-		String menu = penaltyListUp() + "\n";
+		String menu = "";
 		menu += "삭제할 벌칙 번호를 입력하세요. 입력을 중단하려면 exit 를 입력하세요.\n";
 		menu += "삭제 할 벌칙의 번호 : ";
 		
 		while(true) {
+			System.out.println(penaltyListUp());
 			System.out.print(menu);
 			String input = sc.nextLine();
 			
@@ -100,14 +103,12 @@ public class SettingMenu {
 			
 			int number = Integer.parseInt(input);
 			
-			PenaltyDatabase pDB = new PenaltyDatabase();
 			pDB.remove(number);
 			System.out.println("벌칙을 삭제하였습니다.");
 		}
 	}
 	
 	private String penaltyListUp() {
-		PenaltyDatabase pDB = new PenaltyDatabase();
 		String data = pDB.load();
 		String[] listUp = data.split("\n");
 		
