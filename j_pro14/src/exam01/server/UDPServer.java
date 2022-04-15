@@ -6,6 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UDPServer {
 
@@ -41,8 +43,10 @@ public class UDPServer {
 				/*
 				 * 4. 수신한 데이터를 출력하여 확인
 				 */
+				SimpleDateFormat sFormat = new SimpleDateFormat("yyyy년 MM월 dd일 a hh시 mm분 ss초");
+				String now = sFormat.format(new Date());
 				String msg = new String(packet.getData());
-				System.out.printf("%s:%d 주소로 부터 \"%s\" 메시지를 수신하였습니다.", clientIp.getHostAddress(), clientPort, msg);
+				System.out.printf("[%s] [%s:%d] - %s\n", now, clientIp.getHostAddress(), clientPort, msg);
 			}
 			
 			/*
