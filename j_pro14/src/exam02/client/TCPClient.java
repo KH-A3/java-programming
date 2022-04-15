@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class TCPClient {
 
@@ -31,16 +32,20 @@ public class TCPClient {
 			BufferedReader sIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			BufferedWriter sOut = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
 			
-			sOut.write("Hello");
-			sOut.newLine();
-			sOut.flush();
+			Scanner sc = new Scanner(System.in);
+			while(true) {
+				String msg = sc.nextLine();
+				sOut.write(msg);
+				sOut.newLine();
+				sOut.flush();
+			}
 			
 			/*
 			 * 4. 데이터 송신을 완료하였으면 모든 자원 반납.
 			 */
-			sIn.close();
-			sOut.close();
-			sock.close();
+			// sIn.close();
+			// sOut.close();
+			// sock.close();
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();

@@ -10,6 +10,8 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class TCPServer {
 
@@ -26,6 +28,7 @@ public class TCPServer {
 			 * 2. 서버용 소켓 생성 후 서버IP, 서버Port 바인딩
 			 */
 			ServerSocket serverSock = new ServerSocket();
+			
 			InetSocketAddress serverIpPort = new InetSocketAddress(serverIp, serverPort);
 			serverSock.bind(serverIpPort);
 			
@@ -40,18 +43,24 @@ public class TCPServer {
 			BufferedReader sIn = new BufferedReader(new InputStreamReader(sock.getInputStream()));
 			BufferedWriter sOut = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
 			
-			while(sIn.ready()) {
-				String line = sIn.readLine();
-				System.out.println(line);
+			SimpleDateFormat sFormat = new SimpleDateFormat("yyyy년 MM월 dd일 a hh시 mm분 ss초");
+			InetAddress clientIp = sock.getInetAddress();
+			int clientPort = sock.getPort();
+			while(true) {
+				while(sIn.ready()) {
+					String now = sFormat.format(new Date());
+					String line = sIn.readLine();
+					System.out.printf("[%s] [%s:%d] - %s\n", now, clientIp.getHostAddress(), clientPort, line);
+				}
 			}
 			
 			/*
 			 * 5. 모든 데이터 수신을 완료하였으면 모든 자원 반납.
 			 */
-			sIn.close();
-			sOut.close();
-			sock.close();
-			serverSock.close();
+			// sIn.close();
+			// sOut.close();
+			// sock.close();
+			// serverSock.close();
 			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
