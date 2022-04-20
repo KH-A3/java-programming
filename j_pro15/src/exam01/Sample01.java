@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 
-class Person {
+class Person implements Comparable<Person> {
 	private String name;
 	private int age;
 	
@@ -35,6 +37,22 @@ class Person {
 	public String toString() {
 		return "Person [name=" + name + ", age=" + age + "]";
 	}
+
+	@Override
+	public int compareTo(Person o) {
+		if(this.getName().compareTo(o.getName()) > 0) {
+			return 1;
+		} else if(this.getName().compareTo(o.getName()) < 0) {
+			return -1;
+		} else {
+			if(this.getAge() > o.getAge()) {
+				return -1;
+			} else if(this.getAge() < o.getAge()) {
+				return 1;
+			}
+		}
+		return 0;
+	}
 	
 }
 
@@ -44,7 +62,9 @@ public class Sample01 {
 		/*
 		 * List 컬렉션 - ArrayList
 		 */
-		List<Integer> aList = new ArrayList<Integer>();
+		// List<Integer> aList = new ArrayList<Integer>();
+		// List<Integer> aList = new Vector<Integer>();
+		List<Integer> aList = new LinkedList<Integer>();
 		
 		aList.add(100);
 		System.out.println(aList);
@@ -148,6 +168,10 @@ public class Sample01 {
 		pList.add(new Person("김철수", 25));
 		
 		System.out.println(pList);
+		
+		Collections.sort(pList);
+		System.out.println(pList);
+		
 		Collections.sort(pList, new Comparator<Person>() {
 
 			@Override
@@ -158,9 +182,9 @@ public class Sample01 {
 					return -1;
 				} else {
 					if(x.getAge() > y.getAge()) {
-						return -1;
-					} else if(x.getAge() < y.getAge()) {
 						return 1;
+					} else if(x.getAge() < y.getAge()) {
+						return -1;
 					}
 				}
 				return 0;
