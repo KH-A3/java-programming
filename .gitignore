@@ -29,3 +29,6 @@ hs_err_pid*
 
 # Mac OS Ignore Files
 .DS_Store
+
+# DBeaver Ignore Folder/File
+.dbeaver
