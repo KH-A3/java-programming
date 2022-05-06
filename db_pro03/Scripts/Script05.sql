@@ -42,12 +42,51 @@ CREATE OR REPLACE PROCEDURE PROC_재고입출등록(
 )
 IS
     var_type VARCHAR2(1) := inout_type;
+    var_cnt  NUMBER;
 BEGIN
 	var_type := UPPER(inout_type);
-    INSERT INTO 재고입출고 VALUES(SEQ_재고입출고.NEXTVAL, inout_name, var_type, inout_cnt, inout_date);
-    
-    INSERT INTO 재고관리 VALUES(SEQ_재고관리.NEXTVAL, inout_name, inout_cnt);
+    IF var_type = 'I' THEN
+        INSERT INTO 재고입출고 VALUES(SEQ_재고입출고.NEXTVAL, inout_name, var_type, inout_cnt, inout_date);
+        
+        SELECT COUNT(*)
+          INTO var_cnt
+          FROM 재고관리
+         WHERE PNAME = inout_name;
+        
+        IF var_cnt = 0 THEN
+            INSERT INTO 재고관리 VALUES(SEQ_재고관리.NEXTVAL, inout_name, inout_cnt);
+        ELSE
+            UPDATE 재고관리
+               SET PTOTAL = PTOTAL + inout_cnt
+             WHERE PNAME = inout_name;
+        END IF;
+    ELSE
+        SELECT COUNT(*)
+          INTO var_cnt
+          FROM 재고관리
+         WHERE PNAME = inout_name;
+        
+        IF var_cnt = 0 THEN
+            DBMS_OUTPUT.PUT_LINE('출고 대상 상품이 없습니다.');
+        ELSE
+            INSERT INTO 재고입출고 VALUES(SEQ_재고입출고.NEXTVAL, inout_name, var_type, inout_cnt, inout_date);
+            
+            UPDATE 재고관리
+               SET  PTOTAL = PTOTAL - inout_cnt
+             WHERE PNAME = inout_name;
+            
+            SELECT PTOTAL
+              INTO var_cnt
+              FROM 재고관리
+             WHERE PNAME = inout_name;
+            
+            IF var_cnt < 0 THEN
+                ROLLBACK;
+            END IF;
+        END IF;
+    END IF;
     res_count := 1;
+    COMMIT;
 END;
 
 SELECT * FROM USER_ERRORS;
@@ -55,8 +94,8 @@ SELECT * FROM USER_ERRORS;
 DECLARE
     res_count  NUMBER;
 BEGIN
-    PROC_재고입출등록('상품A', 'i', 5, TO_DATE(20220506), res_count);
-    PROC_재고입출등록('상품A', 'i', 10, TO_DATE(20220507), res_count);
+    PROC_재고입출등록('상품A', 'o', 5, TO_DATE(20220506), res_count);
+    PROC_재고입출등록('상품C', 'o', 15, TO_DATE(20220507), res_count);
     DBMS_OUTPUT.PUT_LINE('실행 결과 : ' || res_count || ' 개 행이 반영되었습니다.');
 END;
 
