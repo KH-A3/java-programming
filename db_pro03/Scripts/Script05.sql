@@ -28,9 +28,20 @@ CREATE TABLE 재고관리(
      , PTOTAL  NUMBER         CONSTRAINT NN_재고관리_PTOTAL  NOT NULL
 );
 
+CREATE TABLE 재고입고신청(
+       PID      NUMBER         CONSTRAINT PK_재고입고신청_PID       PRIMARY KEY
+     , PNAME    VARCHAR2(100)  CONSTRAINT NN_재고입고신청_PNAME     NOT NULL
+     , PCNT     NUMBER         CONSTRAINT NN_재고입고신청_PCNT      NOT NULL
+     , PROCTYPE VARCHAR(9)     CONSTRAINT NN_재고입고신청_PROCTYPE  NOT NULL
+     , PDATE    DATE           CONSTRAINT NN_재고입고신청_PDATE     NOT NULL
+     , DDATE    DATE
+);
+
 CREATE SEQUENCE SEQ_재고입출고 NOCACHE;
 
 CREATE SEQUENCE SEQ_재고관리 NOCACHE;
+
+CREATE SEQUENCE SEQ_재고입고신청 NOCACHE;
 
 
 CREATE OR REPLACE PROCEDURE PROC_재고입출등록(
@@ -97,10 +108,23 @@ BEGIN
                  *     5 라고하는 수량은 부족분에 대한 수량이다.
                  */
                 ROLLBACK;
+                PROC_재고입고신청(inout_name, ABS(var_cnt));
             END IF;
         END IF;
     END IF;
     res_count := 1;
+    COMMIT;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE PROC_재고입고신청(
+       in_name   IN  VARCHAR2
+     , in_count  IN  NUMBER
+)
+IS
+BEGIN
+    INSERT INTO 재고입고신청 VALUES(SEQ_재고입고신청.NEXTVAL, in_name, in_count, 'OFFER', SYSDATE, NULL);
     COMMIT;
 END;
 
@@ -109,19 +133,30 @@ SELECT * FROM USER_ERRORS;
 DECLARE
     res_count  NUMBER;
 BEGIN
-    PROC_재고입출등록('상품A', 'o', 5, TO_DATE(20220506), res_count);
-    PROC_재고입출등록('상품C', 'o', 15, TO_DATE(20220507), res_count);
-    DBMS_OUTPUT.PUT_LINE('실행 결과 : ' || res_count || ' 개 행이 반영되었습니다.');
+    PROC_재고입출등록('상품A', 'I', 5, TO_DATE(20220506), res_count);
+    PROC_재고입출등록('상품A', 'O', 10, TO_DATE(20220506), res_count);
 END;
 
 
 SELECT * FROM 재고입출고;
 SELECT * FROM 재고관리;
+SELECT * FROM 재고입고신청;
 SELECT * FROM USER_SEQUENCES;
 
 DELETE FROM 재고입출고;
 DELETE FROM 재고관리;
+DELETE FROM 재고입고신청;
 COMMIT;
+
+
+
+
+DROP TABLE 재고입출고;
+DROP TABLE 재고관리;
+DROP TABLE 재고입고신청;
+DROP SEQUENCE SEQ_재고입출고;
+DROP SEQUENCE SEQ_재고관리;
+DROP SEQUENCE SEQ_재고입고신청;
 
 
 
