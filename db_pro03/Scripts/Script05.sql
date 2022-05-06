@@ -35,6 +35,7 @@ CREATE TABLE 재고입고신청(
      , PROCTYPE VARCHAR(9)     CONSTRAINT NN_재고입고신청_PROCTYPE  NOT NULL
      , PDATE    DATE           CONSTRAINT NN_재고입고신청_PDATE     NOT NULL
      , DDATE    DATE
+     , DID      NUMBER         CONSTRAINT FK_재고입고신청_DID       REFERENCES 재고입출고(PID)
 );
 
 CREATE SEQUENCE SEQ_재고입출고 NOCACHE;
@@ -95,13 +96,14 @@ BEGIN
                 /*
                  * PROC_재고입고신청 프로시져를 만들어서 부족한 수량을 신청할 수 있게 한다.
                  * 재고입고신청 테이블을 추가로 작성
-                 *     컬럼 : PID, PNAME, PCNT, PROCTYPE, PDATE, DDATE
+                 *     컬럼 : PID, PNAME, PCNT, PROCTYPE, PDATE, DDATE, DID
                  * PROCTYPE 은 진행도와 관련된 컬럼으로 다음의 구분값을 가진다.
                  *     OFFER : 신청
                  *     PROCEEDING : 진행중
                  *     DONE : 입고완료
                  * PDATE 는 신청날짜이다.
                  * DDATE 는 입고완료 된 날짜
+                 * DID 는 
                  * 
                  * 사용예)
                  *     PROC_재고입고신청('상품A', 5)
@@ -116,17 +118,30 @@ BEGIN
     COMMIT;
 END;
 
-
-
 CREATE OR REPLACE PROCEDURE PROC_재고입고신청(
        in_name   IN  VARCHAR2
      , in_count  IN  NUMBER
 )
 IS
 BEGIN
-    INSERT INTO 재고입고신청 VALUES(SEQ_재고입고신청.NEXTVAL, in_name, in_count, 'OFFER', SYSDATE, NULL);
+    INSERT INTO 재고입고신청 VALUES(SEQ_재고입고신청.NEXTVAL, in_name, in_count, 'OFFER', SYSDATE, NULL, NULL);
     COMMIT;
 END;
+
+
+
+CREATE OR REPLACE PROCEDURE PROC_재고입고신청처리(
+)
+IS
+    /*
+     * 재고입고신청된 데이터를 처리하는 프로시져로 생성한다.
+     *     재고입고신청 테이블의 PID로 어떤 신청항목을 처리할 것인지 외부로 부터 값을 입력받는다.
+     *     외부로 부터 입력 받은 PID를 이용하여 재고입출고 테이블에 데이터 등록 처리를 하고
+     *     OFFER 상태를 DONE 상태로 변경 후 DDATE 는 현재날짜로 등록 처리 한다.
+     *     DID 컬럼은 재고입출고 테이블에 등록 할 때 생성된 PID가 저장되도록 한다.
+     */
+BEGIN;
+
 
 SELECT * FROM USER_ERRORS;
 
