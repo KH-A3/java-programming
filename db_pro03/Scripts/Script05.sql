@@ -81,6 +81,21 @@ BEGIN
              WHERE PNAME = inout_name;
             
             IF var_cnt < 0 THEN
+                /*
+                 * PROC_재고입고신청 프로시져를 만들어서 부족한 수량을 신청할 수 있게 한다.
+                 * 재고입고신청 테이블을 추가로 작성
+                 *     컬럼 : PID, PNAME, PCNT, PROCTYPE, PDATE, DDATE
+                 * PROCTYPE 은 진행도와 관련된 컬럼으로 다음의 구분값을 가진다.
+                 *     OFFER : 신청
+                 *     PROCEEDING : 진행중
+                 *     DONE : 입고완료
+                 * PDATE 는 신청날짜이다.
+                 * DDATE 는 입고완료 된 날짜
+                 * 
+                 * 사용예)
+                 *     PROC_재고입고신청('상품A', 5)
+                 *     5 라고하는 수량은 부족분에 대한 수량이다.
+                 */
                 ROLLBACK;
             END IF;
         END IF;
