@@ -1,5 +1,6 @@
 package com.join.dao;
 
+import java.io.File;
 import java.sql.ResultSet;
 
 import com.conn.db.DBConn;
@@ -10,7 +11,7 @@ public class JoinDAO {
 	
 	public JoinDAO() {
 		try {
-			db = new DBConn("db202204211937_low", "C:\\Users\\user2\\eclipse\\oracle\\Wallet_DB202204211937", "puser1", "Database1234");
+			db = new DBConn(new File(System.getProperty("user.home") + "/oracle_db.conf"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
