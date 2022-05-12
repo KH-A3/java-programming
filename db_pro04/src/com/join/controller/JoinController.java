@@ -33,5 +33,17 @@ public class JoinController {
 		}
 		return null;
 	}
+	
+	public boolean update(JoinVO data) {
+		return dao.modify(data);
+	}
+	
+	public boolean remove(JoinVO data, String password) {
+		if(data.getUserpw().equals(password)) {
+			return dao.remove(data);
+		} else {
+			return false;
+		}
+	}
 
 }

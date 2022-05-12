@@ -38,12 +38,42 @@ public class JoinDAO {
 		return false;
 	}
 	
-	public void modify() {
+	public boolean modify(JoinVO data) {
 		// 데이터 수정
+		String query = ""
+				+ "UPDATE accounts"
+				+ "   SET USERPW = '" + data.getUserpw() + "'"
+				+ "     , USERNAME = '" + data.getUsername() + "'"
+				+ "     , GENDER = '" + data.getGender() + "'"
+				+ "     , AGE = " + data.getAge()
+				+ " WHERE USERID = '" + data.getUserid() + "'";
+		try {
+			int rs = db.sendUpdateQuery(query);
+			
+			if(rs == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
-	public void remove() {
+	public boolean remove(JoinVO data) {
 		// 데이터 삭제
+		String query = ""
+				+ "DELETE FROM accounts"
+				+ " WHERE USERID = '" + data.getUserid() + "'";
+		try {
+			int rs = db.sendDeleteQuery(query);
+			
+			if(rs == 1) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public JoinVO get(String userid) {

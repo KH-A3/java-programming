@@ -47,9 +47,9 @@ public class JoinVO {
 	}
 	
 	public void setGender(String gender) {
-		if(gender.charAt(0) == '남') {
+		if(gender.charAt(0) == '남' || gender.charAt(0) == 'M') {
 			this.gender = 'M';
-		} else if(gender.charAt(0) == '여') {
+		} else if(gender.charAt(0) == '여' || gender.charAt(0) == 'F') {
 			this.gender = 'F';
 		}
 	}
