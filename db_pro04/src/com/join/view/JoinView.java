@@ -1,5 +1,6 @@
 package com.join.view;
 
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import com.join.controller.JoinController;
@@ -92,6 +93,27 @@ public class JoinView {
 			
 			switch(input) {
 				case "1":
+					System.out.println(account.getUserid());
+					System.out.println(account.getUsername());
+					System.out.println(account.getGender());
+					System.out.println(account.getAge());
+					
+					System.out.println(account.getCreateDate());
+					SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+					
+					java.util.Date createDate = new java.util.Date(account.getCreateDate().getTime());
+					String sDate = dateFormat.format(createDate);
+					
+					System.out.println(sDate);
+					
+					java.util.Date now = new java.util.Date();
+					java.sql.Date sqlDate = new java.sql.Date(now.getTime());
+					sqlDate = java.sql.Date.valueOf("2022-05-13");
+					
+					System.out.println(sqlDate);
+					
+					break;
+				case "2":
 					System.out.println("아무것도 입력을 하지 않으면 이전 값을 유지 합니다.");
 					System.out.println("변경 할 패스워드 : ");
 					input = sc.nextLine();
@@ -120,7 +142,7 @@ public class JoinView {
 					}
 					
 					break;
-				case "2":
+				case "3":
 					System.out.println("패스워드 : ");
 					input = sc.nextLine();
 					
@@ -131,7 +153,7 @@ public class JoinView {
 						System.out.println("계정 삭제 작업에 실패하였습니다.");
 					}
 					break;
-				case "3":
+				case "4":
 					account = null;
 					return;
 				default:
