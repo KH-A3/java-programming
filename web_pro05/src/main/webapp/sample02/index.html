@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>CSS 선택자 2</title>
+	<style>
+		.ex1 > p:active {
+			border: 1px solid red;
+		}
+		.ex1 > p:hover {
+			color: lightseagreen;
+		}
+		.ex2 > input {
+			border: none;
+			outline: none;
+		}
+		.ex2 > input:enabled {
+			border: 1px solid black;
+		}
+		.ex2 > input:disabled {
+			background-color: #DFDFDF;
+		}
+		.ex2 > input:focus {
+			border: 1px solid #CCCCFF;
+		}
+		.ex2 > input:checked {
+			box-shadow: 0 0 1px 2px blue;
+		}
+		.ex3 > a:link {
+			font-weight: bold;
+			color: lightblue;
+		}
+		.ex3 > a:visited {
+			font-weight: bold;
+			color: lightcoral;
+		}
+		.ex4 li:first-child {
+			color: red;
+		}
+		.ex4 li:last-child {
+			color: blue;
+		}
+		.ex5 li:nth-child(2n) {
+			color: red;
+		}
+		.ex5 li:nth-child(2n-1) {
+			color: blue;
+		}
+		.ex5 li:nth-last-child(2n) {
+			text-decoration: underline;
+		}
+		.ex6 h2:first-child {
+			color: red;
+		}
+		.ex6 h3:first-child {
+			color: blue;
+		}
+		.ex6 h3:first-of-type {
+			text-decoration: underline;
+		}
+		.ex6 h2:nth-child(2n) {
+			color: green;
+		}
+		.ex6 h2:nth-of-type(2n) {
+			background-color: whitesmoke;
+		}
+		.ex7 p::first-letter {
+			font-size: 24px;
+			font-weight: bold;
+			color: red;
+		}
+		.ex8 p::first-line {
+			text-decoration: underline;
+		}
+		.ex9 h4::after {
+			content: " >>>";
+		}
+		.ex9 h4::before {
+			content: "<<< ";
+		}
+		.ex9 ::selection {
+			background-color: lime;
+		}
+		.ex10 h4:not(.ignore)::selection {
+			background-color: lime;
+		}
+	</style>
+</head>
+<body>
+	<div class="ex1">
+		<p>:active : 사용자가 HTML 요소에 마우스를 클릭을 유지하고 있을 때</p>
+		<p>:hover : 사용자가 HTML 요소에 마우스를 올려두고 있을 때</p>
+	</div>
+	<hr>
+	<div class="ex2">
+		<input type="text"><br>
+		<input type="number"><br>
+		<input type="email" disabled><br>
+		<input type="checkbox"><input type="checkbox">
+		<input type="checkbox"><input type="checkbox">
+	</div>
+	<hr>
+	<div class="ex3">
+		<a href="https:naver.com">네이버로 이동</a>
+	</div>
+	<hr>
+	<div class="ex4">
+		<ul>
+			<li>목록 A</li>
+			<li>목록 B
+				<ul>
+					<li>목록 B-1</li>
+					<li>목록 B-2</li>
+					<li>목록 B-3</li>
+					<li>목록 B-4</li>
+					<li>목록 B-5</li>
+				</ul>
+			</li>
+			<li>목록 C</li>
+			<li>목록 D</li>
+			<li>목록 E</li>
+		</ul>
+	</div>
+	<hr>
+	<div class="ex5">
+		<ul>
+			<li>목록 A</li>
+			<li>목록 B</li>
+			<li>목록 C
+				<ul>
+					<li>목록 B-1</li>
+					<li>목록 B-2</li>
+					<li>목록 B-3</li>
+					<li>목록 B-4</li>
+					<li>목록 B-5</li>
+				</ul>
+			</li>
+			<li>목록 D</li>
+			<li>목록 E</li>
+		</ul>
+	</div>
+	<hr>
+	<div class="ex6">
+		<h2>제목 2 - 1</h2>
+		<h2>제목 2 - 2</h2>
+		<h3>제목 3 - 1</h3>
+		<h3>제목 3 - 2</h3>
+		<h2>제목 2 - 3</h2>
+		<h3>제목 3 - 3</h3>
+		<h2>제목 2 - 4</h2>
+		<h2>제목 2 - 5</h2>
+		<h3>제목 3 - 4</h3>
+		<h3>제목 3 - 5</h3>
+	</div>
+	<hr>
+	<div class="ex7">
+		<p>first-letter 는 첫번째 글자를 선택하기 위한 선택자</p>
+	</div>
+	<hr>
+	<div class="ex8">
+		<p>first-line 은 첫번째 줄을 선택하기 위한 선택자
+		단, 브라우저에 출력되는 텍스트에 대해서 첫번째 줄을 선택하기 위해 사용한다.</p>
+	</div>
+	<hr>
+	<div class="ex9">
+		<h4>제목 4</h4>
+		<h4>제목 4</h4>
+		<h4>제목 4</h4>
+	</div>
+	<div class="ex10">
+		<h4>제목 4</h4>
+		<h4 class="ignore">제목 4</h4>
+		<h4>제목 4</h4>
+	</div>
+</body>
+</html>
