@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+/*
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+*/
+
+@font-face {
+	font-family: "나눔펜";
+	src: url(./NanumPenScript-Regular.ttf);
+}
+
+body {
+	/* font-family: 'Nanum Pen Script', cursive; */
+	font-family: "나눔펜";
+}
+
+.test1 > .ex1 {
+	font-size: 2em;
+}
+
+.test1 > .ex1 > .ex2 {
+	font-size: 2em;
+}
+
+.test2 > .ex1 {
+	font-size: 2rem;
+}
+
+.test2 > .ex1 > .ex2 {
+	font-size: 2rem;
+}
+
+.test3 > .ex1 {
+	/*
+	font-family: "맑은 고딕";
+	font-size: 32px;
+	font-weight: bold;
+	font-variant: small-caps;
+	font-style: italic;
+	*/
+	font: italic small-caps bold 32px "맑은 고딕"
+}
+
+.test4 > .ex1 {
+	font-family: "맑은 고딕";
+	text-transform: uppercase;
+}
+
+.test5 > .ex1 {
+	text-shadow: 0 0 0 red;
+}
+
+.test6 > .ex1 {
+	white-space: normal;
+}
+
+.test7 > .ex1 {
+	letter-spacing: 12px;
+}
+
+.test7 > .ex2 {
+	word-spacing: 12px;
+}
+
+.test8 > .ex1 {
+	text-align: center;
+}
+.test8 > .ex2 {
+	text-indent: 24px;
+}
+.test8 > .ex3 {
+	line-height: 24px;
+}
+.test8 > .ex4 {
+	width: 100px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: clip;
+}
+.test9 > .ex1 {
+	list-style-type: none;
+	list-style-image: url(./list-icon.png);
+	list-style-position: inside;
+	padding-inline-start: 40px;
+}
+
+
+
+
+
+
+
+
+
+
