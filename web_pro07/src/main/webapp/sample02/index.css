@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.form-main {
+	width: 480px;
+	margin: 0 auto;
+}
+
+form * {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.form-control {
+	width: 100%;
+	margin: 0.4rem 0.2rem;
+}
+
+.form-control .form-label {
+	width: 100%;
+	color: gray;
+	margin-bottom: 0.4rem;
+}
+
+.form-control .form-input {
+	width: 100%;
+	border-style: none;
+	padding: 0.4rem;
+}
+
+.form-input:focus {
+	outline: 2px solid skyblue;
+	border-radius: 4px;
+}
+
+.btn {
+	width: 100%;
+	padding: 0.8rem;
+	border-style: none;
+	border-radius: 4px;
+	background-color: skyblue;
+}
+
+.btn:hover {
+	background-color: #7BD3F7;
+	cursor: pointer;
+}
