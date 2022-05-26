@@ -73,6 +73,8 @@
 }
 .test5 th,td {
 	border: 1px solid black;
+	text-align: left;
+	vertical-align: top;
 }
 .test5 table.table-fixed {
 	table-layout: fixed;
