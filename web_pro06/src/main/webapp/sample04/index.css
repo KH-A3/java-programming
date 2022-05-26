@@ -66,3 +66,19 @@
 .test4 h2 {
 	column-span: 1;
 }
+
+.test5 table {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+.test5 th,td {
+	border: 1px solid black;
+}
+.test5 table.table-fixed {
+	table-layout: fixed;
+	width: 100%;
+}
+.test5 caption {
+	caption-side: bottom;
+	text-align: right;
+}
