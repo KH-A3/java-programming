@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+.test1 p {
+	border: 1px solid red;
+	padding: 1rem;
+}
+
+.test1 .ex1 {
+	position: relative;
+	left: 50px;
+	top: 50px;
+}
+
+.test2 {
+	position: relative;
+}
+
+.test2 p {
+	border: 1px solid blue;
+	padding: 1rem;
+}
+
+.test2 .ex1 {
+	position: absolute;
+	left: 50px;
+	top: 50px;
+}
+
+.test3 p {
+	border: 1px solid green;
+	padding: 1rem;
+}
+
+.test3 .ex1 {
+	position: fixed;
+	right: 50px;
+	bottom: 50px;
+}
+
+.test4 table,td {
+	border: 1px solid gray;
+}
+
+.test4 td {
+	padding: 1rem;
+}
+
+.test5 {
+	position: relative;
+}
+
+.test5 p {
+	position: absolute;
+	padding: 2rem;
+}
+
+.test5 .ex1 {
+	border: 1px solid orange;
+	background-color: orange;
+	z-index: 2; top: 25px; left: 25px;
+}
+
+.test5 .ex2 {
+	border: 1px solid skyblue;
+	background-color: skyblue;
+	z-index: 1; top: 50px; left: 50px;
+}
+
+.test5 .ex3 {
+	border: 1px solid lightcoral;
+	background-color: lightcoral;
+	z-index: 3; top: 75px; left: 75px;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.collapse {
+	visibility: collapse;
+}
+
+.none {
+	display: none;
+}

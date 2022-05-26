@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+.test1 .box {
+	width: 250px;
+	height: 250px;
+	background-color: lightcoral;
+	float: right;
+}
+
+.test2 * {
+	margin: 0; padding: 0;
+	box-sizing: border-box;
+}
+
+.test2 section {
+	width: 75%;
+	height: 480px;
+	background-color: bisque;
+	float: right;
+}
+
+.test2 aside {
+	width: 25%;
+	height: 480px;
+	background-color: honeydew;
+	display: inline-block;
+}
+
+.test3 * {
+	margin: 0; padding: 0;
+	box-sizing: border-box;
+}
+
+.test3 section {
+	width: 50%;
+	height: 480px;
+	background-color: bisque;
+	display: inline-block;
+}
+
+.test3 aside {
+	width: 25%;
+	height: 480px;
+	background-color: honeydew;
+}
+
+.test3 .layout-left {
+	float: left;
+}
+
+.test3 .layout-right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.test4 {
+	/* column-width: 480px; */
+	column-count: 3;
+	column-gap: 3rem;
+	column-rule: 2px dashed gray;
+}
+
+.test4 h2 {
+	column-span: 1;
+}
