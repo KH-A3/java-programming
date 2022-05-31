@@ -92,8 +92,53 @@ input.check-hidden:checked + .checkbox {
 }
 
 
+.paging-list {
+	list-style-type: none;
+}
 
+.paging-list .paging-item {
+	display: inline-block;
+}
 
+.paging-list .active {
+	border: 1px solid black;
+	background-color: white;
+}
+
+.paging-list .active a {
+	color: rgb(0, 216, 80);
+}
+
+.paging-list a {
+	display: inline-block;
+	text-decoration: none;
+	padding: 0.4rem 0.6rem;
+	color: black;
+}
+
+.paging-list a:hover {
+	text-decoration: underline;
+}
+
+.paging-list .next-item::after {
+	position: relative;
+	right: 12px;
+	content: ">";
+}
+
+.paging-list .prev-item::before {
+	position: relative;
+	left: 12px;
+	content: "<";
+}
+
+.align-center {
+	text-align: center;
+}
+
+.align-right {
+	text-align: right;
+}
 
 
 
