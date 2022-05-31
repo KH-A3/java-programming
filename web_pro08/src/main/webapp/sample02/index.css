@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+* {
+	margin: 0; padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	width: 768px;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.content-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table {
+	width: 100%;
+}
+
+.table-normal {
+	border-collapse: collapse;
+}
+
+.table-normal > thead td,th {
+	border-top: 2px solid black;
+	border-bottom: 1px solid rgb(216, 216, 216);
+	padding: 0.8rem 0;
+}
+
+.table-normal > tbody td,th {
+	border-bottom: 1px solid rgb(216, 216, 216);
+	padding: 0.4rem 0;
+}
+
+.table-fix {
+	table-layout: fixed;
+}
+
+.cell-center {
+	text-align: center;
+}
+
+.cell-left {
+	text-align: left;
+}
+
+.col-1 {
+	width: calc(100% / 12 * 1);
+}
+
+.col-2 {
+	width: calc(100% / 12 * 2);
+}
+
+.col-4 {
+	width: calc(100% / 12 * 4);
+}
+
+
+
+
+
+input.check-hidden {
+	display: none;
+}
+
+input.check-hidden + .checkbox {
+	position: relative;
+	top: -2px;
+	display: inline-block;
+	width: 1rem; height: 1rem;
+	border: 1px solid black;
+	vertical-align: middle;
+}
+
+input.check-hidden + .checkbox > span {
+	display: none;
+	font-size: 14px;
+}
+
+input.check-hidden:checked + .checkbox > span {
+	position: relative;
+	top: -4px;
+	display: inline-block;
+}
+
+input.check-hidden:checked + .checkbox {
+	background-color: gray;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
