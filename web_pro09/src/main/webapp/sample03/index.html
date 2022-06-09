@@ -32,6 +32,55 @@
 	<p id="res4"></p>
 	<hr>
 	<h2>객체에 메서드 만들고 사용하기</h2>
+	<button type="button" onclick="f5();">생성</button>
+	<input id="id_input2_name" type="text" readonly>
+	<input id="id_input2_age" type="text" readonly>
+	<input id="id_input2_gender" type="text" readonly>
+	<p id="res5"></p>
+	<hr>
+	<h2>문제 1</h2>
+	<p>
+		다음의 속성을 가지는 사각형 객체를 만들어 본다.
+	</p>
+	<table>
+		<tr>
+			<th>속성명(한글)</th>
+			<th>속성명(영문)</th>
+			<th>설명</th>
+		</tr>
+		<tr>
+			<td>너비</td>
+			<td>width</td>
+			<td>사각형의 너비값을 가지는 속성이다.</td>
+		</tr>
+		<tr>
+			<td>높이</td>
+			<td>height</td>
+			<td>사각형의 높이값을 가지는 속성이다.</td>
+		</tr>
+		<tr>
+			<td>색상</td>
+			<td>color</td>
+			<td>사각형의 내부 배경색을 가지는 속성이다.<br>
+			이 속성값은 색상코드 또는 색상명을 가진다.</td>
+		</tr>
+		<tr>
+			<td>면적</td>
+			<td>getArea</td>
+			<td>사각형의 너비와 높이로 계산된 면적이다.</td>
+		</tr>
+	</table>
+	<p>
+		객체를 생성할 때 속성명은 한글이 아닌 영문으로 작성해야 한다.<br>
+		면적의 경우 함수로 만들어서 내부 속성값으로 계산되여 반환될 수 있게 한다.<br>
+		너비, 높이, 색상 속성의 값은 input 태그에 입력된 값으로 설정되도록 한다.<br>
+		최종 결과는 res6 영역에 정보를 출력하는 것으로 확인한다.
+	</p>
+	<input id="id_input3_width" type="text" placeholder="너비를 입력하세요.">
+	<input id="id_input3_height" type="text" placeholder="높이를 입력하세요.">
+	<input id="id_input3_color" type="text" placeholder="색상을 입력하세요.">
+	<button type="button" onclick="f6();">생성</button>
+	<p id="res6"></p>
 </body>
 </html>
 

@@ -68,6 +68,99 @@ function f4() {
 	};
 }
 
+function f5() {
+	var res4 = document.getElementById("res4");
+	var res5 = document.getElementById("res5");
+	
+	if(!res4.innerHTML) {
+		res5.innerHTML = "함수로 객체 만들기를 먼저 진행하세요.";
+		return;
+	}
+	
+	var name = document.getElementById("id_input1_name");
+	var age = document.getElementById("id_input1_age");
+	var gender = document.getElementById("id_input1_gender");
+	var n, a, g;
+
+	n = name.value;
+	a = parseInt(age.value);
+	g = gender.value;
+	
+	var student = genStudent(n, a, g);
+	
+	student.getGender = function() {
+		if(this.gender === "M") {
+			return "남자";
+		} else {
+			return "여자";
+		}
+	};
+	
+	name = document.getElementById("id_input2_name");
+	age = document.getElementById("id_input2_age");
+	gender = document.getElementById("id_input2_gender");
+	
+	name.value = student.name;
+	age.value = student.age;
+	gender.value = student.getGender();
+}
+
+function f6() {
+	var width = document.getElementById("id_input3_width");
+	var height = document.getElementById("id_input3_height");
+	var color = document.getElementById("id_input3_color");
+	var res6 = document.getElementById("res6");
+	
+	if(!width.value) {
+		res6.innerHTML = "너비를 입력하세요.";
+		width.focus();
+		return;
+	}
+	
+	if(!height.value) {
+		res6.innerHTML = "높이를 입력하세요.";
+		height.focus();
+		return;
+	}
+	
+	if(!color.value) {
+		res6.innerHTML = "색상코드를 입력하세요.";
+		color.focus();
+		return;
+	}
+	
+	var square = genSquare(width.value, height.value, color.value);
+	
+	var element = document.createElement("div");
+	element.style.width = square.width + "px";
+	element.style.height = square.height + "px";
+	element.style.backgroundColor = square.color;
+	element.innerText = "HTML 태그 객체 생성하여 추가";
+	res6.appendChild(element);
+	
+	/*
+	for(let key in square) {
+		if(typeof(square[key]) === "function") {
+			res6.innerHTML += "square['" + key + "']() -> " + square[key]() + "<br>";
+		} else {
+    		res6.innerHTML += "square['" + key + "'] -> " + square[key] + "<br>";
+		}
+	};
+	*/
+}
+
+function genSquare(width=1, height=1, color="#000000") {
+	var square = {
+		width: width,
+		height: height,
+		color: color,
+		getArea: function() {
+			return this.width * this.height;
+		}
+	};
+	return square;
+}
+
 function genStudent(name, age, gender) {
 	var student = {
 		name: name,
