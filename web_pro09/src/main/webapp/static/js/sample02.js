@@ -46,6 +46,18 @@ function f8(x, y=0, ...args) {
 	}
 }
 
+function f9(x) {
+	console.log(arguments);
+}
+
+/*
+var f10 = () => {
+	return "익명 함수";
+};
+*/
+var f10 = () => "익명 함수";
+var f11 = (x) => x + 10;
+
 
 
 
