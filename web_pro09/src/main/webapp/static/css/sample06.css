@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+body {
+	background-color: whitesmoke;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table,td,th {
+	border: 1px solid black;
+}
+
+td,th {
+	padding: 1rem;
+}
+
+textarea {
+	font-size: 2rem;
+	resize: none;
+	width: 180px;
+	height: 3rem;
+	white-space: pre;
+}
+
+.box-red {
+	display: inline-block;
+	width: 120px;
+	height: 120px;
+	background-color: lightcoral;
+}

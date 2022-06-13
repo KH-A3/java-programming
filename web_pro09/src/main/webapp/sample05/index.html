@@ -7,6 +7,70 @@
 	<script type="text/javascript" src="../static/js/sample05.js"></script>
 </head>
 <body>
+	<h1>DOM 객체 선택/접근</h1>
+	<h2>document.getElementById(id)</h2>
+	<p>HTML 태그의 속성중 id 속성의 값으로 태그를 선택/접근 하기 위한 방법<br>
+		id 로 접근하는 경우 가장 먼저 선택한 요소 1개만 반환한다.</p>
+	<hr>
+	<h2>document.getElementsByTagName(tag_name)</h2>
+	<p>HTML 태그 이름으로 선택/접근 하기 위한 방법<br>
+		동일한 태그명에 해당하는 모든 요소를 HTMLCollection으로 반환한다.</p>
+	<hr>
+	<h2>document.getElementsByName(name)</h2>
+	<p>HTML 태그의 속성중 name 속성의 값으로 태그를 선택/접근 하기 위한 방법<br>
+		동일한 name 속성 값에 해당하는 모든 요소를 HTMLCollection으로 반환한다.</p>
+	<hr>
+	<h2>document.getElementsByClassName(class_name)</h2>
+	<p>HTML 태그의 속성중 class 속성의 값으로 태그를 선택/접근 하기 위한 방법<br>
+		동일한 class 속성 값에 해당하는 모든 요소를 HTMLCollection으로 반환한다.</p>
+	<hr>
+	<h2>document.getSelector(css_selector)</h2>
+	<p>HTML 태그의 속성중 class 속성의 값으로 태그를 선택/접근 하기 위한 방법<br>
+		css 선택자를 사용하여 id, 태그명, class 등의 속성을 활용할 수 있다.<br>
+		가장 먼저 선택한 요소 1개만 반환한다.</p>
+	<hr>
+	<h2>document.getSelectorAll(css_selector)</h2>
+	<p>HTML 태그의 속성중 class 속성의 값으로 태그를 선택/접근 하기 위한 방법<br>
+		css 선택자를 사용하여 id, 태그명, class 등의 속성을 활용할 수 있다.<br>
+		동일한 css 선택자에 해당하는 모든 요소를 NodeList 으로 반환한다.</p>
+	<hr>
+	<h2>선택된 DOM 객체를 기준으로 다른 DOM 객체 선택/접근</h2>
+	<p>선택된 DOM 객체로 부터 상대적인 방법으로 다른 DOM 객체에 접근하는 방법</p>
+	<ul>
+		<li>HTMLElement.firstElementChild : 하위 요소 중 첫번째 요소</li>
+		<li>HTMLElement.lastElementChild : 하위 요소 중 마지막 요소</li>
+		<li>HTMLElement.previousElementSibling : 동일 레벨에 있는 이전 요소</li>
+		<li>HTMLElement.nextElementSibling : 동일 레벨에 있는 다음 요소</li>
+		<li>HTMLElement.parentElement : 상위(부모) 레벨의 요소</li>
+	</ul>
+	<div>
+		<ul id="id1">
+			<li>목록 1</li>
+			<li>목록 2</li>
+			<li>목록 3</li>
+			<li>목록 4</li>
+		</ul>
+		<button type="button" onclick="f1();">내부 목록 선택</button>
+	</div>
+	<div>
+		<ul>
+			<li>목록 1</li>
+			<li>목록 2</li>
+			<li id="id2">목록 3</li>
+			<li>목록 4</li>
+		</ul>
+		<button type="button" onclick="f2();">동일 위치의 목록 선택</button>
+	</div>
+	<div>
+		<ul>
+			<li>목록 1</li>
+			<li>목록 2</li>
+			<li id="id3">목록 3</li>
+			<li>목록 4</li>
+		</ul>
+		<button type="button" onclick="f3();">부모(상위) 선택</button>
+	</div>
+	<hr>
 	<section>
 		<p>DOM 을 활용하여 사용자가 입력한 URL 주소와 이름이 ol, li, a 태그로
 			만들어져 목록화 될 수 있게 한다.<br>
