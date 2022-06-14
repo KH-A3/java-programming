@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>자바스크립트 - 활용</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/sample07.css">
+	<script type="text/javascript" src="../static/js/sample07.js"></script>
+</head>
+<body>
+	<h1>자바스크립트 - 활용</h1>
+	<div>
+		<h2>1 ~ 12월 까지의 옵션을 자바스크립트로 생성하기</h2>
+		<div>
+			<select data-calendar="month">
+				<option>월</option>
+				<!--
+					1 ~ 12월 까지의 옵션을 자동으로 생성하도록 한다.
+					option의 value 속성은 1 ~ 12 의 값으로 설정한다.
+					option 태그의 사이의 텍스트는 1월 ~ 12월 의 값으로 설정한다.
+				-->
+			</select>
+		</div>
+	</div>
+	<hr>
+	<div>
+		<h2>1 ~ 12월 중 선택한 월에 대응하는 일자 옵션을 자바스크립트로 생성하기</h2>
+		<div>
+			<select data-calendar="month" data-calendar-id="calendar1">
+				<option>월</option>
+			</select>
+			<select data-calendar="date" data-calendar-id="calendar1">
+				<option>일</option>
+				<!--
+					1 ~ 12월 중 선택된 월에 해당하는 일자가 옵션으로 생성되도록 한다.
+					option의 value 속성은 1 ~ 28,29,30,31 의 값으로 설정한다.
+					option 태그의 사이의 텍스트는 1일 ~ 28일,29일,30일,31일 의 값으로 설정한다.
+					년도는 현재년으로 한다.
+				-->
+			</select>
+		</div>
+	</div>
+	<hr>
+	<div>
+		<h2>전체 선택용 체크박스</h2>		
+		<div>
+			<!--
+				전체선택 체크박스를 클릭하면 동일한 이름의 모든 체크박스가 선택되게 한다.
+				선택 해제를 할 때에도 마찬가지로 전체 해제가 가능해야 한다.
+			-->
+			<input type="checkbox" name="chk1" value="all" onclick="toggleAll(this);">전체선택
+			<input type="checkbox" name="chk1" value="a">a
+			<input type="checkbox" name="chk1" value="b">b
+			<input type="checkbox" name="chk1" value="c">c
+			<input type="checkbox" name="chk1" value="d">d
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

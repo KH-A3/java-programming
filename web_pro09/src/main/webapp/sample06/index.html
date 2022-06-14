@@ -414,19 +414,16 @@
 				<td>전송(submit) 버튼을 눌렀을 때 발생</td>
 				<td>
 					<form id="id37" action="./" method="get">
-						<input type="text" name="username" required>
+						<input type="text" name="username">
 						<button type="submit">전송</button>
 					</form>
 					<script type="text/javascript">
 						var id37 = document.getElementById("id37");
 						
 						id37.addEventListener("submit", function(e) {
+							this.username.value = this.username.value += " Add Data";
+							this.submit();
 							e.preventDefault();
-							console.log(this.__proto__);
-							if(!this.username.value) {
-							} else {								
-								this.submit();
-							}
 						});
 					</script>
 				</td>
