@@ -2,9 +2,14 @@
  * 
  */
 
-window.onload = function() {
+// window.onload = function() {
+$(function() {
 	createOptionMonth();
-}
+	$(".allchk").bind("click", function(e) {
+		toggleAll(this);
+	});
+});
+// }
 
 function createOptionMonth() {
 	var selects = document.querySelectorAll("select[data-calendar='month']");
