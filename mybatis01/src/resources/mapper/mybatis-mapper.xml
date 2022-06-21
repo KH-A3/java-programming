@@ -2,8 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="testMapper">
-	<select id="test" resultType="string">
-		select 'Connection Success!!' from dual
+<mapper namespace="empMapper">
+	<resultMap type="empVo" id="empVoMap">
+		<result property="empId" column="employee_id" />
+		<result property="firstName" column="first_name" />
+		<result property="lastName" column="last_name" />
+	</resultMap>
+	
+	<select id="empCount" resultType="_int">
+		SELECT COUNT(*) FROM EMPLOYEES
+	</select>
+	
+	<select id="empNames" resultType="string">
+		SELECT CONCAT(FIRST_NAME, LAST_NAME) FROM EMPLOYEES
+	</select>
+	
+	<select id="empDatas" resultType="map">
+		SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME FROM EMPLOYEES
+	</select>
+	
+	<select id="empObjects" resultType="empVo">
+		SELECT EMPLOYEE_ID AS empid
+		     , FIRST_NAME AS firstname
+		     , LAST_NAME AS lastname
+		  FROM EMPLOYEES
+	</select>
+	
+	<select id="empSelect" resultType="empVo">
+		SELECT EMPLOYEE_ID AS empid
+		     , FIRST_NAME AS firstname
+		     , LAST_NAME AS lastname
+		  FROM EMPLOYEES
+		 WHERE EMPLOYEE_ID = #{id}
+	</select>
+	
+	<select id="empRange" parameterType="map" resultMap="empVoMap">
+		SELECT EMPLOYEE_ID
+		     , FIRST_NAME
+		     , LAST_NAME
+		  FROM EMPLOYEES
+		 WHERE EMPLOYEE_ID BETWEEN #{first} AND #{last}
 	</select>
 </mapper>
