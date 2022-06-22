@@ -11,6 +11,7 @@
 	<typeAliases>
 		<typeAlias type="com.emp.vo.EmpVO" alias="empVo" />
 		<typeAlias type="com.emp.vo.DataVO" alias="dataVo" />
+		<typeAlias type="com.emp.vo.EmpWhereVO" alias="empWhereVo" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">

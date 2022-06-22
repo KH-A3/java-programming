@@ -64,4 +64,38 @@
 		SELECT * FROM T_MYBATIS
 		 WHERE ID = #{id}
 	</select>
+	
+	<select id="dynamicQuery" parameterType="empWhereVo" resultType="empVo">
+		SELECT EMPLOYEE_ID
+		     , FIRST_NAME
+		     , LAST_NAME
+		     , SALARY
+		  FROM EMPLOYEES
+		 WHERE 1 = 1
+		<if test="salary > 0">
+			AND SALARY >= #{salary}
+		</if>
+		<choose>
+			<when test="deptId > 0">
+				AND DEPARTMENT_ID = #{deptId}
+			</when>
+			<when test="deptIdList != null">
+				<foreach collection="deptIdList" item="v" index="index"
+					open="AND DEPARTMENT_ID IN (" close=")" separator=", ">
+					#{v}
+				</foreach>
+			</when>
+		</choose>
+		<choose>
+			<when test="startDate != null and endDate != null">
+				AND HIRE_DATE BETWEEN #{startDate} AND #{endDate}
+			</when>
+			<when test="startDate != null and endDate == null">
+				AND HIRE_DATE >= #{startDate}
+			</when>
+			<when test="startDate == null and endDate != null">
+				AND HIRE_DATE &lt;= #{endDate}
+			</when>
+		</choose>
+	</select>
 </mapper>

@@ -3,6 +3,9 @@ package com.conn.db;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.emp.vo.DataVO;
 import com.emp.vo.EmpVO;
+import com.emp.vo.EmpWhereVO;
 
 public class DBConn {
 
@@ -98,6 +102,28 @@ public class DBConn {
 //		int result9 = session.update("empMapper.dataDelete1", 1);
 //		session.commit();
 //		System.out.println(result9 + " 개 행이 삭제 되었습니다.");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		java.util.Date stDate = null, edDate = null;
+		try {
+			stDate = sdf.parse("1990/01/01");
+			edDate = sdf.parse("1999/12/31");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		EmpWhereVO dynamicData = new EmpWhereVO();
+		dynamicData.setSalary(10000);
+		// dynamicData.setDeptId(80);
+		// dynamicData.setStartDate(new Date(stDate.getTime()));
+		// dynamicData.setEndDate(new Date(edDate.getTime()));
+		
+		List<Integer> deptList = new ArrayList<Integer>();
+		deptList.add(80); deptList.add(90); deptList.add(100);
+		dynamicData.setDeptIdList(deptList);
+		
+		List<EmpVO> result10 = session.selectList("empMapper.dynamicQuery", dynamicData);
+		System.out.println(result10.size() + " 개 행 데이터가 조회 되었습니다.");
 	}
 
 }
