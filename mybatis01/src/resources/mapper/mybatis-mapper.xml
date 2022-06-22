@@ -43,4 +43,25 @@
 		  FROM EMPLOYEES
 		 WHERE EMPLOYEE_ID BETWEEN #{first} AND #{last}
 	</select>
+	
+	<insert id="dataInsert1" parameterType="dataVo">
+		INSERT INTO T_MYBATIS VALUES(SEQ_MYBATIS.NEXTVAL, #{name}, #{today})
+	</insert>
+	
+	<!-- update id="dataUpdate1" parameterType="map" -->
+	<update id="dataUpdate1" parameterType="dataVo">
+		UPDATE T_MYBATIS
+		   SET NAME = #{name}
+		 WHERE ID = #{id}
+	</update>
+	
+	<delete id="dataDelete1">
+		DELETE FROM T_MYBATIS
+		 WHERE ID = #{id}
+	</delete>
+	
+	<select id="insertCheck" resultType="dataVo">
+		SELECT * FROM T_MYBATIS
+		 WHERE ID = #{id}
+	</select>
 </mapper>

@@ -10,6 +10,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="com.emp.vo.EmpVO" alias="empVo" />
+		<typeAlias type="com.emp.vo.DataVO" alias="dataVo" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
