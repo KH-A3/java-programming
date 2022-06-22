@@ -113,14 +113,14 @@ public class DBConn {
 		}
 		
 		EmpWhereVO dynamicData = new EmpWhereVO();
-		dynamicData.setSalary(10000);
+		// dynamicData.setSalary(10000);
 		// dynamicData.setDeptId(80);
 		// dynamicData.setStartDate(new Date(stDate.getTime()));
 		// dynamicData.setEndDate(new Date(edDate.getTime()));
 		
 		List<Integer> deptList = new ArrayList<Integer>();
 		deptList.add(80); deptList.add(90); deptList.add(100);
-		dynamicData.setDeptIdList(deptList);
+		// dynamicData.setDeptIdList(deptList);
 		
 		List<EmpVO> result10 = session.selectList("empMapper.dynamicQuery", dynamicData);
 		System.out.println(result10.size() + " 개 행 데이터가 조회 되었습니다.");
