@@ -147,6 +147,15 @@ public class DBConn {
 		if(id != -1) {
 			System.out.println("ID 가 " + id + " 인 데이터가 추가 되었습니다.");
 		}
+		
+		DataVO dataVo2 = new DataVO();
+		dataVo2.setName("mybatis_seqquence");
+		dataVo2.setToday(new Date(new java.util.Date().getTime()));
+		int result12 = session.insert("empMapper.insertGetSeq", dataVo2);
+		if(result12 == 1) {
+			System.out.println("ID 가 " + dataVo2.getId() + " 인 데이터가 추가 되었습니다.");
+			session.commit();
+		}
 	}
 	
 	public static int insertSeqData(Map<String, Object> param) {
