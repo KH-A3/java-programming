@@ -124,6 +124,43 @@ public class DBConn {
 		
 		List<EmpVO> result10 = session.selectList("empMapper.dynamicQuery", dynamicData);
 		System.out.println(result10.size() + " 개 행 데이터가 조회 되었습니다.");
+		
+		// Map<String, Integer> paramData = new HashMap<String, Integer>();
+		// paramData.put("deptId", 10);
+		// paramData.put("stDeptId", 10);
+		// paramData.put("edDeptId", 40);
+		Map<String, List<Integer>> paramData = new HashMap<String, List<Integer>>();
+		List<Integer> deptList2 = new ArrayList<Integer>();
+		deptList2.add(10); deptList2.add(20); deptList2.add(40); deptList2.add(70);
+		paramData.put("deptList", deptList2);
+		
+		List<Map<String, Object>> result11 = session.selectList("empMapper.empOfDeptCount", paramData);
+		
+		for(Map<String, Object> d: result11) {
+			System.out.println(d);
+		}
+		
+		Map<String, Object> paramData2 = new HashMap<String, Object>();
+		paramData2.put("name", "newSeq");
+		paramData2.put("date", new Date(new java.util.Date().getTime()));
+		int id = insertSeqData(paramData2);
+		if(id != -1) {
+			System.out.println("ID 가 " + id + " 인 데이터가 추가 되었습니다.");
+		}
+	}
+	
+	public static int insertSeqData(Map<String, Object> param) {
+		SqlSession session = DBConn.getSqlSession();
+		int seq = session.selectOne("empMapper.getSeq");
+		param.put("seq", seq);
+		int result = session.insert("empMapper.insertSeq", param);
+		
+		if(result == 1) {
+			session.commit();
+			return seq;
+		}
+		session.rollback();
+		return -1;
 	}
 
 }
