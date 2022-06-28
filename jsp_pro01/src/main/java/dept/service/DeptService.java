@@ -17,4 +17,18 @@ public class DeptService {
 		List<DeptDTO> datas = dao.searchAll();
 		return datas;
 	}
+	
+	public DeptDTO getDeptId(String id) {
+		int deptId = Integer.parseInt(id);
+		return _getDeptId(deptId);
+	}
+	
+	public DeptDTO getDeptId(int id) {
+		return _getDeptId(id);
+	}
+	
+	private DeptDTO _getDeptId(int id) {
+		DeptDTO data = dao.searchDeptId(id);
+		return data;
+	}
 }
