@@ -27,6 +27,9 @@ function formCheck(e) {
 <body>
 	<h1>부서 조회 결과</h1>
 	<div>
+		<button type="button" onclick="location.href='./depts/add'">추가</button>
+	</div>
+	<div>
 		<form action="./depts" method="get">
 			<div>
 				<input type="text" name="search">

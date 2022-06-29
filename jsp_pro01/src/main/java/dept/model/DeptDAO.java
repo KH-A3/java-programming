@@ -23,4 +23,15 @@ public class DeptDAO {
 		DeptDTO data = session.selectOne("deptMapper.deptSelectId", id);
 		return data;
 	}
+
+	public boolean insertDept(DeptDTO data) {
+		int result = session.insert("deptMapper.deptInsert", data);
+		
+		if(result == 1) {
+			session.commit();
+			return true;
+		}
+		session.rollback();
+		return false;
+	}
 }

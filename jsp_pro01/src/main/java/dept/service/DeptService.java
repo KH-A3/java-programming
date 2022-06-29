@@ -35,4 +35,16 @@ public class DeptService {
 		DeptDTO data = dao.searchDeptId(id);
 		return data;
 	}
+
+	public int addDept(DeptDTO data) {
+		DeptDTO deptData = _getDeptId(data.getDeptId());
+		
+		if(deptData == null) {
+			boolean isSave = dao.insertDept(data);
+			if(isSave) {
+				return 1;	// 성공
+			}
+		}
+		return -1;	// 실패
+	}
 }
