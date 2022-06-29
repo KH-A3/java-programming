@@ -19,8 +19,12 @@ public class DeptService {
 	}
 	
 	public DeptDTO getDeptId(String id) {
-		int deptId = Integer.parseInt(id);
-		return _getDeptId(deptId);
+		boolean isNumber = id.matches("\\d+");
+		if(isNumber) {
+			int deptId = Integer.parseInt(id);
+			return _getDeptId(deptId);
+		}
+		return null;
 	}
 	
 	public DeptDTO getDeptId(int id) {

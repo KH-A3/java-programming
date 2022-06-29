@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, dept.model.DeptDTO" %>
+<%@ page import="java.util.*, locs.model.LocsDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>부서 조회 결과</title>
+	<title>지역 조회 결과</title>
 </head>
 <script type="text/javascript">
 window.onload = function() {
@@ -25,9 +25,9 @@ function formCheck(e) {
 }
 </script>
 <body>
-	<h1>부서 조회 결과</h1>
+	<h1>지역 조회 결과</h1>
 	<div>
-		<form action="./depts" method="get">
+		<form action="./locs" method="get">
 			<div>
 				<input type="text" name="search">
 				<button type="submit">조회</button>
@@ -36,28 +36,32 @@ function formCheck(e) {
 	</div>
 	<table>
 		<tr>
-			<th>DeptId</th>
-			<th>DeptName</th>
-			<th>MngId</th>
-			<th>LocId</th>
+			<th>Location ID</th>
+			<th>Street Address</th>
+			<th>Postal Code</th>
+			<th>City</th>
+			<th>State Province</th>
+			<th>Country Id</th>
 		</tr>
 		<%
 			if(request.getAttribute("datas") != null) {
-				List<DeptDTO> datas = (List<DeptDTO>)request.getAttribute("datas");
-				for(DeptDTO data: datas) {
+				List<LocsDTO> datas = (List<LocsDTO>)request.getAttribute("datas");
+				for(LocsDTO data: datas) {
 		%>
 					<tr>
-						<td><%=data.getDeptId() %></td>
-						<td><%=data.getDeptName() %></td>
-						<td><%=data.getMngId() %></td>
-						<td><a href="./locs?search=<%=data.getLocId() %>"><%=data.getLocId() %></a></td>
+						<td><%=data.getLocId() %></td>
+						<td><%=data.getStAddr() %></td>
+						<td><%=data.getPostal() %></td>
+						<td><%=data.getCity() %></td>
+						<td><%=data.getState() %></td>
+						<td><%=data.getCtyId() %></td>
 					</tr>
 		<%
 				}
 			} else {
 		%>
 			<tr>
-				<td colspan="4">검색 결과가 없습니다.</td>
+				<td colspan="6">검색 결과가 없습니다.</td>
 			</tr>
 		<%
 			}
