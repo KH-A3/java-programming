@@ -34,4 +34,8 @@ public class DeptDAO {
 		session.rollback();
 		return false;
 	}
+	
+	public void close() {
+		session.close();
+	}
 }
