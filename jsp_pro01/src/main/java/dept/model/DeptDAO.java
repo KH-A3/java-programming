@@ -52,6 +52,9 @@ public class DeptDAO {
 	public boolean updateDept(DeptDTO data) {
 		// 업데이트 용 맵퍼와 SQL 구문을 작성하여 이 메서드가 동작하게 한다.
 		int result = session.update("deptMapper.deptUpdate", data);
+		if(result == 1) {
+			return true;
+		}
 		return false;
 	}
 	

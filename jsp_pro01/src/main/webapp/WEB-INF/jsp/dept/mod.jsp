@@ -16,6 +16,14 @@
 		deptName = data.getDeptName();
 		mngId = String.valueOf(data.getMngId());
 		locId = String.valueOf(data.getLocId());
+		
+		if(request.getAttribute("error") != null) {
+	%>
+			<script type="text/javascript">
+				alert("<%=request.getAttribute("errorMsg") %>");
+			</script>
+	<%
+		}
 	%>
 	<form action="./mod" method="post">
 		<input type="hidden" name="deptId" value="<%=deptId %>" readonly>

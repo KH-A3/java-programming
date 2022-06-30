@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dept.model.DeptDTO;
+import dept.service.DEPT_SERVICE_STATUS;
 import dept.service.DeptService;
 
 @WebServlet("/depts/mod")
@@ -46,7 +47,26 @@ public class DeptModController extends HttpServlet {
 		// 완료된 데이터에 대해 상태 정보를 받아서
 		// 정상/실패 를 구분하고 JSP 에서 에러메시지가
 		// 나올 수 있게 처리한다.
-		service.modifyDept(data);
+		DEPT_SERVICE_STATUS status = service.modifyDept(data);
+		
+		String view = "/WEB-INF/jsp/dept/mod.jsp";
+		switch(status) {
+			case SUCCESS:
+				response.sendRedirect("/jsp01/depts?search=" + data.getDeptId());
+				return;
+			case MNG_ID_NOT_EXISTS:
+				request.setAttribute("errorMsg", "관리자 ID가 존재하지 않습니다.");
+				break;
+			case LOC_ID_NOT_EXISTS:
+				request.setAttribute("errorMsg", "지역 ID가 존재하지 않습니다.");
+				break;
+			case FAILED:
+				request.setAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+				break;
+		}
+		request.setAttribute("data", data);
+		request.setAttribute("error", true);
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }

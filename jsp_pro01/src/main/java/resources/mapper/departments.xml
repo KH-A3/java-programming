@@ -30,4 +30,11 @@
 		INSERT INTO DEPARTMENTS
 		     VALUES (#{deptId}, #{deptName}, #{mngId}, #{locId})
 	</insert>
+	<update id="deptUpdate" parameterType="deptDto">
+		UPDATE DEPARTMENTS
+		   SET DEPARTMENT_NAME = #{deptName}
+		     , MANAGER_ID = #{mngId}
+		     , LOCATION_ID = #{locId}
+		 WHERE DEPARTMENT_ID = #{deptId}
+	</update>
 </mapper>

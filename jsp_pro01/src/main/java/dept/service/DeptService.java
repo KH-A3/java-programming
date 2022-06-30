@@ -80,11 +80,32 @@ public class DeptService {
 		return result;
 	}
 
-	public void modifyDept(DeptDTO data) {
+	public DEPT_SERVICE_STATUS modifyDept(DeptDTO data) {
 		// addDept 를 구현한 것과 유사하게 수정한 데이터에 대해
 		// 문제가 발생한 경우 상세 오류를 구분할 수 있게 만들고
 		// Controller 에 반환할 수 있게 한다.
 		dao = new DeptDAO();
-		boolean result = dao.updateDept(data);
+		DEPT_SERVICE_STATUS status = DEPT_SERVICE_STATUS.SUCCESS;
+		
+		if(!_existManager(data.getMngId())) {
+			status = DEPT_SERVICE_STATUS.MNG_ID_NOT_EXISTS;
+		}
+		if(!_existLocation(data.getLocId())) {
+			status = DEPT_SERVICE_STATUS.LOC_ID_NOT_EXISTS;
+		}
+		
+		switch(status) {
+			case SUCCESS:
+				if(dao.updateDept(data)) {
+					dao.commit();
+				} else {
+					status = DEPT_SERVICE_STATUS.FAILED;
+					dao.rollback();
+				}
+			default:
+				dao.close();
+		}
+		
+		return status;
 	}
 }
