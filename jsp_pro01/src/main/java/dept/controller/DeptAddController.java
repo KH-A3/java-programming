@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dept.model.DeptDTO;
+import dept.service.DEPT_SERVICE_STATUS;
 import dept.service.DeptService;
 
 @WebServlet("/depts/add")
@@ -33,14 +34,29 @@ public class DeptAddController extends HttpServlet {
 		data.setMngId(Integer.parseInt(mngId));
 		data.setLocId(Integer.parseInt(locId));
 		
-		int resultCode = service.addDept(data);
-		if(resultCode == 1) {
-			response.sendRedirect("/jsp01/depts?search=" + data.getDeptId());
-		} else {
-			request.setAttribute("error", true);
-			String view = "/WEB-INF/jsp/dept/add.jsp";
-			request.getRequestDispatcher(view).forward(request, response);
+		DEPT_SERVICE_STATUS status = service.addDept(data);
+		
+		String view = "/WEB-INF/jsp/dept/add.jsp";
+		switch(status) {
+			case SUCCESS:
+				response.sendRedirect("/jsp01/depts?search=" + data.getDeptId());
+				return;
+			case DEPT_ID_DUPLICATED:
+				request.setAttribute("errorMsg", "부서 ID 중복 오류가 발생하였습니다.");
+				break;
+			case MNG_ID_NOT_EXISTS:
+				request.setAttribute("errorMsg", "관리자 ID가 존재하지 않습니다.");
+				break;
+			case LOC_ID_NOT_EXISTS:
+				request.setAttribute("errorMsg", "지역 ID가 존재하지 않습니다.");
+				break;
+			case FAILED:
+				request.setAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
+				break;
 		}
+		request.setAttribute("data", data);
+		request.setAttribute("error", true);
+		request.getRequestDispatcher(view).forward(request, response);
 	}
 
 }

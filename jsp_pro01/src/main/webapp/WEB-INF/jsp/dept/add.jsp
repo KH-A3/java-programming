@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="dept.model.DeptDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,13 +12,14 @@
 	<%
 		String deptId = "", deptName = "", mngId = "", locId = "";
 		if(request.getAttribute("error") != null) {
-			deptId = request.getParameter("deptId");
-			deptName = request.getParameter("deptName");
-			mngId = request.getParameter("mngId");
-			locId = request.getParameter("locId");
+			DeptDTO data = (DeptDTO) request.getAttribute("data");
+			deptId = String.valueOf(data.getDeptId());
+			deptName = data.getDeptName();
+			mngId = String.valueOf(data.getMngId());
+			locId = String.valueOf(data.getLocId());
 	%>
 			<script type="text/javascript">
-				alert("데이터 저장 처리중 에러 발생!!");
+				alert("<%=request.getAttribute("errorMsg") %>");
 			</script>
 	<%
 		}

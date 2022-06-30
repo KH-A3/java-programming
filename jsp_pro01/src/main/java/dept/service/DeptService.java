@@ -20,49 +20,64 @@ public class DeptService {
 		boolean isNumber = id.matches("\\d+");
 		if(isNumber) {
 			int deptId = Integer.parseInt(id);
-			return _getDeptId(deptId);
+			dao = new DeptDAO();
+			DeptDTO data = _getDeptId(deptId);
+			dao.close();
+			return data;
 		}
 		return null;
 	}
 	
 	public DeptDTO getDeptId(int id) {
-		return _getDeptId(id);
+		dao = new DeptDAO();
+		DeptDTO data = _getDeptId(id);
+		dao.close();
+		return data;
 	}
 	
 	private DeptDTO _getDeptId(int id) {
-		dao = new DeptDAO();
+		// public 메서드에서 dao 객체를 생성하게해야 함.
 		DeptDTO data = dao.searchDeptId(id);
 		return data;
 	}
 
-	public int addDept(DeptDTO data) {
+	public DEPT_SERVICE_STATUS addDept(DeptDTO data) {
 		dao = new DeptDAO();
-		DeptDTO deptData = _getDeptId(data.getDeptId());
+		DEPT_SERVICE_STATUS status = DEPT_SERVICE_STATUS.SUCCESS;
 		
-		/*
-		 *  -1 : deptId 중복 오류 -> _getDeptId() DeptDTO
-		 *  -2 : mngId 없음 오류 -> existManager() boolean 있으면 true
-		 *       관련 맵퍼로는 deptManager.existManager 를 만들어 사용하도록 한다.
-		 *  -3 : locId 없음 오류 -> existLocation() boolean 있으면 true
-		 *       관련 맵퍼로는 deptManager.existLocation 을 만들어 사용하도록 한다.
-		 *  
-		 *  위 오류를 구분하여 컨트롤러에 반환하게 만들기.
-		 *  
-		 *  최종적으로 add.jsp 에 "데이터 저장 처리중 에러 발생" 메시지를
-		 *  에러 코드에 따라 다음과 같이 출력되도록 한다.
-		 *  -1 : 부서 코드 중복 오류
-		 *  -2 : 해당 관리자 ID 존재하지 않음
-		 *  -3 : 해당 지역 코드 존재하지 않음
-		 */
-		
-		if(deptData == null) {
-			boolean isSave = dao.insertDept(data);
-			if(isSave) {
-				dao.close();
-				return 1;	// 성공
-			}
+		if(_getDeptId(data.getDeptId()) != null) {
+			status = DEPT_SERVICE_STATUS.DEPT_ID_DUPLICATED;
 		}
-		dao.close();
-		return -1;	// 실패
+		if(!_existManager(data.getMngId())) {
+			status = DEPT_SERVICE_STATUS.MNG_ID_NOT_EXISTS;
+		}
+		if(!_existLocation(data.getLocId())) {
+			status = DEPT_SERVICE_STATUS.LOC_ID_NOT_EXISTS;
+		}
+		
+		switch(status) {
+			case SUCCESS:
+				if(dao.insertDept(data)) {
+					dao.commit();
+				} else {
+					status = DEPT_SERVICE_STATUS.FAILED;
+					dao.rollback();
+				}
+				break;
+			default:
+				dao.close();
+		}
+		
+		return status;
+	}
+	
+	private boolean _existManager(int id) {
+		boolean result = dao.existManager(id);
+		return result;
+	}
+	
+	private boolean _existLocation(int id) {
+		boolean result = dao.existLocation(id);
+		return result;
 	}
 }
