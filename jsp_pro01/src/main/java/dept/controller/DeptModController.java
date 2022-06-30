@@ -8,17 +8,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dept.model.DeptDTO;
-import dept.service.DEPT_SERVICE_STATUS;
 import dept.service.DeptService;
 
-@WebServlet("/depts/add")
-public class DeptAddController extends HttpServlet {
+@WebServlet("/depts/mod")
+public class DeptModController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private DeptService service = new DeptService();
+	DeptService service = new DeptService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String view = "/WEB-INF/jsp/dept/add.jsp";
+		String id = request.getParameter("id");
+		
+		DeptDTO data = service.getDeptId(id);
+		
+		request.setAttribute("data", data);
+		
+		String view = "/WEB-INF/jsp/dept/mod.jsp";
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 	
@@ -37,29 +42,11 @@ public class DeptAddController extends HttpServlet {
 		data.setMngId(Integer.parseInt(mngId));
 		data.setLocId(Integer.parseInt(locId));
 		
-		DEPT_SERVICE_STATUS status = service.addDept(data);
-		
-		String view = "/WEB-INF/jsp/dept/add.jsp";
-		switch(status) {
-			case SUCCESS:
-				response.sendRedirect("/jsp01/depts?search=" + data.getDeptId());
-				return;
-			case DEPT_ID_DUPLICATED:
-				request.setAttribute("errorMsg", "부서 ID 중복 오류가 발생하였습니다.");
-				break;
-			case MNG_ID_NOT_EXISTS:
-				request.setAttribute("errorMsg", "관리자 ID가 존재하지 않습니다.");
-				break;
-			case LOC_ID_NOT_EXISTS:
-				request.setAttribute("errorMsg", "지역 ID가 존재하지 않습니다.");
-				break;
-			case FAILED:
-				request.setAttribute("errorMsg", "알 수 없는 오류가 발생하였습니다.");
-				break;
-		}
-		request.setAttribute("data", data);
-		request.setAttribute("error", true);
-		request.getRequestDispatcher(view).forward(request, response);
+		// add 작업을 했던 것과 유사하게 수정 처리가
+		// 완료된 데이터에 대해 상태 정보를 받아서
+		// 정상/실패 를 구분하고 JSP 에서 에러메시지가
+		// 나올 수 있게 처리한다.
+		service.modifyDept(data);
 	}
 
 }

@@ -36,7 +36,7 @@ public class DeptService {
 	}
 	
 	private DeptDTO _getDeptId(int id) {
-		// public 메서드에서 dao 객체를 생성하게해야 함.
+		// public 메서드에서 dao 객체를 생성하게 해야함.
 		DeptDTO data = dao.searchDeptId(id);
 		return data;
 	}
@@ -63,7 +63,6 @@ public class DeptService {
 					status = DEPT_SERVICE_STATUS.FAILED;
 					dao.rollback();
 				}
-				break;
 			default:
 				dao.close();
 		}
@@ -79,5 +78,13 @@ public class DeptService {
 	private boolean _existLocation(int id) {
 		boolean result = dao.existLocation(id);
 		return result;
+	}
+
+	public void modifyDept(DeptDTO data) {
+		// addDept 를 구현한 것과 유사하게 수정한 데이터에 대해
+		// 문제가 발생한 경우 상세 오류를 구분할 수 있게 만들고
+		// Controller 에 반환할 수 있게 한다.
+		dao = new DeptDAO();
+		boolean result = dao.updateDept(data);
 	}
 }
