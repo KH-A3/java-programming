@@ -22,7 +22,7 @@ public class DeptController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
 		String page = request.getParameter("page");
-		int count = 15;
+		int count = 3;
 		
 		List<DeptDTO> datas = null;
 		if(search == null) {

@@ -71,17 +71,34 @@ function formCheck(e) {
 			}
 		%>
 	</table>
-	<ul>
 	<%
 		if(request.getAttribute("pageList") != null) {
 			List<Integer> pageList = (List<Integer>) request.getAttribute("pageList");
-			for(Integer num: pageList) {
+			int currentPage = Integer.parseInt(request.getParameter("page"));
 	%>
-				<li><a href="./depts?page=<%=num %>"><%=num %></a></li>
+			<ul>
+	<%
+			if(currentPage - 1 > 0) {
+	%>
+				<li><a href="./depts?page=<%=currentPage - 1 %>">Prev</a></li>
 	<%
 			}
+			int i = currentPage - 1;
+			int maxPage = i + 5 > pageList.size() ? pageList.size() : i + 5;
+			for(; i < maxPage; i++) {
+	%>
+				<li><a href="./depts?page=<%=pageList.get(i) %>"><%=pageList.get(i) %></a></li>
+	<%
+			}
+			if(currentPage + 1 <= pageList.size()) {
+	%>
+				<li><a href="./depts?page=<%=currentPage + 1 %>">Next</a></li>
+	<%
+			}
+	%>
+			</ul>
+	<%
 		}
 	%>
-	</ul>
 </body>
 </html>
