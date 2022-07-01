@@ -1,7 +1,11 @@
 package dept.model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.ibatis.cursor.Cursor;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
 import com.conn.db.DBConn;
@@ -33,6 +37,15 @@ public class DeptDAO {
 		return false;
 	}
 	
+	public boolean updateDept(DeptDTO data) {
+		// 업데이트 용 맵퍼와 SQL 구문을 작성하여 이 메서드가 동작하게 한다.
+		int result = session.update("deptMapper.deptUpdate", data);
+		if(result == 1) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean existManager(int id) {
 		int result = session.selectOne("deptMapper.existManager", id);
 		if(result == 1) {
@@ -49,15 +62,6 @@ public class DeptDAO {
 		return false;
 	}
 	
-	public boolean updateDept(DeptDTO data) {
-		// 업데이트 용 맵퍼와 SQL 구문을 작성하여 이 메서드가 동작하게 한다.
-		int result = session.update("deptMapper.deptUpdate", data);
-		if(result == 1) {
-			return true;
-		}
-		return false;
-	}
-	
 	public void commit() {
 		session.commit();
 	}
@@ -68,6 +72,15 @@ public class DeptDAO {
 	
 	public void close() {
 		session.close();
+	}
+
+	public boolean deleteDept(int id) {
+		int result = session.delete("deptMapper.deptDelete", id);
+		
+		if(result == 1) {
+			return true;
+		}
+		return false;
 	}
 
 }

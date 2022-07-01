@@ -108,4 +108,24 @@ public class DeptService {
 		
 		return status;
 	}
+
+	public DEPT_SERVICE_STATUS deleteDept(String id) {
+		DEPT_SERVICE_STATUS status = DEPT_SERVICE_STATUS.SUCCESS;
+		
+		dao = new DeptDAO();
+		
+		if(_getDeptId(Integer.parseInt(id)) == null) {
+			status = DEPT_SERVICE_STATUS.DEPT_ID_NOT_EXISTS;
+		}
+		
+		boolean result = dao.deleteDept(Integer.parseInt(id));
+		if(result) {
+			dao.commit();
+		} else {
+			status = DEPT_SERVICE_STATUS.FAILED;
+			dao.rollback();
+		}
+		dao.close();
+		return status;
+	}
 }
