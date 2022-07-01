@@ -21,12 +21,19 @@ public class DeptController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
+		String page = request.getParameter("page");
+		int count = 15;
 		
 		List<DeptDTO> datas = null;
 		if(search == null) {
-			int page = Integer.parseInt(request.getParameter("page"));
-			datas = service.getPage(page);
-			request.setAttribute("pageList", service.getPageNumberList());
+			int pageNum = 1;
+			if(page != null) {
+				if(!page.isEmpty() && page.matches("\\d+")) {
+					pageNum = Integer.parseInt(page);
+				}
+			}
+			datas = service.getPage(pageNum, count);
+			request.setAttribute("pageList", service.getPageNumberList(count));
 		} else {
 			DeptDTO data = service.getDeptId(search);
 			if(data != null) {
