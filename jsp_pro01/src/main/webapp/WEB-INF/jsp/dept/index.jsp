@@ -71,5 +71,17 @@ function formCheck(e) {
 			}
 		%>
 	</table>
+	<ul>
+	<%
+		if(request.getAttribute("pageList") != null) {
+			List<Integer> pageList = (List<Integer>) request.getAttribute("pageList");
+			for(Integer num: pageList) {
+	%>
+				<li><a href="./depts?page=<%=num %>"><%=num %></a></li>
+	<%
+			}
+		}
+	%>
+	</ul>
 </body>
 </html>

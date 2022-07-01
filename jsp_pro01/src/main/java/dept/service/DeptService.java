@@ -1,5 +1,6 @@
 package dept.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dept.model.DeptDAO;
@@ -14,6 +15,29 @@ public class DeptService {
 		List<DeptDTO> datas = dao.searchAll();
 		dao.close();
 		return datas;
+	}
+	
+	public List<DeptDTO> getPage(int pageNumber) {
+		int start = (pageNumber - 1) * 10 + 1;
+		int end = start + 9;
+		
+		dao = new DeptDAO();
+		List<DeptDTO> datas = dao.searchPage(start, end);
+		dao.close();
+		return datas;
+	}
+	
+	public List<Integer> getPageNumberList() {
+		dao = new DeptDAO();
+		int rowCount = dao.rowCount();
+		dao.close();
+		// 여기에 페이지 번호를 가지는 리스트를 만든다.
+		List<Integer> pageList = new ArrayList<Integer>();
+		int pageNum = (rowCount - 1) / 10;
+		for(int n = 0; n <= pageNum; n++) {
+			pageList.add(n + 1);
+		}
+		return pageList;
 	}
 	
 	public DeptDTO getDeptId(String id) {
@@ -125,6 +149,7 @@ public class DeptService {
 			status = DEPT_SERVICE_STATUS.FAILED;
 			dao.rollback();
 		}
+		
 		dao.close();
 		return status;
 	}

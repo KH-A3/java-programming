@@ -1,8 +1,10 @@
 package dept.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.cursor.Cursor;
 import org.apache.ibatis.session.RowBounds;
@@ -21,6 +23,19 @@ public class DeptDAO {
 	public List<DeptDTO> searchAll() {
 		List<DeptDTO> datas = session.selectList("deptMapper.deptSelectAll");
 		return datas;
+	}
+	
+	public List<DeptDTO> searchPage(int start, int end) {
+		Map<String, Integer> page = new HashMap<String, Integer>();
+		page.put("start", start);
+		page.put("end", end);
+		List<DeptDTO> datas = session.selectList("deptMapper.deptSelectPage", page);
+		return datas;
+	}
+	
+	public int rowCount() {
+		int count = session.selectOne("deptMapper.deptRowCount");
+		return count;
 	}
 	
 	public DeptDTO searchDeptId(int id) {
@@ -62,6 +77,15 @@ public class DeptDAO {
 		return false;
 	}
 	
+	public boolean deleteDept(int id) {
+		int result = session.delete("deptMapper.deptDelete", id);
+		
+		if(result == 1) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void commit() {
 		session.commit();
 	}
@@ -72,15 +96,6 @@ public class DeptDAO {
 	
 	public void close() {
 		session.close();
-	}
-
-	public boolean deleteDept(int id) {
-		int result = session.delete("deptMapper.deptDelete", id);
-		
-		if(result == 1) {
-			return true;
-		}
-		return false;
 	}
 
 }
