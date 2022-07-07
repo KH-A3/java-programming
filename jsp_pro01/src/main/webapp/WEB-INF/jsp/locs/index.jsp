@@ -6,25 +6,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>지역 조회 결과</title>
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/default.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/form.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/navigation.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/paging.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/required.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/static/css/table.css">
+	<script type="text/javascript" src="<%=request.getContextPath() %>/static/js/required.js"></script>
 </head>
-<script type="text/javascript">
-window.onload = function() {
-	var form = document.forms[0];
-	form.addEventListener("submit", formCheck);
-}
-
-function formCheck(e) {
-	var f = e.target;
-	e.preventDefault();
-	
-	if(f.search.value.trim() === "") {
-		f.search.value = f.search.value.trim();
-		return;
-	}
-	f.submit();
-}
-</script>
 <body>
+	<%@ include file="/WEB-INF/jsp/module/navigation.jsp" %>
 	<h1>지역 조회 결과</h1>
 	<div>
 		<form action="./locs" method="get">

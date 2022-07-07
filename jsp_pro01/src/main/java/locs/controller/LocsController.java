@@ -22,6 +22,7 @@ public class LocsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
 		
+		request.setAttribute("menuLocation", "locs");
 		List<LocsDTO> datas = null;
 		if(search == null) {
 			datas = service.getAll();

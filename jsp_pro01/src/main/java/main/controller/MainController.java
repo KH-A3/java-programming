@@ -7,12 +7,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dept.model.DeptDTO;
+
 @WebServlet("/main")
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String view = "/WEB-INF/jsp/index.jsp";
+		DeptDTO data = new DeptDTO();
+		data.setDeptId(100);
+		data.setDeptName("Test");
+		request.setAttribute("data", data);
 		request.getRequestDispatcher(view).forward(request, response);
 	}
 

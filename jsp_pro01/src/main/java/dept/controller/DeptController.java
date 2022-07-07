@@ -24,6 +24,7 @@ public class DeptController extends HttpServlet {
 		String page = request.getParameter("page");
 		int count = 3;
 		
+		request.setAttribute("menuLocation", "depts");
 		List<DeptDTO> datas = null;
 		if(search == null) {
 			int pageNum = 1;
@@ -33,6 +34,7 @@ public class DeptController extends HttpServlet {
 				}
 			}
 			datas = service.getPage(pageNum, count);
+			request.setAttribute("page", pageNum);
 			request.setAttribute("pageList", service.getPageNumberList(count));
 		} else {
 			DeptDTO data = service.getDeptId(search);
