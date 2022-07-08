@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ page import="java.util.*, dept.model.DeptDTO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +27,12 @@
 				<div class="input-form form-right">
 					<input class="input-text" type="text" name="search">
 					<button class="btn btn-outline" type="submit">조회</button>
+					<select class="select-form" onchange="location.href='./depts?pgc=' + this.value">
+						<option value="5" ${pgc == 5 ? 'selected' : ''}>5 개</option>
+						<option value="10" ${pgc == 10 ? 'selected' : ''}>10 개</option>
+						<option value="15" ${pgc == 15 ? 'selected' : ''}>15 개</option>
+						<option value="20" ${pgc == 20 ? 'selected' : ''}>20 개</option>
+					</select>
 				</div>
 			</form>
 		</div>
@@ -94,6 +99,5 @@
 			</div>
 		</c:if>
 	</section>
-	
 </body>
 </html>

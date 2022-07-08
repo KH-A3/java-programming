@@ -22,28 +22,40 @@
 	<h1>Welcome JSP/Servlet</h1>
 	<div>
 		<h2>JSTL Core 기능 테스트</h2>
-		<c:set var="d" value="Hello1" scope="page" />
-		<c:set var="d" value="Hello2" scope="request" />
-		<c:set var="d" value="Hello3" scope="session" />
-		<c:set var="d" value="Hello4" scope="application" />
-		${pageScope.d}<br>
-		${requestScope.d}<br>
-		${sessionScope.d}<br>
-		${applicationScope.d}<br>
+		<fmt:formatNumber value="1000" /><br>
+		<fmt:formatNumber value="0.1" type="percent" /><br>
+		<fmt:formatNumber value="1000" type="currency" /><br>
+		<fmt:formatNumber value="1000" type="currency" currencySymbol="$" /><br>
 		<hr>
-		<c:remove var="d" scope="page" />
-		<c:remove var="d" scope="request" />
-		<c:remove var="d" scope="session" />
-		<c:remove var="d" scope="application" />
-		${pageScope.d}<br>
-		${requestScope.d}<br>
-		${sessionScope.d}<br>
-		${applicationScope.d}<br>
+		<c:set var="date" value="<%=new Date() %>" />
+		<fmt:formatDate value="${date}" type="date" /><br>
+		<fmt:formatDate value="${date}" type="date" dateStyle="full" /><br>
+		<fmt:formatDate value="${date}" type="date" dateStyle="long" /><br>
+		<fmt:formatDate value="${date}" type="date" dateStyle="medium" /><br>
+		<fmt:formatDate value="${date}" type="date" dateStyle="short" /><br>
+		<fmt:formatDate value="${date}" type="date" pattern="YYYY-MM-dd E EEEE" /><br>
 		<hr>
-		<c:url var="url1" value="/path">
-			<c:param name="x" value="10" />
-		</c:url>
-		${url1}
+		<fmt:formatDate value="${date}" type="time" /><br>
+		<fmt:formatDate value="${date}" type="time" timeStyle="full" /><br>
+		<fmt:formatDate value="${date}" type="time" timeStyle="long" /><br>
+		<fmt:formatDate value="${date}" type="time" timeStyle="medium" /><br>
+		<fmt:formatDate value="${date}" type="time" timeStyle="short" /><br>
+		<fmt:formatDate value="${date}" type="time" pattern="a hh:mm:ss | HH:mm:ss.sss z" /><br>
+		<hr>
+		<fmt:formatDate value="${date}" type="both" /><br>
+		<fmt:formatDate value="${date}" type="both" dateStyle="full" timeStyle="medium" /><br>
+		<hr>
+		${fn:contains('Hello', 'e')}<br>
+		${fn:containsIgnoreCase('Hello', 'E')}<br>
+		${fn:startsWith('Hello', 'e')}<br>
+		${fn:endsWith('Hello', 'e')}<br>
+		${fn:indexOf('Hello', 'e')}<br>
+		${fn:length('Hello')}<br>
+		${fn:replace('Hello', 'e', 'a')}<br>
+		${fn:substring('Hello', 1, 3)}<br>
+		${fn:split('Hello, Hi', ', ')}<br>
+		${fn:join(fn:split('Hello, Hi', ', '), '-')}<br>
+		${fn:trim('  Hello  ')}<br>
 	</div>
 </body>
 </html>
