@@ -22,47 +22,28 @@
 	<h1>Welcome JSP/Servlet</h1>
 	<div>
 		<h2>JSTL Core 기능 테스트</h2>
-		${1 == '1'} / ${1 == 1}
-		
-		<c:if test="${not empty data}">
-			if 제어문 : test 에 작성한 조건식이 참이면 실행된다.<br>
-			${data}
-		</c:if>
+		<c:set var="d" value="Hello1" scope="page" />
+		<c:set var="d" value="Hello2" scope="request" />
+		<c:set var="d" value="Hello3" scope="session" />
+		<c:set var="d" value="Hello4" scope="application" />
+		${pageScope.d}<br>
+		${requestScope.d}<br>
+		${sessionScope.d}<br>
+		${applicationScope.d}<br>
 		<hr>
-		<c:choose>
-			<c:when test="${param.x == 'a'}">
-				파라메터 x 의 값이 a 입니다.
-			</c:when>
-			<c:when test="${param.x == 'b'}">
-				파라메터 x 의 값이 b 입니다.
-			</c:when>
-			<c:when test="${param.x == 'c'}">
-				파라메터 x 의 값이 c 입니다.
-			</c:when>
-			<c:otherwise>
-				파라메터 x 의 값이 a, b, c 가 아닙니다.
-			</c:otherwise>
-		</c:choose>
+		<c:remove var="d" scope="page" />
+		<c:remove var="d" scope="request" />
+		<c:remove var="d" scope="session" />
+		<c:remove var="d" scope="application" />
+		${pageScope.d}<br>
+		${requestScope.d}<br>
+		${sessionScope.d}<br>
+		${applicationScope.d}<br>
 		<hr>
-		<c:forEach begin="5" end="10" step="2" var="v">
-			${v}<br>
-		</c:forEach>
-		<%
-			List<String> lst = new ArrayList<String>();
-			lst.add("a"); lst.add("b"); lst.add("c"); lst.add("d");
-			request.setAttribute("lst", lst);
-		%>
-		<c:forEach items="${lst}" var="v">
-			${v}<br>
-		</c:forEach>
-		<%
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("a", "가"); map.put("b", "나"); map.put("c", "다");
-			request.setAttribute("map", map);
-		%>
-		<c:forEach items="${map}" var="v">
-			${v.key} - ${v.value}<br>
-		</c:forEach>
+		<c:url var="url1" value="/path">
+			<c:param name="x" value="10" />
+		</c:url>
+		${url1}
 	</div>
 </body>
 </html>

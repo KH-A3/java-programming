@@ -69,43 +69,30 @@
 				</c:if>
 			</tbody>
 		</table>
-		<%
-			if(request.getAttribute("pageList") != null) {
-				List<Integer> pageList = (List<Integer>) request.getAttribute("pageList");
-				int currentPage = (int)request.getAttribute("page");
-		%>
+		<c:if test="${not empty pageList}">
+			<c:set var="currentPage" value="${page}" />
 			<div class="paging">
 				<ul class="page center">
-		<%
-				if(currentPage - 1 > 0) {
-		%>
-					<li class="page-item">
-						<a class="page-link" href="./depts?page=<%=currentPage - 1 %>">Prev</a>
-					</li>
-		<%
-				}
-				int i = currentPage - 1;
-				int maxPage = i + 5 > pageList.size() ? pageList.size() : i + 5;
-				for(; i < maxPage; i++) {
-		%>
-					<li class="page-item">
-						<a class="page-link" href="./depts?page=<%=pageList.get(i) %>"><%=pageList.get(i) %></a>
-					</li>
-		<%
-				}
-				if(currentPage + 1 <= pageList.size()) {
-		%>
-					<li class="page-item">
-						<a class="page-link" href="./depts?page=<%=currentPage + 1 %>">Next</a>
-					</li>
-		<%
-				}
-		%>
+					<c:if test="${currentPage - 1 > 0}">
+						<li class="page-item">
+							<a class="page-link" href="./depts?page=${currentPage - 1}">Prev</a>
+						</li>
+					</c:if>
+					<c:set var="i" value="${currentPage - 1}" />
+					<c:set var="maxPage" value="${i + 5 > pageList.size() ? pageList.size() : i + 5}" />
+					<c:forEach begin="${i}" end="${maxPage - 1}" var="num">
+						<li class="page-item">
+							<a class="page-link" href="./depts?page=${pageList.get(num)}">${pageList.get(num)}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${currentPage + 1 <= pageList.size()}">
+						<li class="page-item">
+							<a class="page-link" href="./depts?page=${currentPage + 1}">Next</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
-		<%
-			}
-		%>
+		</c:if>
 	</section>
 	
 </body>

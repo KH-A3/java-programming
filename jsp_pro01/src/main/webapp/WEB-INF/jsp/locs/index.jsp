@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page import="java.util.*, locs.model.LocsDTO" %>
 <!DOCTYPE html>
 <html>
@@ -16,47 +19,49 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/module/navigation.jsp" %>
-	<h1>지역 조회 결과</h1>
-	<div>
-		<form action="./locs" method="get">
-			<div>
-				<input type="text" name="search">
-				<button type="submit">조회</button>
-			</div>
-		</form>
-	</div>
-	<table>
-		<tr>
-			<th>Location ID</th>
-			<th>Street Address</th>
-			<th>Postal Code</th>
-			<th>City</th>
-			<th>State Province</th>
-			<th>Country Id</th>
-		</tr>
-		<%
-			if(request.getAttribute("datas") != null) {
-				List<LocsDTO> datas = (List<LocsDTO>)request.getAttribute("datas");
-				for(LocsDTO data: datas) {
-		%>
-					<tr>
-						<td><%=data.getLocId() %></td>
-						<td><%=data.getStAddr() %></td>
-						<td><%=data.getPostal() %></td>
-						<td><%=data.getCity() %></td>
-						<td><%=data.getState() %></td>
-						<td><%=data.getCtyId() %></td>
-					</tr>
-		<%
-				}
-			} else {
-		%>
-			<tr>
-				<td colspan="6">검색 결과가 없습니다.</td>
-			</tr>
-		<%
-			}
-		%>
-	</table>
+	<section class="container">
+		<div>
+			<form action="./locs" method="get">
+				<div class="input-form form-right">
+					<input class="input-text" type="text" name="search">
+					<button class="btn btn-outline" type="submit">조회</button>
+				</div>
+			</form>
+		</div>
+		<table class="table wide vertical-hidden hover">
+			<colgroup>
+				<col class="col-120">
+				<col class="col-auto">
+				<col class="col-120">
+				<col class="col-120">
+				<col class="col-180">
+				<col class="col-120">
+			</colgroup>
+			<thead>
+				<tr>
+					<th>Location ID</th>
+					<th>Street Address</th>
+					<th>Postal Code</th>
+					<th>City</th>
+					<th>State Province</th>
+					<th>Country Id</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${not empty datas}">
+					<c:forEach items="${datas}" var="data">
+						<tr>
+							<td>${data.locId}</td>
+							<td>${data.stAddr}</td>
+							<td>${data.postal}</td>
+							<td>${data.city}</td>
+							<td>${data.state}</td>
+							<td>${data.ctyId}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</tbody>
+		</table>
+	</section>
 </body>
 </html>
