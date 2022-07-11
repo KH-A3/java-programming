@@ -37,6 +37,16 @@ public class DeptService {
 		return datas;
 	}
 	
+	public List<DeptDTO> getPage(int pageNumber, int count, String sort) {
+		int start = (pageNumber - 1) * count + 1;
+		int end = start + count - 1;
+		
+		dao = new DeptDAO();
+		List<DeptDTO> datas = dao.searchPage(start, end, sort);
+		dao.close();
+		return datas;
+	}
+	
 	public List<Integer> getPageNumberList() {
 		dao = new DeptDAO();
 		int rowCount = dao.rowCount();

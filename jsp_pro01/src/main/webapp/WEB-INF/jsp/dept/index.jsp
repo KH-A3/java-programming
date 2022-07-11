@@ -38,18 +38,26 @@
 		</div>
 		<table class="table wide vertical-hidden hover">
 			<colgroup>
-				<col class="col-60">
+				<col class="col-120">
 				<col class="col-auto">
-				<col class="col-60">
-				<col class="col-60">
+				<col class="col-120">
+				<col class="col-120">
 				<col class="col-120">
 			</colgroup>
 			<thead>
 				<tr>
-					<th>DeptId</th>
-					<th>DeptName</th>
-					<th>MngId</th>
-					<th>LocId</th>
+					<th class="${sort == 'deptId' ? 'sort-desc' : ''}"
+					onclick="location.href='./depts?page=${page}&sort=deptId'">DeptId
+					</th>
+					<th class="${sort == 'deptName' ? 'sort-desc' : ''}"
+					onclick="location.href='./depts?page=${page}&sort=deptName'">DeptName
+					</th>
+					<th class="${sort == 'mngId' ? 'sort-desc' : ''}"
+					onclick="location.href='./depts?page=${page}&sort=mngId'">MngId
+					</th>
+					<th class="${sort == 'locId' ? 'sort-desc' : ''}"
+					onclick="location.href='./depts?page=${page}&sort=locId'">LocId
+					</th>
 					<th class="border-hidden-right"></th>
 				</tr>
 			</thead>

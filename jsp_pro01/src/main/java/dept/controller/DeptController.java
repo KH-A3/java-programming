@@ -24,41 +24,29 @@ public class DeptController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String search = request.getParameter("search");
 		String page = request.getParameter("page");
+		String sort = "deptId";
 		int count = 5;
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("pgc") != null) {
 			count = Integer.parseInt(session.getAttribute("pgc").toString());
 		}
+		if(session.getAttribute("sort") != null) {
+			sort = (String)session.getAttribute("sort");
+		}
 		
 		if(request.getParameter("pgc") != null) {
 			count = Integer.parseInt(request.getParameter("pgc"));
 		}
+		if(request.getParameter("sort") != null) {
+			sort = request.getParameter("sort");
+		}
 		
 		session.setAttribute("pgc", count);
-		
-		/*
-		Cookie cookies[] = request.getCookies();
-		for(Cookie c: cookies) {
-			if(c.getName().equals("pgc")) {
-				count = Integer.parseInt(c.getValue());
-			}
-		}
-		
-		Cookie cookie = null;
-		if(request.getParameter("pgc") != null) {
-			count = Integer.parseInt(request.getParameter("pgc"));		
-			cookie = new Cookie("pgc", request.getParameter("pgc"));
-		} else {
-			cookie = new Cookie("pgc", String.valueOf(count));
-		}
-		cookie.setMaxAge(30);
-		cookie.setPath("/depts");
-		response.addCookie(cookie);
-		*/
-		
+		session.setAttribute("sort", sort);
 		request.setAttribute("pgc", count);
 		request.setAttribute("menuLocation", "depts");
+		
 		List<DeptDTO> datas = null;
 		if(search == null) {
 			int pageNum = 1;
@@ -67,7 +55,7 @@ public class DeptController extends HttpServlet {
 					pageNum = Integer.parseInt(page);
 				}
 			}
-			datas = service.getPage(pageNum, count);
+			datas = service.getPage(pageNum, count, sort);
 			request.setAttribute("page", pageNum);
 			request.setAttribute("pageList", service.getPageNumberList(count));
 		} else {
