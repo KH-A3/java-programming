@@ -17,6 +17,10 @@ public class EmpsDTO {
 		this.empId = empId;
 	}
 	
+	public void setEmpId(String empId) {
+		this.empId = Integer.parseInt(empId);
+	}
+	
 	public String getEmpName() {
 		return empName;
 	}

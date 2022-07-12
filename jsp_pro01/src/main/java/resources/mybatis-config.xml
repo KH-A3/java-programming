@@ -28,5 +28,6 @@
 		<mapper resource="resources/mapper/departments.xml"/>
 		<mapper resource="resources/mapper/locations.xml"/>
 		<mapper resource="resources/mapper/employees.xml"/>
+		<mapper resource="resources/mapper/login.xml"/>
 	</mappers>
 </configuration>
