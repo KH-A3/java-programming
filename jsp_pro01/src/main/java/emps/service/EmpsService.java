@@ -52,4 +52,22 @@ public class EmpsService {
 		return data;
 	}
 
+	public boolean setEmp(EmpsDTO empsData, EmpsDetailDTO empsDetailData) {
+		EmpsDAO dao = new EmpsDAO();
+		
+		boolean res1 = dao.updateEmp(empsData);
+		boolean res2 = dao.updateEmpDetail(empsDetailData);
+		
+		if(res1 && res2) {
+			dao.commit();
+			dao.close();
+			return true;
+		} else {
+			dao.rollback();
+			dao.close();
+			return false;
+		}
+		
+	}
+
 }

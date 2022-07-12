@@ -59,4 +59,14 @@
 		  FROM EMPLOYEES
 		 WHERE EMPLOYEE_ID = #{id}
 	</select>
+	<update id="updateEmp" parameterType="empsDto">
+		UPDATE EMPLOYEES
+		   SET EMAIL = SUBSTR(#{email}, 1, INSTR(#{email}, '@emp.com')-1)
+		 WHERE EMPLOYEE_ID = #{empId}
+	</update>
+	<update id="updateEmpDetail" parameterType="empsDetailDto">
+		UPDATE EMPLOYEES
+		   SET PHONE_NUMBER = #{phone}
+		 WHERE EMPLOYEE_ID = #{empId}
+	</update>
 </mapper>

@@ -27,23 +27,23 @@
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">ID</label>
-					<input class="input-text w-auto" type="text" name="empId" value="${sessionScope.loginData.empId}" readonly>
+					<input class="input-text w-auto" type="text" name="empId" value="${sessionScope.loginData.empId}" disabled>
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">이름</label>
-					<input class="input-text w-auto" type="text" name="empName" value="${sessionScope.loginData.empName}">
+					<input class="input-text w-auto" type="text" name="empName" value="${sessionScope.loginData.empName}" disabled>
 				</div>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">직급</label>
-					<select class="select-form w-auto" name="jobId">
+					<select class="select-form w-auto" name="jobId" disabled>
 						<option>${sessionScope.loginData.jobName}</option>
 					</select>
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">부서</label>
-					<select class="select-form w-auto" name="deptId">
+					<select class="select-form w-auto" name="deptId" disabled>
 						<option>${sessionScope.loginData.deptName}</option>
 					</select>
 				</div>
@@ -58,7 +58,7 @@
 				<div class="input-form">
 					<fmt:formatDate var="fHireDate" value="${empsDetailData.hireDate}" dateStyle="long" />
 					<label class="input-label w-100">입사일</label>
-					<input class="input-text w-auto" type="text" name="hireDate" value="${fHireDate}">
+					<input class="input-text w-auto" type="text" name="hireDate" value="${fHireDate}" disabled>
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">전화번호</label>
@@ -69,12 +69,12 @@
 				<div class="input-form">
 					<fmt:formatNumber var="fSalary" value="${empsDetailData.salary}" />
 					<label class="input-label w-100">급여액</label>
-					<input class="input-text w-auto" type="text" name="salery" value="${fSalary}">
+					<input class="input-text w-auto" type="text" name="salery" value="${fSalary}" disabled>
 				</div>
 				<div class="input-form">
 					<fmt:formatNumber var="fCommission" value="${empsDetailData.commission}" type="percent" />
 					<label class="input-label w-100">커미션</label>
-					<input class="input-text w-auto" type="text" name="commission" value="${fCommission}">
+					<input class="input-text w-auto" type="text" name="commission" value="${fCommission}" disabled>
 				</div>
 			</div>
 			<div class="input-form form-right">

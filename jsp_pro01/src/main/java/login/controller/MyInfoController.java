@@ -48,7 +48,32 @@ public class MyInfoController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
 		
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("loginData") == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+		} else {
+			EmpsDTO empsData = (EmpsDTO)session.getAttribute("loginData");
+			empsData.setEmail(email);
+			
+			EmpsDetailDTO empsDetailData = new EmpsDetailDTO();
+			empsDetailData.setEmpId(empsData.getEmpId());
+			empsDetailData.setPhone(phone);
+			
+			boolean result = empsService.setEmp(empsData, empsDetailData);
+			if(result) {
+				// 수정 성공
+				response.sendRedirect(request.getContextPath() + "/myinfo");
+			} else {
+				// 수정 실패
+				request.setAttribute("error", "수정 작업 중 문제가 발생하였습니다.");
+				RequestDispatcher rd = request.getRequestDispatcher(view);
+				rd.forward(request, response);
+			}
+		}
 	}
 
 }
