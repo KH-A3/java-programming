@@ -19,7 +19,8 @@
 <body>
 	<%@ include file="../module/navigation.jsp" %>
 	<section class="container">
-		<form class="large-form" action="">
+		<c:url var="myInfoUpdateUrl" value="/myinfo" />
+		<form class="large-form" action="${myInfoUpdateUrl}" method="post">
 			<div class="image-form left">
 				<img class="image-360" alt="여기에는 증명 사진이 배치됩니다." src="${imagePath}">
 			</div>
@@ -55,22 +56,25 @@
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
+					<fmt:formatDate var="fHireDate" value="${empsDetailData.hireDate}" dateStyle="long" />
 					<label class="input-label w-100">입사일</label>
-					<input class="input-text w-auto" type="text" name="hireDate" value="">
+					<input class="input-text w-auto" type="text" name="hireDate" value="${fHireDate}">
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">전화번호</label>
-					<input class="input-text w-auto" type="text" name="phone" value="">
+					<input class="input-text w-auto" type="text" name="phone" value="${empsDetailData.phone}">
 				</div>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
+					<fmt:formatNumber var="fSalary" value="${empsDetailData.salary}" />
 					<label class="input-label w-100">급여액</label>
-					<input class="input-text w-auto" type="text" name="salery" value="">
+					<input class="input-text w-auto" type="text" name="salery" value="${fSalary}">
 				</div>
 				<div class="input-form">
+					<fmt:formatNumber var="fCommission" value="${empsDetailData.commission}" type="percent" />
 					<label class="input-label w-100">커미션</label>
-					<input class="input-text w-auto" type="text" name="commission" value="">
+					<input class="input-text w-auto" type="text" name="commission" value="${fCommission}">
 				</div>
 			</div>
 			<div class="input-form form-right">

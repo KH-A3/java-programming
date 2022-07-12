@@ -30,6 +30,8 @@ public class MyInfoController extends HttpServlet {
 			EmpsDTO empsData = (EmpsDTO)session.getAttribute("loginData");
 			EmpsDetailDTO empsDetailData = empsService.getEmpDetail(empsData.getEmpId());
 			
+			request.setAttribute("empsDetailData", empsDetailData);
+			
 			File file = new File(
 					request.getServletContext().getRealPath(request.getContextPath() + "/static/img/emp/" + empsData.getEmpId() + ".png"));
 			
