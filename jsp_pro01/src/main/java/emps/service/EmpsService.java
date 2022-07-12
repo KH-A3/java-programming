@@ -5,6 +5,7 @@ import java.util.List;
 
 import emps.model.EmpsDAO;
 import emps.model.EmpsDTO;
+import emps.model.EmpsDetailDTO;
 
 public class EmpsService {
 
@@ -42,6 +43,13 @@ public class EmpsService {
 	
 	public List<Integer> getPageNumberList() {
 		return getPageNumberList(10);
+	}
+
+	public EmpsDetailDTO getEmpDetail(int empId) {
+		EmpsDAO dao = new EmpsDAO();
+		EmpsDetailDTO data = dao.selectEmpDetail(empId);
+		dao.close();
+		return data;
 	}
 
 }

@@ -18,10 +18,22 @@ import login.service.LoginService;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private String view = "/WEB-INF/jsp/index.jsp";
+	
 	private DeptService deptService = new DeptService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
+		RequestDispatcher rd = null;
+		if(session.getAttribute("loginData") == null) {
+			List<DeptDTO> deptDatas = deptService.getAll();
+			request.setAttribute("deptDatas", deptDatas);
+			rd = request.getRequestDispatcher(view);
+		} else {
+			rd = request.getRequestDispatcher("/WEB-INF/jsp/index2.jsp");
+		}
+		rd.forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,8 +53,6 @@ public class LoginController extends HttpServlet {
 			// 로그인 실패
 			List<DeptDTO> deptDatas = deptService.getAll();
 			request.setAttribute("deptDatas", deptDatas);
-			
-			String view = "/WEB-INF/jsp/index.jsp";
 			
 			RequestDispatcher rd = request.getRequestDispatcher(view);
 			rd.forward(request, response);

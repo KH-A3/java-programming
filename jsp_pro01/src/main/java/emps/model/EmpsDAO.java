@@ -33,6 +33,13 @@ public class EmpsDAO {
 		return count;
 	}
 	
+	public EmpsDetailDTO selectEmpDetail(int empId) {
+		String mapId = String.format(mapper, "selectEmpDetail");
+		EmpsDetailDTO data = session.selectOne(mapId, empId);
+		System.out.println(data);
+		return data;
+	}
+	
 	public void commit() {
 		session.commit();
 	}

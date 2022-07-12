@@ -40,6 +40,10 @@
 			</li>
 			<c:if test="${not empty sessionScope.loginData}">
 				<li class="nav-item">
+					<c:url var="myInfoUrl" value="/myinfo" />
+					<a class="nav-link" href="${myInfoUrl}">내정보</a>
+				</li>
+				<li class="nav-item">
 					<c:url var="logoutUrl" value="/logout" />
 					<a class="nav-link" href="${logoutUrl}">로그아웃</a>
 				</li>

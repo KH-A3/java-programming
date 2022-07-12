@@ -50,4 +50,13 @@
 		  JOIN DEPARTMENTS D
 		    ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
 	</select>
+	<select id="selectEmpDetail" parameterType="_int" resultType="empsDetailDto">
+		SELECT EMPLOYEE_ID AS empId
+		     , HIRE_DATE AS hireDate
+		     , PHONE_NUMBER AS phone
+		     , SALARY AS salary
+		     , COMMISSION_PCT AS commission
+		  FROM EMPLOYEES
+		 WHERE EMPLOYEE_ID = #{id}
+	</select>
 </mapper>
