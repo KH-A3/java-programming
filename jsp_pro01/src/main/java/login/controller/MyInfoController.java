@@ -2,20 +2,26 @@ package login.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import emps.model.EmpsDTO;
 import emps.model.EmpsDetailDTO;
 import emps.service.EmpsService;
 
 @WebServlet("/myinfo")
+@MultipartConfig(
+		maxFileSize = 1024 * 1024 * 10
+)
 public class MyInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String view = "/WEB-INF/jsp/login/myinfo.jsp";
@@ -48,6 +54,20 @@ public class MyInfoController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("email: " + request.getParameter("email"));
+		System.out.println("phone: " + request.getParameter("phone"));
+		
+		Part imgFile = request.getPart("uploadImg");
+		String imgName = imgFile.getSubmittedFileName();
+		long imgSize = imgFile.getSize();
+		String location = "C:/Users/user2/eclipse/" + imgName;
+		imgFile.write(location);
+				
+		System.out.println("이미지 파일명 : " + imgName);
+		System.out.println("이미지 크기(바이트) : " + imgSize);
+		System.out.println("저장 위치 : " + location);
+		
+		/*
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 		
@@ -74,6 +94,7 @@ public class MyInfoController extends HttpServlet {
 				rd.forward(request, response);
 			}
 		}
+		*/
 	}
 
 }
