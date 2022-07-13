@@ -22,12 +22,13 @@ public class DeptController extends HttpServlet {
 	private DeptService service = new DeptService();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
 		String search = request.getParameter("search");
 		String page = request.getParameter("page");
 		String sort = "deptId";
 		int count = 5;
 		
-		HttpSession session = request.getSession();
 		if(session.getAttribute("pgc") != null) {
 			count = Integer.parseInt(session.getAttribute("pgc").toString());
 		}
