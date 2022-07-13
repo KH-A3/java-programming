@@ -39,7 +39,10 @@ function showImagePreview(e) {
 			<div class="image-form left">
 				<img id="previewImg" class="image-360" alt="여기에는 증명 사진이 배치됩니다." src="${imagePath}">
 				<br>
-				<input id="imgSelect" type="file" name="uploadImg" value="이미지 선택">
+				<input id="imgSelect" type="file" name="uploadImg" value="이미지 선택" accept="image/png">
+				<c:if test="${not empty imageError}">
+					<label class="input-label-error">${imageError}</label>
+				</c:if>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
