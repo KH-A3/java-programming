@@ -20,14 +20,19 @@ function dupCheck(value) {
 		},
 		dataType: "json",
 		success: function(data, status) {
+			var form = document.forms[0];
 			if(data.errCode === "duplicate") {
-				var form = document.forms[0];
-				
 				var label = document.createElement("label");
 				label.setAttribute("class", "input-label-error");
 				label.innerText = data.errMessage;
 				
-				form.deptId.after(label);
+				if(form.deptId.nextElementSibling === null) {
+					form.deptId.after(label);
+				}
+			} else {
+				if(form.deptId.nextElementSibling !== null) {
+					form.deptId.nextElementSibling.remove();
+				}
 			}
 		}
 	});
@@ -43,14 +48,27 @@ function existsCheck(name, value) {
 		},
 		dataType: "json",
 		success: function(data, status) {
+			var form = document.forms[0];
 			if(data.errCode === "notExists") {
-				var form = document.forms[0];
-				
-				var label = document.createElement("label");
-				label.setAttribute("class", "input-label-error");
-				label.innerText = data.errMessage;
-				
-				form[name].after(label);
+				if(form[name].nextElementSibling === null) {					
+					var label = document.createElement("label");
+					label.setAttribute("class", "input-label-error");
+					label.innerText = data.errMessage;
+					form[name].after(label);
+				} else {
+					form[name].nextElementSibling.setAttribute("class", "input-label-error");
+					form[name].nextElementSibling.innerText = data.errMessage;
+				}
+			} else if(data.errCode == "exists") {
+				if(form[name].nextElementSibling === null) {	
+					var label = document.createElement("label");
+					label.setAttribute("class", "input-label-ok");
+					label.innerText = data.errMessage;
+					form[name].after(label);
+				} else {
+					form[name].nextElementSibling.setAttribute("class", "input-label-ok");
+					form[name].nextElementSibling.innerText = data.errMessage;
+				}
 			}
 		}
 	});

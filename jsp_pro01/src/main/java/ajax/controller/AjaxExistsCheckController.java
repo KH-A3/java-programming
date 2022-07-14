@@ -37,11 +37,17 @@ public class AjaxExistsCheckController extends HttpServlet {
 					break;
 			}
 			
+			PrintWriter out = response.getWriter();
 			if(!data) {
-				PrintWriter out = response.getWriter();
 				out.println("{");
 				out.println("    \"errCode\": \"notExists\",");
 				out.println(errMessage);
+				out.println("}");
+				out.flush();
+			} else {
+				out.println("{");
+				out.println("    \"errCode\": \"exists\",");
+				out.println("    \"errMessage\": \"정상.\"");
 				out.println("}");
 				out.flush();
 			}
