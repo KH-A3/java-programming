@@ -69,4 +69,13 @@ public class EmpsDAO {
 		session.close();
 	}
 
+	public boolean insertEmp(EmpsDTO empsData) {
+		String mapId = String.format(mapper, "insertEmp");
+		int result = session.update(mapId, empsData);
+		if(result == 1) {
+			return true;
+		}
+		return false;
+	}
+
 }

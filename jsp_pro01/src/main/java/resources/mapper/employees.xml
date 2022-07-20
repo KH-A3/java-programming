@@ -3,6 +3,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="empsMapper">
+	<insert id="insertEmp" parameterType="empsDto">
+		INSERT INTO 
+		  EMPLOYEES(EMPLOYEE_ID
+		          , FIRST_NAME
+		          , LAST_NAME
+		          , EMAIL
+		          , JOB_ID
+		          , DEPARTMENT_ID
+		          , HIRE_DATE)
+		     VALUES(#{empId}
+		          , SUBSTR(#{empName}, 1, INSTR(#{empName}, ' ') - 1)
+		          , SUBSTR(#{empName}, INSTR(#{empName}, ' ') + 1, LENGTH(#{empName}))
+		          , SUBSTR(#{email}, 1, INSTR(#{email}, '@') - 1)
+		          , #{jobId}
+		          , #{deptId}
+		          , SYSDATE)
+	</insert>
 	<select id="selectAll" resultType="empsDto">
 		SELECT E.EMPLOYEE_ID AS empId
 		     , CONCAT(FIRST_NAME, ' ' || LAST_NAME) AS empName
@@ -67,6 +84,9 @@
 	<update id="updateEmpDetail" parameterType="empsDetailDto">
 		UPDATE EMPLOYEES
 		   SET PHONE_NUMBER = #{phone}
+		     , SALARY = #{salary}
+		     , COMMISSION_PCT = #{commission}
+		     , HIRE_DATE = #{hireDate}
 		 WHERE EMPLOYEE_ID = #{empId}
 	</update>
 </mapper>

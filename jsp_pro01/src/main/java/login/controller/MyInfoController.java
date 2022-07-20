@@ -73,6 +73,7 @@ public class MyInfoController extends HttpServlet {
 		empsDetailData.setPhone(phone);
 		
 		boolean result = empsService.setEmp(empsData, empsDetailData);
+		
 		if(result) {
 			// 수정 성공
 			response.sendRedirect(request.getContextPath() + "/myinfo");

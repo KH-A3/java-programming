@@ -9,6 +9,7 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	<typeAliases>
+		<typeAlias type="job.model.JobDTO" alias="jobDto" />
 		<typeAlias type="dept.model.DeptDTO" alias="deptDto" />
 		<typeAlias type="locs.model.LocsDTO" alias="locsDto" />
 		<typeAlias type="emps.model.EmpsDTO" alias="empsDto" />
@@ -30,5 +31,6 @@
 		<mapper resource="resources/mapper/locations.xml"/>
 		<mapper resource="resources/mapper/employees.xml"/>
 		<mapper resource="resources/mapper/login.xml"/>
+		<mapper resource="resources/mapper/jobs.xml"/>
 	</mappers>
 </configuration>

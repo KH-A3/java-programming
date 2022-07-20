@@ -16,7 +16,7 @@ window.onload = function() {
 		imgSelect.click();
 	});
 	
-	imgSelect.addEventListener("change", ajaxImageUpload);
+	imgSelect.addEventListener("change", showImagePreview);
 }
 
 function showImagePreview(e) {
@@ -63,50 +63,65 @@ function ajaxImageUpload(e) {
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">이름</label>
-					<input class="input-text w-auto" type="text" name="empName" value="">
+					<input class="input-text w-auto" type="text" name="empName" value="${param.empName}">
 				</div>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">직급</label>
 					<select class="select-form w-auto" name="jobId">
-						<option>${sessionScope.loginData.jobName}</option>
+						<c:forEach items="${jobDatas}" var="item">
+							<c:choose>
+								<c:when test="${item.jobId eq param.jobId}">
+									<option value="${item.jobId}" selected>${item.jobName}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${item.jobId}">${item.jobName}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">부서</label>
 					<select class="select-form w-auto" name="deptId">
-						<option>${sessionScope.loginData.deptName}</option>
+						<c:forEach items="${deptDatas}" var="item">
+							<c:choose>
+								<c:when test="${item.deptId eq param.deptId}">
+									<option value="${item.deptId}" selected>${item.deptName}</option>
+								</c:when>
+								<c:otherwise>
+									<option value="${item.deptId}">${item.deptName}</option>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</select>
 				</div>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">이메일</label>
-					<input class="input-text w-auto" type="text" name="email" value="">
+					<input class="input-text w-auto" type="text" name="email" value="${param.email}">
 				</div>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
-					<fmt:formatDate var="fHireDate" value="${empsDetailData.hireDate}" dateStyle="long" />
 					<label class="input-label w-100">입사일</label>
-					<input class="input-text w-auto" type="text" name="hireDate" value="" >
+					<input class="input-text w-auto" type="text" name="hireDate" value="${param.hireDate}" >
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">전화번호</label>
-					<input class="input-text w-auto" type="text" name="phone" value="">
+					<input class="input-text w-auto" type="text" name="phone" value="${param.phone}">
 				</div>
 			</div>
 			<div class="input-form inline">
 				<div class="input-form">
-					<fmt:formatNumber var="fSalary" value="${empsDetailData.salary}" />
 					<label class="input-label w-100">급여액</label>
-					<input class="input-text w-auto" type="text" name="salery" value="">
+					<input class="input-text w-auto" type="text" name="salary" value="${param.salary}">
 				</div>
 				<div class="input-form">
-					<fmt:formatNumber var="fCommission" value="${empsDetailData.commission}" type="percent" />
 					<label class="input-label w-100">커미션</label>
-					<input class="input-text w-auto" type="text" name="commission" value="">
+					<input class="input-text w-auto" type="text" name="commission" value="${param.commission}">
 				</div>
 			</div>
 			<div class="input-form form-right">

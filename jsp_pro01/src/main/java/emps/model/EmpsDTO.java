@@ -69,6 +69,10 @@ public class EmpsDTO {
 		this.deptId = deptId;
 	}
 	
+	public void setDeptId(String deptId) {
+		this.deptId = Integer.parseInt(deptId);
+	}
+	
 	@Override
 	public String toString() {
 		return "EmpsDTO [empId=" + empId + ", empName=" + empName + ", email=" + email + ", jobName=" + jobName
