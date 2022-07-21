@@ -1,7 +1,10 @@
 package emps.service;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import emps.model.EmpsDAO;
 import emps.model.EmpsDTO;
@@ -86,6 +89,24 @@ public class EmpsService {
 			return false;
 		}
 		
+	}
+
+	public EmpsDTO getId(String id) {
+		EmpsDAO dao = new EmpsDAO();
+		EmpsDTO data = dao.selectId(Integer.parseInt(id));
+		dao.close();
+		return data;
+	}
+	
+	public String getProfileImagePath(HttpServletRequest request, String imagePath, EmpsDTO empsData) {
+		String realPath = request.getServletContext().getRealPath(imagePath) + empsData.getEmpId() + ".png";
+		
+		File file = new File(realPath);
+		if(file.exists()) {
+			return imagePath + empsData.getEmpId() + ".png";
+		} else {
+			return imagePath + "profile.png";
+		}
 	}
 
 }
