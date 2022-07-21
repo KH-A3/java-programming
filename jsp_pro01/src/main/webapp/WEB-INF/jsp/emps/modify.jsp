@@ -42,6 +42,21 @@ function ajaxImageUpload(e) {
 		}
 	});
 }
+
+function getSalaryRange(element, target) {
+	$.ajax({
+		type: "get",
+		url: "/ajax/check",
+		data: {
+			checkName: "jobRange",
+			id: element.value
+		},
+		success: function(data, status) {
+			target.setAttribute("min", data.min);
+			target.setAttribute("max", data.max);
+		}
+	});
+}
 </script>
 <body>
 	<%@ include file="../module/navigation.jsp" %>
@@ -69,7 +84,8 @@ function ajaxImageUpload(e) {
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">직급</label>
-					<select class="select-form w-auto" name="jobId">
+					<select class="select-form w-auto" name="jobId"
+						onchange="getSalaryRange(this, form.salary)">
 						<c:forEach items="${jobDatas}" var="item">
 							<c:choose>
 								<c:when test="${item.jobId eq empsData.jobId}">
@@ -107,7 +123,7 @@ function ajaxImageUpload(e) {
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">입사일</label>
-					<input class="input-text w-auto" type="text" name="hireDate" value="${empsDetailData.hireDate}" >
+					<input class="input-text w-auto" type="date" name="hireDate" value="${empsDetailData.hireDate}" >
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">전화번호</label>
@@ -117,7 +133,7 @@ function ajaxImageUpload(e) {
 			<div class="input-form inline">
 				<div class="input-form">
 					<label class="input-label w-100">급여액</label>
-					<input class="input-text w-auto" type="text" name="salary" value="${empsDetailData.salary}">
+					<input class="input-text w-auto" type="number" min="" max="" name="salary" value="${empsDetailData.salary}">
 				</div>
 				<div class="input-form">
 					<label class="input-label w-100">커미션</label>

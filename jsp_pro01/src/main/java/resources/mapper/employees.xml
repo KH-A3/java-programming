@@ -3,6 +3,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="empsMapper">
+	<resultMap type="map" id="mapSalary">
+		<result column="minSalary" property="minSalary" javaType="int" />
+		<result column="maxSalary" property="maxSalary" javaType="int" />
+	</resultMap>
+	<select id="checkSalaryRange" resultMap="mapSalary">
+		SELECT MIN_SALARY AS minSalary
+		     , MAX_SALARY AS maxSalary
+		  FROM JOBS
+		 WHERE JOB_ID = #{id}
+	</select>
 	<select id="selectId" resultType="empsDto">
 		SELECT E.EMPLOYEE_ID AS empId
 		     , CONCAT(FIRST_NAME, ' ' || LAST_NAME) AS empName

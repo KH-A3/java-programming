@@ -12,6 +12,12 @@ public class EmpsDAO {
 	private SqlSession session = DBConn.getSqlSession();
 	private String mapper = "empsMapper.%s";
 	
+	public Map<String, Integer> checkSalaryRange(String id) {
+		String mapId = String.format(mapper, "checkSalaryRange");
+		Map<String, Integer> data = session.selectOne(mapId, id);
+		return data;
+	}
+	
 	public List<EmpsDTO> selectAll() {
 		String mapId = String.format(mapper, "selectAll");
 		List<EmpsDTO> datas = session.selectList(mapId);
