@@ -137,4 +137,16 @@ public class EmpsService {
 		return salary;
 	}
 
+	public boolean removeId(int id) {
+		EmpsDAO dao = new EmpsDAO();
+		boolean result = dao.deleteId(id);
+		if(result) {
+			dao.commit();
+		} else {
+			dao.rollback();
+		}
+		dao.close();
+		return result;
+	}
+
 }

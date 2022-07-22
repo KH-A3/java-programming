@@ -7,6 +7,10 @@
 		<result column="minSalary" property="minSalary" javaType="int" />
 		<result column="maxSalary" property="maxSalary" javaType="int" />
 	</resultMap>
+	<delete id="deleteId">
+		DELETE FROM EMPLOYEES
+		 WHERE EMPLOYEE_ID = #{id}
+	</delete>
 	<select id="checkSalaryRange" resultMap="mapSalary">
 		SELECT MIN_SALARY AS minSalary
 		     , MAX_SALARY AS maxSalary
