@@ -22,20 +22,20 @@ public class EmpsService {
 		return datas;
 	}
 
-	public List<EmpsDTO> getPage(int pageNumber, int count) {
+	public List<EmpsDTO> getPage(EmpsDTO data, int pageNumber, int count) {
 		int start = (pageNumber - 1) * count + 1;
 		int end = start + count - 1;
 		
 		EmpsDAO dao = new EmpsDAO();
-		List<EmpsDTO> datas = dao.selectPage(start, end);
+		List<EmpsDTO> datas = dao.selectPage(data.getDeptId(), start, end);
 		dao.close();
 		
 		return datas;
 	}
 	
-	public List<Integer> getPageNumberList(int count) {
+	public List<Integer> getPageNumberList(EmpsDTO data, int count) {
 		EmpsDAO dao = new EmpsDAO();
-		int rowCount = dao.rowCount();
+		int rowCount = dao.rowCount(data.getDeptId());
 		dao.close();
 		
 		List<Integer> pageList = new ArrayList<Integer>();
@@ -46,8 +46,8 @@ public class EmpsService {
 		return pageList;
 	}
 	
-	public List<Integer> getPageNumberList() {
-		return getPageNumberList(10);
+	public List<Integer> getPageNumberList(EmpsDTO data) {
+		return getPageNumberList(data, 10);
 	}
 
 	public EmpsDetailDTO getEmpDetail(int empId) {

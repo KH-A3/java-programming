@@ -24,18 +24,19 @@ public class EmpsDAO {
 		return datas;
 	}
 
-	public List<EmpsDTO> selectPage(int start, int end) {
+	public List<EmpsDTO> selectPage(int id, int start, int end) {
 		String mapId = String.format(mapper, "selectPage");
 		Map<String, Integer> page = new HashMap<String, Integer>();
+		page.put("deptId", id);
 		page.put("start", start);
 		page.put("end", end);
 		List<EmpsDTO> datas = session.selectList(mapId, page);
 		return datas;
 	}
 	
-	public int rowCount() {
+	public int rowCount(int id) {
 		String mapId = String.format(mapper, "rowCount");
-		int count = session.selectOne(mapId);
+		int count = session.selectOne(mapId, id);
 		return count;
 	}
 	

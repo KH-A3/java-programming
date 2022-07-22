@@ -85,6 +85,7 @@
 				    ON E.JOB_ID = J.JOB_ID
 				  JOIN DEPARTMENTS D
 				    ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+				 WHERE E.DEPARTMENT_ID = #{deptId}
 			    )
 		 WHERE RN BETWEEN #{start} AND #{end}
 	</select>
@@ -95,6 +96,7 @@
 		    ON E.JOB_ID = J.JOB_ID
 		  JOIN DEPARTMENTS D
 		    ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+		 WHERE E.DEPARTMENT_ID = #{id}
 	</select>
 	<select id="selectEmpDetail" parameterType="_int" resultType="empsDetailDto">
 		SELECT EMPLOYEE_ID AS empId

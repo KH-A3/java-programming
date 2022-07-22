@@ -42,6 +42,26 @@ function ajaxImageUpload(e) {
 		}
 	});
 }
+function ajaxEmpDelete(id) {
+	if(confirm("해당 데이터를 삭제하겠습니까?")) {
+		$.ajax({
+			type: "post",
+			url: "/ajax/delete",
+			data: {
+				id: id
+			},
+			dataType: "json",
+			success: function(data) {
+				if(data.type === "success") {
+					alert(data.message);
+					location.href="/emps";
+				} else if(data.type === "fail") {
+					alert(data.message);
+				}
+			}
+		});
+	}
+}
 </script>
 <body>
 	<%@ include file="../module/navigation.jsp" %>
@@ -109,7 +129,7 @@ function ajaxImageUpload(e) {
 				<c:url var="empDelUrl" value="/emps/delete">
 					<c:param name="id" value="${empsData.empId}" />
 				</c:url>
-				<button class="btn btn-outline btn-cancel" type="button" onclick="location.href='${empDelUrl}'">삭제</button>
+				<button class="btn btn-outline btn-cancel" type="button" onclick="ajaxEmpDelete(${empsData.empId});">삭제</button>
 			</div>
 		</div>
 	</section>
