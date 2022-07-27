@@ -12,3 +12,11 @@ CREATE TABLE EMP_BOARDS (
 );
 
 CREATE SEQUENCE EMP_BOARDS_SEQ NOCACHE;
+
+
+-- 게시판 글을 등록하기 전에 ID 번호를 자동 생성하여 가져오기 위한 쿼리
+SELECT EMP_BOARDS_SEQ.NEXTVAL FROM DUAL;
+
+-- 게시판 글을 등록하기 위한 쿼리
+INSERT INTO EMP_BOARDS(ID, TITLE, CONTENT, EMPID, CREATEDATE)
+     VALUES(1, '여기에 제목을 넣으세요.', '여기에 내용을 넣으세요.', 100, SYSDATE);
