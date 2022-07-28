@@ -10,4 +10,12 @@
 		INSERT INTO EMP_BOARDS(ID, TITLE, CONTENT, EMPID, CREATEDATE)
 		     VALUES(#{id}, #{title}, #{content}, #{empId}, SYSDATE)
 	</insert>
+	<select id="selectData" resultType="empBoardDto">
+		SELECT ID, TITLE, CONTENT
+		     , EMPID, CREATEDATE
+		     , VIEW_CNT AS viewCnt
+		     , "LIKE"
+		  FROM EMP_BOARDS
+		 WHERE ID = #{id}
+	</select>
 </mapper>

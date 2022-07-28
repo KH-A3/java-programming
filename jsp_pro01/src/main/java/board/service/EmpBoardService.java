@@ -23,4 +23,13 @@ public class EmpBoardService {
 		dao.close();
 		return -1;
 	}
+
+	public EmpBoardDTO getData(int id) {
+		EmpBoardDAO dao = new EmpBoardDAO();
+		
+		EmpBoardDTO data = dao.selectData(id);
+		dao.close();
+		
+		return data;
+	}
 }

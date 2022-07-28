@@ -24,6 +24,12 @@ public class EmpBoardDAO {
 		return res == 1 ? true : false;
 	}
 	
+	public EmpBoardDTO selectData(int id) {
+		String mapperId = String.format(mapper, "selectData");
+		EmpBoardDTO res = session.selectOne(mapperId, id);
+		return res;
+	}
+	
 	public void commit() {
 		this.session.commit();
 	}
