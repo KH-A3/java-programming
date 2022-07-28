@@ -11,7 +11,22 @@
 	<link rel="stylesheet" type="text/css" href="/static/bs5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 	<script type="text/javascript" src="/static/bs5/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
 </head>
+<script type="text/javascript">
+	function ajaxLike(element, id) {
+		$.ajax({
+			type: "post",
+			url: "/ajax/board/like",
+			data: {
+				id: id
+			},
+			success: function(data) {
+				element.innerText = data.like;
+			}
+		});
+	}
+</script>
 <body>
 	<header></header>
 	<section class="container">
@@ -29,9 +44,9 @@
 				<p>${data.content}</p>
 			</div>
 			<div class="mb-1">
-				<div>
+				<div onclick="ajaxLike(id_like, ${data.id});">
 					<i class="bi bi-hand-thumbs-up text-secondary text-opacity-50"></i>
-					<label class="text-secondary text-opacity-75">${data.like}</label>
+					<label id="id_like" class="text-secondary text-opacity-75">${data.like}</label>
 				</div>
 			</div>
 			<div class="mb-1 text-end">

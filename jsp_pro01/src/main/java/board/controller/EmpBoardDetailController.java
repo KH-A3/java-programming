@@ -27,13 +27,20 @@ public class EmpBoardDetailController extends HttpServlet {
 		EmpsService empsService = new EmpsService();
 		
 		EmpBoardDTO data = service.getData(Integer.parseInt(id));
-		EmpsDTO empData = empsService.getId("" + data.getEmpId());
 		
-		request.setAttribute("data", data);
-		request.setAttribute("empData", empData);
-		
-		RequestDispatcher rd = request.getRequestDispatcher(view);
-		rd.forward(request, response);
+		if(data != null) {
+			service.incViewCnt(data);
+			EmpsDTO empData = empsService.getId("" + data.getEmpId());
+			
+			request.setAttribute("data", data);
+			request.setAttribute("empData", empData);
+			
+			RequestDispatcher rd = request.getRequestDispatcher(view);
+			rd.forward(request, response);
+		} else {
+			// 데이터가 조회되지 않은 경우
+			// 별도의 에러 페이지로 전환
+		}
 	}
 
 }

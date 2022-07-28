@@ -18,4 +18,14 @@
 		  FROM EMP_BOARDS
 		 WHERE ID = #{id}
 	</select>
+	<update id="updateViewCnt" parameterType="empBoardDto">
+		UPDATE EMP_BOARDS
+		   SET VIEW_CNT = #{viewCnt} + 1
+		 WHERE ID = #{id}
+	</update>
+	<update id="updateLike" parameterType="empBoardDto">
+		UPDATE EMP_BOARDS
+		   SET "LIKE" = #{like} + 1
+		 WHERE ID= #{id}
+	</update>
 </mapper>
