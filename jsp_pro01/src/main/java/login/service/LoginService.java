@@ -33,7 +33,6 @@ public class LoginService {
 			return false;
 		} else {
 			List<PermDTO> perm = dao.selectPerm(data.getEmpId());
-			System.out.println(perm);
 			session.setAttribute("loginData", data);
 			session.setAttribute("permData", perm);
 			dao.close();

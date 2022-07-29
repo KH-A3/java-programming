@@ -25,12 +25,16 @@ import job.service.JobService;
 public class EmpsAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private EmpsService empsService = new EmpsService();
+	private DeptService deptService = new DeptService();
+	private JobService jobService = new JobService();
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String view = "/WEB-INF/jsp/emps/add.jsp";
 		
-		EmpsService empsService = new EmpsService();
-		DeptService deptService = new DeptService();
-		JobService jobService = new JobService();
+		empsService = new EmpsService();
+		deptService = new DeptService();
+		jobService = new JobService();
 		
 		List<DeptDTO> deptDatas = deptService.getAll();
 		List<JobDTO> jobDatas = jobService.getAll();
@@ -67,7 +71,7 @@ public class EmpsAddController extends HttpServlet {
 		empsDetailData.setSalary(salary);
 		empsDetailData.setCommission(commission);
 		
-		EmpsService empsService = new EmpsService();
+		empsService = new EmpsService();
 		boolean result = empsService.add(empsData, empsDetailData);
 		
 		if(result) {
