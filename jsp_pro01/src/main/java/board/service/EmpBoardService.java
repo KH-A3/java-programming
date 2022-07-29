@@ -1,10 +1,15 @@
 package board.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import board.model.EmpBoardDAO;
 import board.model.EmpBoardDTO;
+import board.model.EmpBoardStaticsDTO;
+import emps.model.EmpsDTO;
 
 public class EmpBoardService {
 	
@@ -36,10 +41,31 @@ public class EmpBoardService {
 		return data;
 	}
 
-	public void incViewCnt(EmpBoardDTO data) {
+	public void incViewCnt(HttpSession session, EmpBoardDTO data) {
 		EmpBoardDAO dao = new EmpBoardDAO();
 		
-		boolean result = dao.updateViewCnt(data);
+		EmpBoardStaticsDTO staticsData = new EmpBoardStaticsDTO();
+		staticsData.setbId(data.getId());
+		staticsData.setEmpId(((EmpsDTO)session.getAttribute("loginData")).getEmpId());
+		
+		staticsData = dao.selectStatics(staticsData);
+		
+		boolean result = false;
+		if(staticsData == null) {
+			result = dao.updateViewCnt(data);
+			
+			staticsData = new EmpBoardStaticsDTO();
+			staticsData.setbId(data.getId());
+			staticsData.setEmpId(((EmpsDTO)session.getAttribute("loginData")).getEmpId());
+			dao.insertStatics(staticsData);
+		} else {
+			long timeDiff = new Date().getTime() - staticsData.getLatestViewDate().getTime();
+			if(timeDiff / (1000 * 60 * 60 * 24) >= 7) {
+				result = dao.updateViewCnt(data);
+				dao.updateStatics(staticsData);
+			}
+		}
+		
 		if(result) {
 			data.setViewCnt(data.getViewCnt() + 1);
 			dao.commit();
