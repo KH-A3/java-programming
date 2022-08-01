@@ -2,6 +2,7 @@ package board.service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -74,7 +75,7 @@ public class EmpBoardService {
 		dao.rollback();
 		dao.close();
 	}
-
+	
 	public void incLike(HttpSession session, EmpBoardDTO data) {
 		EmpsDTO empData = (EmpsDTO)session.getAttribute("loginData");
 		EmpBoardDAO dao = new EmpBoardDAO();
@@ -106,4 +107,12 @@ public class EmpBoardService {
 		}
 		dao.close();
 	}
+	
+	public List<EmpBoardDTO> getAll() {
+		EmpBoardDAO dao = new EmpBoardDAO();
+		List<EmpBoardDTO> datas = dao.selectAll();
+		dao.close();
+		return datas;
+	}
+
 }

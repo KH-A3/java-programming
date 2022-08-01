@@ -59,4 +59,16 @@
 		</choose>
 		 WHERE ID = #{id}
 	</update>
+	<select id="selectAll" resultType="empBoardDto">
+		SELECT B.ID, B.TITLE, B.CONTENT
+		     , B.EMPID
+		     , E.FIRST_NAME || ' ' || E.LAST_NAME AS EMPNAME
+		     , B.CREATEDATE
+		     , B.VIEW_CNT AS viewCnt
+		     , B."LIKE"
+		  FROM EMP_BOARDS B
+		  JOIN EMPLOYEES E
+		    ON B.EMPID = E.EMPLOYEE_ID
+		 ORDER BY B.ID DESC
+	</select>
 </mapper>
