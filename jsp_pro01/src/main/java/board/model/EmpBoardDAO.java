@@ -56,9 +56,15 @@ public class EmpBoardDAO {
 		return res == 1 ? true : false;
 	}
 	
-	public boolean updateStatics(EmpBoardStaticsDTO staticsData) {
+	public boolean updateStatics(EmpBoardStaticsDTO data) {
 		String mapperId = String.format(mapper, "updateStatics");
-		int res = session.update(mapperId, staticsData);
+		int res = session.update(mapperId, data);
+		return res == 1 ? true : false;
+	}
+	
+	public boolean updateStaticsLike(EmpBoardStaticsDTO data) {
+		String mapperId = String.format(mapper, "updateStaticsLike");
+		int res = session.update(mapperId, data);
 		return res == 1 ? true : false;
 	}
 	

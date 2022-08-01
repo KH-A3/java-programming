@@ -75,16 +75,35 @@ public class EmpBoardService {
 		dao.close();
 	}
 
-	public void incLike(EmpBoardDTO data) {
+	public void incLike(HttpSession session, EmpBoardDTO data) {
+		EmpsDTO empData = (EmpsDTO)session.getAttribute("loginData");
 		EmpBoardDAO dao = new EmpBoardDAO();
 		
-		boolean result = dao.updateLike(data);
-		if(result) {
+		EmpBoardStaticsDTO staticsData = new EmpBoardStaticsDTO();
+		staticsData.setbId(data.getId());
+		staticsData.setEmpId(empData.getEmpId());
+		
+		staticsData = dao.selectStatics(staticsData);
+		
+		// 이전에 추천을 했는지 안 했는지 확인
+		if(staticsData.isLiked()) {
+			// 이전에 추천을 한 기록이 있으면 -> 추천 취소로 전환
+			staticsData.setLiked(false);
+			data.setLike(data.getLike() - 1);
+		} else {
+			// 이전에 추천을 한 기록이 없으면 -> 추천으로 전환
+			staticsData.setLiked(true);
 			data.setLike(data.getLike() + 1);
-			dao.commit();
-			dao.close();
 		}
-		dao.rollback();
+		
+		dao.updateStaticsLike(staticsData);
+		boolean result = dao.updateLike(data);
+		
+		if(result) {
+			dao.commit();
+		} else {
+			dao.rollback();
+		}
 		dao.close();
 	}
 }

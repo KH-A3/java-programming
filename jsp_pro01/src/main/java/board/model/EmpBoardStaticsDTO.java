@@ -8,6 +8,7 @@ public class EmpBoardStaticsDTO {
 	private int bId;
 	private boolean viewed;
 	private Date latestViewDate;
+	private boolean liked;
 	
 	public int getId() {
 		return id;
@@ -49,10 +50,18 @@ public class EmpBoardStaticsDTO {
 		this.latestViewDate = latestViewDate;
 	}
 	
+	public boolean isLiked() {
+		return liked;
+	}
+
+	public void setLiked(boolean liked) {
+		this.liked = liked;
+	}
+
 	@Override
 	public String toString() {
-		return "EmpBoardStaticsDTO [id=" + id + ", empId=" + empId + ", bid=" + bId + ", viewed=" + viewed
-				+ ", latestViewDate=" + latestViewDate + "]";
+		return "EmpBoardStaticsDTO [id=" + id + ", empId=" + empId + ", bId=" + bId + ", viewed=" + viewed
+				+ ", latestViewDate=" + latestViewDate + ", liked=" + liked + "]";
 	}
 	
 }
