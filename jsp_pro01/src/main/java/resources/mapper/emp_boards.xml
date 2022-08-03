@@ -71,4 +71,12 @@
 		    ON B.EMPID = E.EMPLOYEE_ID
 		 ORDER BY B.ID DESC
 	</select>
+	<delete id="deleteStaticsData">
+		DELETE FROM EMP_BOARDS_STATICS
+		 WHERE BID = #{bId}
+	</delete>
+	<delete id="deleteData">
+		DELETE FROM EMP_BOARDS
+		 WHERE ID = #{id}
+	</delete>
 </mapper>

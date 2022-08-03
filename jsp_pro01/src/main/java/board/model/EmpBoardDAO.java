@@ -75,6 +75,18 @@ public class EmpBoardDAO {
 		return res;
 	}
 	
+	public boolean deleteStaticsData(EmpBoardStaticsDTO data) {
+		String mapperId = String.format(mapper, "deleteStaticsData");
+		int res = session.delete(mapperId, data);
+		return res >= 0 ? true : false;
+	}
+	
+	public boolean deleteData(EmpBoardDTO data) {
+		String mapperId = String.format(mapper, "deleteData");
+		int res = session.delete(mapperId, data);
+		return res == 1 ? true : false;
+	}
+	
 	public void commit() {
 		this.session.commit();
 	}

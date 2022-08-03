@@ -115,4 +115,22 @@ public class EmpBoardService {
 		return datas;
 	}
 
+	public boolean remove(EmpBoardDTO data) {
+		EmpBoardDAO dao = new EmpBoardDAO();
+		
+		EmpBoardStaticsDTO staticsData = new EmpBoardStaticsDTO();
+		staticsData.setbId(data.getId());
+		
+		dao.deleteStaticsData(staticsData);
+		boolean result = dao.deleteData(data);
+		
+		if(result) {
+			dao.commit();
+		} else {
+			dao.rollback();
+		}
+		dao.close();
+		return result;
+	}
+
 }
