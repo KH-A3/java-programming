@@ -70,7 +70,20 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<p>${comment.content}</p>
+							<c:choose>
+								<c:when test="${comment.isDeleted()}">
+									<p class="text-muted">삭제된 댓글 입니다.</p>
+								</c:when>
+								<c:otherwise>
+									<p>${comment.content}</p>
+								</c:otherwise>
+							</c:choose>
+							<c:if test="${sessionScope.loginData.empId eq comment.empId}">
+								<div class="text-end">
+									<button class="btn btn-sm btn-outline-dark" type="button">수정</button>
+									<button class="btn btn-sm btn-outline-dark" type="button" onclick="commentDelete(this, ${comment.id})">삭제</button>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -105,6 +118,20 @@
 	</section>
 	<footer></footer>
 	<script type="text/javascript">
+		function commentDelete(element, id) {
+			$.ajax({
+				url: "/comment/delete",
+				type: "post",
+				data: {
+					id: id
+				},
+				success: function(data) {
+					if(data.code === "success") {
+						element.parentElement.parentElement.parentElement.parentElement.remove();
+					}
+				}
+			});
+		}
 		function formCheck(form) {
 			if(form.content.value.trim() === "") {
 				alert("댓글 내용을 입력하세요.");
