@@ -53,7 +53,7 @@
 				<c:url var="boardUrl" value="/board" />
 				<button class="btn btn-primary" type="button" onclick="location.href='${boardUrl}'">목록</button>
 				<c:if test="${data.empId eq sessionScope.loginData.empId}">
-					<button class="btn btn-success" type="button">수정</button>
+					<button class="btn btn-success" type="button" onclick="location.href='${boardUrl}/modify?id=${data.id}'">수정</button>
 					<button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#removeModal">삭제</button>
 				</c:if>
 			</div>
