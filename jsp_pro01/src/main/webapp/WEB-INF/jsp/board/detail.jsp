@@ -60,19 +60,21 @@
 		</div>
 		
 		<div class="mt-3 mb-3">
-			<div class="mb-1">
-				<div class="card border-light">
-					<div class="card-header">
-						<div class="d-flex justify-content-between">
-							<span><small>Steven King</small></span>
-							<span><small>2022년 08월 04일</small></span>
+			<c:forEach items="${commentDatas}" var="comment">
+				<div class="mb-1">
+					<div class="card border-light">
+						<div class="card-header">
+							<div class="d-flex justify-content-between">
+								<span><small>${comment.empName}</small></span>
+								<span><small>${comment.createDate}</small></span>
+							</div>
+						</div>
+						<div class="card-body">
+							<p>${comment.content}</p>
 						</div>
 					</div>
-					<div class="card-body">
-						<p>내용</p>
-					</div>
 				</div>
-			</div>
+			</c:forEach>
 			<div class="mb-1">
 				<form action="/comment/add" method="post">
 					<input type="hidden" name="bid" value="${data.id}">
