@@ -17,6 +17,7 @@
 		<typeAlias type="emps.model.EmpsDetailDTO" alias="empsDetailDto" />
 		<typeAlias type="board.model.EmpBoardDTO" alias="empBoardDto" />
 		<typeAlias type="board.model.EmpBoardStaticsDTO" alias="empBoardStaticsDto" />
+		<typeAlias type="comment.model.CommentDTO" alias="commentDto" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -34,6 +35,7 @@
 		<mapper resource="resources/mapper/emp_boards.xml"/>
 		<mapper resource="resources/mapper/locations.xml"/>
 		<mapper resource="resources/mapper/employees.xml"/>
+		<mapper resource="resources/mapper/comment.xml"/>
 		<mapper resource="resources/mapper/login.xml"/>
 		<mapper resource="resources/mapper/jobs.xml"/>
 	</mappers>

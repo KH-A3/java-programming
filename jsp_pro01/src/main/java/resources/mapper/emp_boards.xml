@@ -79,7 +79,7 @@
 		DELETE FROM EMP_BOARDS
 		 WHERE ID = #{id}
 	</delete>
-	<update id="updateData">
+	<update id="updateData" parameterType="empBoardDto">
 		UPDATE EMP_BOARDS
 		   SET TITLE = #{title}
 		     , CONTENT = #{content}

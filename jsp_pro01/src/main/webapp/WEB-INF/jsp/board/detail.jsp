@@ -58,6 +58,32 @@
 				</c:if>
 			</div>
 		</div>
+		
+		<div class="mt-3 mb-3">
+			<div class="mb-1">
+				<div class="card border-light">
+					<div class="card-header">
+						<div class="d-flex justify-content-between">
+							<span><small>Steven King</small></span>
+							<span><small>2022년 08월 04일</small></span>
+						</div>
+					</div>
+					<div class="card-body">
+						<p>내용</p>
+					</div>
+				</div>
+			</div>
+			<div class="mb-1">
+				<form action="/comment/add" method="post">
+					<input type="hidden" name="bid" value="${data.id}">
+					<div class="input-group">
+						<textarea class="form-control" name="content" rows="2"></textarea>
+						<button class="btn btn-outline-dark" type="button" onclick="formCheck(this.form);">등록</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
 		<div class="modal fade" id="removeModal" tabindex="-1" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -77,6 +103,13 @@
 	</section>
 	<footer></footer>
 	<script type="text/javascript">
+		function formCheck(form) {
+			if(form.content.value.trim() === "") {
+				alert("댓글 내용을 입력하세요.");
+			} else {
+				form.submit();
+			}
+		}
 		function deleteBoard(boardId) {
 			$.ajax({
 				url: "/board/delete",
