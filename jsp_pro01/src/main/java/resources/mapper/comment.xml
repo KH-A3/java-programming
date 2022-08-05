@@ -44,4 +44,9 @@
 		   SET DELETED = 'Y'
 		 WHERE ID = #{id}
 	</update>
+	<update id="updateData" parameterType="commentDto">
+		UPDATE COMMENTS
+		   SET CONTENT = #{content}
+		 WHERE ID = #{id}
+	</update>
 </mapper>

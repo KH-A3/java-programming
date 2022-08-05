@@ -50,4 +50,18 @@ public class CommentService {
 		return result;
 	}
 
+	public boolean modify(CommentDTO data) {
+		CommentDAO dao = new CommentDAO();
+		boolean result = dao.updateData(data);
+		
+		if(result) {
+			dao.commit();
+		} else {
+			dao.rolback();
+		}
+		dao.close();
+		
+		return result;
+	}
+
 }

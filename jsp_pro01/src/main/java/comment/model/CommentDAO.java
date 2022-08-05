@@ -34,6 +34,12 @@ public class CommentDAO {
 		int res = session.update(mapId, data);
 		return res == 1 ? true : false;
 	}
+	
+	public boolean updateData(CommentDTO data) {
+		String mapId = String.format("commentMapper.%s", "updateData");
+		int res = session.update(mapId, data);
+		return res == 1 ? true : false;
+	}
 
 	public void commit() {
 		session.commit();

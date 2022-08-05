@@ -76,7 +76,8 @@
 									<p class="text-muted">삭제된 댓글 입니다.</p>
 								</c:when>
 								<c:otherwise>
-									<p class="card-text">${comment.content}</p>
+									<c:set var="newLine" value="<%= \"\n\" %>" />
+									<p class="card-text">${fn:replace(comment.content, newLine, '<br>')}</p>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${sessionScope.loginData.empId eq comment.empId}">
@@ -136,7 +137,6 @@
 		
 		function changeText(element) {
 			element.innerText = "수정";
-			
 			var cid = element.parentElement.parentElement.children[0].value;
 			var value = element.parentElement.previousElementSibling.children[0].value;
 			element.parentElement.previousElementSibling.children[0].remove();
@@ -148,7 +148,6 @@
 			btnDelete.setAttribute("onclick", "commentDelete(this, " + cid + ");");
 			
 			element.parentElement.append(btnDelete);
-			
 			element.setAttribute("onclick", "changeEdit(this);");
 		}
 		
@@ -163,7 +162,8 @@
 					id: cid,
 					content: value
 				},
-				complete: function(data) {
+				success: function(data) {
+					element.parentElement.previousElementSibling.children[0].value = data.value
 					changeText(element);
 				}
 			});
