@@ -23,6 +23,7 @@
 		  JOIN EMPLOYEES E
 		    ON C.EMPID = E.EMPLOYEE_ID
 		 WHERE C.BID = #{bId}
+		 ORDER BY C.ID
 	</select>
 	<select id="selectData" resultType="commentDto">
 		SELECT C.ID
