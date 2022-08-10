@@ -46,6 +46,12 @@ public class BoardDAO {
 		return res == 1 ? true : false;
 	}
 	
+	public boolean updateData(BoardDTO data) {
+		String mapperId = String.format(mapper, "updateData");
+		int res = session.update(mapperId, data);
+		return res == 1 ? true : false;
+	}
+	
 	/*
 	
 	public boolean updateViewCnt(BoardDTO data) {
@@ -94,20 +100,6 @@ public class BoardDAO {
 		String mapperId = String.format(mapper, "deleteData");
 		int res = session.delete(mapperId, data);
 		return res == 1 ? true : false;
-	}
-	
-	public boolean updateData(BoardDTO data) {
-		String mapperId = String.format(mapper, "updateData");
-		int res = session.update(mapperId, data);
-		return res == 1 ? true : false;
-	}
-	
-	public void commit() {
-		this.session.commit();
-	}
-	
-	public void rollback() {
-		this.session.rollback();
 	}
 	*/
 }

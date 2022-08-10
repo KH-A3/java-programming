@@ -97,4 +97,53 @@ public class BoardController {
 			return "board/add";
 		}
 	}
+	
+	@GetMapping(value="/modify")
+	public String modify(Model model
+			, @SessionAttribute("loginData") EmpDTO empDto
+			, @RequestParam int id) {
+		logger.info("modify(empDto={}, id={})", empDto, id);
+		
+		BoardDTO data = service.getData(id);
+		if(data != null) {
+			if(data.getEmpId() == empDto.getEmpId()) {
+				model.addAttribute("data", data);
+				return "board/modify";
+			} else {
+				model.addAttribute("error", "해당 작업을 수행할 권한이 없습니다.");
+				return "error/permission";
+			}
+		} else {
+			model.addAttribute("error", "해당 데이터가 존재하지 않습니다.");
+			return "error/noExists";
+		}
+	}
+	
+	@PostMapping(value="/modify")
+	public String modify(Model model
+			, @SessionAttribute("loginData") EmpDTO empDto
+			, @ModelAttribute BoardVO boardVo) {
+		logger.info("modify(empDto={}, boardVo={})", empDto, boardVo);
+		
+		BoardDTO data = service.getData(boardVo.getId());
+		
+		if(data != null) {
+			if(data.getEmpId() == empDto.getEmpId()) {
+				data.setTitle(boardVo.getTitle());
+				data.setContent(boardVo.getContent());
+				boolean result = service.modify(data);
+				if(result) {
+					return "redirect:/board/detail?id=" + data.getId();
+				} else {
+					return "board/modify";
+				}
+			} else {
+				model.addAttribute("error", "해당 작업을 수행할 권한이 없습니다.");
+				return "error/permission";
+			}
+		} else {
+			model.addAttribute("error", "해당 데이터가 존재하지 않습니다.");
+			return "error/noExists";
+		}
+	}
 }

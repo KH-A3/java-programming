@@ -43,6 +43,11 @@ public class BoardService {
 		return -1;
 	}
 	
+	public boolean modify(BoardDTO data) {
+		boolean result = dao.updateData(data);
+		return result;
+	}
+	
 	/*
 
 	public void incViewCnt(HttpSession session, BoardDTO data) {
@@ -126,20 +131,6 @@ public class BoardService {
 			dao.rollback();
 		}
 		dao.close();
-		return result;
-	}
-
-	public boolean modify(BoardDTO data) {
-		BoardDAO dao = new BoardDAO();
-		boolean result = dao.updateData(data);
-		
-		if(result) {
-			dao.commit();
-		} else {
-			dao.rollback();
-		}
-		dao.close();
-		
 		return result;
 	}
 	*/
