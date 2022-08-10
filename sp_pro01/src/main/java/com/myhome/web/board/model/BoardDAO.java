@@ -3,11 +3,15 @@ package com.myhome.web.board.model;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BoardDAO {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardDAO.class);
 	
 	@Autowired
 	private SqlSession session;
@@ -15,29 +19,34 @@ public class BoardDAO {
 	private String mapper = "boardMapper.%s";
 	
 	public List<BoardDTO> selectAll() {
+		logger.info("selectAll()");
 		String mapperId = String.format(mapper, "selectAll");
 		List<BoardDTO> res = session.selectList(mapperId);
 		return res;
 	}
 	
-	/*
+	public BoardDTO selectData(int id) {
+		logger.info("selectData(id={})", id);
+		String mapperId = String.format(mapper, "selectData");
+		BoardDTO res = session.selectOne(mapperId, id);
+		return res;
+	}
+	
 	public int getNextSeq() {
+		logger.info("getNextSeq()");
 		String mapperId = String.format(mapper, "getNextSeq");
 		int seq = session.selectOne(mapperId);
 		return seq;
 	}
 	
 	public boolean insertData(BoardDTO data) {
+		logger.info("insertData(data={})", data);
 		String mapperId = String.format(mapper, "insertData");
 		int res = session.insert(mapperId, data);
 		return res == 1 ? true : false;
 	}
 	
-	public BoardDTO selectData(int id) {
-		String mapperId = String.format(mapper, "selectData");
-		BoardDTO res = session.selectOne(mapperId, id);
-		return res;
-	}
+	/*
 	
 	public boolean updateViewCnt(BoardDTO data) {
 		String mapperId = String.format(mapper, "updateViewCnt");

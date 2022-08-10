@@ -35,7 +35,7 @@
 				<h1>${data.title}</h1>
 			</div>
 			<div class="mb-3">
-				<label class="pe-3 text-secondary text-opacity-75">${empData.empName}</label>
+				<label class="pe-3 text-secondary text-opacity-75">${data.empName}</label>
 				<fmt:formatDate value="${data.createDate}" var="createDate" dateStyle="long" />
 				<label class="pe-3 text-secondary text-opacity-75">${createDate}</label>
 				<label class="pe-3 text-secondary text-opacity-75">조회수: ${data.viewCnt}</label>

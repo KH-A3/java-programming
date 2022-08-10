@@ -2,6 +2,8 @@ package com.myhome.web.board.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,42 +13,37 @@ import com.myhome.web.board.model.BoardDTO;
 @Service
 public class BoardService {
 	
+	private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
+	
 	@Autowired
 	private BoardDAO dao;
 	
 	public List<BoardDTO> getAll() {
+		logger.info("getAll()");
 		List<BoardDTO> datas = dao.selectAll();
 		return datas;
 	}
 	
-	/*
+	public BoardDTO getData(int id) {
+		logger.info("getData(id={})", id);
+		BoardDTO data = dao.selectData(id);
+		return data;
+	}
+	
 	public int add(BoardDTO data) {
-		BoardDAO dao = new BoardDAO();
-		
+		logger.info("add(data={})", data);
 		int seq = dao.getNextSeq();
 		data.setId(seq);
 		
 		boolean result = dao.insertData(data);
 		
 		if(result) {
-			dao.commit();
-			dao.close();
 			return data.getId();
 		}
-		
-		dao.rollback();
-		dao.close();
 		return -1;
 	}
-
-	public BoardDTO getData(int id) {
-		BoardDAO dao = new BoardDAO();
-		
-		BoardDTO data = dao.selectData(id);
-		dao.close();
-		
-		return data;
-	}
+	
+	/*
 
 	public void incViewCnt(HttpSession session, BoardDTO data) {
 		BoardDAO dao = new BoardDAO();

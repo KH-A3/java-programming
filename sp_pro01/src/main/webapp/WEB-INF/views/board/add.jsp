@@ -8,8 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>게시글 등록</title>
-	<link rel="stylesheet" type="text/css" href="/static/bs5/css/bootstrap.min.css">
-	<script type="text/javascript" src="/static/bs5/js/bootstrap.min.js"></script>
+	<%@ include file="../module/head.jsp" %>
 </head>
 <script type="text/javascript">
 	function formCheck(form) {
@@ -27,7 +26,8 @@
 	<header></header>
 	<section class="container">
 		<div class="mt-3">
-			<form action="/board/add" method="post">
+			<c:url var="boardAddUrl" value="/board/add" />
+			<form action="${boardAddUrl}" method="post">
 				<div class="mb-3">
 					<input class="form-control" type="text" name="title" placeholder="제목을 입력하세요.">
 				</div>
