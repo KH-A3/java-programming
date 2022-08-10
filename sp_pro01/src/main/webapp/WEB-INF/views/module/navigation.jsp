@@ -36,10 +36,10 @@
 						<a class="nav-link" href="${mainUrl}/board">게시판</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="${mainUrl}/emps">직원</a>
+						<a class="nav-link" href="${mainUrl}/emp">직원</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="${mainUrl}/depts">부서</a>
+						<a class="nav-link" href="${mainUrl}/dept">부서</a>
 					</li>
 				</c:if>
 			</ul>
