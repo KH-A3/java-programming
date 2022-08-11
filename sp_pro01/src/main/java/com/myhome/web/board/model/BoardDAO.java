@@ -67,42 +67,45 @@ public class BoardDAO {
 		return res == 1 ? true : false;
 	}
 	
-	/*
-	
 	public boolean updateViewCnt(BoardDTO data) {
+		logger.info("updateViewCnt(data={})", data);
 		String mapperId = String.format(mapper, "updateViewCnt");
 		int res = session.update(mapperId, data);
 		return res == 1 ? true : false;
 	}
 	
+	public BoardStaticsDTO selectStatics(BoardStaticsDTO data) {
+		logger.info("selectStatics(data={})", data);
+		String mapperId = String.format(mapper, "selectStatics");
+		BoardStaticsDTO res = session.selectOne(mapperId, data);
+		return res;
+	}
+	
+	public boolean insertStatics(BoardStaticsDTO data) {
+		logger.info("insertStatics(data={})", data);
+		String mapperId = String.format(mapper, "insertStatics");
+		int res = session.insert(mapperId, data);
+		return res == 1 ? true : false;
+	}
+	
+	public boolean updateStatics(BoardStaticsDTO data) {
+		logger.info("updateStatics(data={})", data);
+		String mapperId = String.format(mapper, "updateStatics");
+		int res = session.update(mapperId, data);
+		return res == 1 ? true : false;
+	}
+
 	public boolean updateLike(BoardDTO data) {
+		logger.info("updateLike(data={})", data);
 		String mapperId = String.format(mapper, "updateLike");
 		int res = session.update(mapperId, data);
 		return res == 1 ? true : false;
 	}
 	
-	public BoardStaticsDTO selectStatics(BoardStaticsDTO staticsData) {
-		String mapperId = String.format(mapper, "selectStatics");
-		BoardStaticsDTO data = session.selectOne(mapperId, staticsData);
-		return data;
-	}
-	
-	public boolean insertStatics(BoardStaticsDTO staticsData) {
-		String mapperId = String.format(mapper, "insertStatics");
-		int res = session.insert(mapperId, staticsData);
-		return res == 1 ? true : false;
-	}
-	
-	public boolean updateStatics(BoardStaticsDTO data) {
-		String mapperId = String.format(mapper, "updateStatics");
-		int res = session.update(mapperId, data);
-		return res == 1 ? true : false;
-	}
-	
 	public boolean updateStaticsLike(BoardStaticsDTO data) {
+		logger.info("updateStaticsLike(data={})", data);
 		String mapperId = String.format(mapper, "updateStaticsLike");
 		int res = session.update(mapperId, data);
 		return res == 1 ? true : false;
 	}
-	*/
 }

@@ -1,6 +1,9 @@
 package com.myhome.web.board.service;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.myhome.web.board.model.BoardDAO;
 import com.myhome.web.board.model.BoardDTO;
 import com.myhome.web.board.model.BoardStaticsDTO;
+import com.myhome.web.emp.model.EmpDTO;
 
 @Service
 public class BoardService {
@@ -60,15 +64,11 @@ public class BoardService {
 		
 		return result;
 	}
-	
-	/*
-
 	public void incViewCnt(HttpSession session, BoardDTO data) {
-		BoardDAO dao = new BoardDAO();
-		
+		logger.info("incViewCnt(data={})", data);
 		BoardStaticsDTO staticsData = new BoardStaticsDTO();
 		staticsData.setbId(data.getId());
-		staticsData.setEmpId(((EmpsDTO)session.getAttribute("loginData")).getEmpId());
+		staticsData.setEmpId(((EmpDTO)session.getAttribute("loginData")).getEmpId());
 		
 		staticsData = dao.selectStatics(staticsData);
 		
@@ -78,7 +78,7 @@ public class BoardService {
 			
 			staticsData = new BoardStaticsDTO();
 			staticsData.setbId(data.getId());
-			staticsData.setEmpId(((EmpsDTO)session.getAttribute("loginData")).getEmpId());
+			staticsData.setEmpId(((EmpDTO)session.getAttribute("loginData")).getEmpId());
 			dao.insertStatics(staticsData);
 		} else {
 			long timeDiff = new Date().getTime() - staticsData.getLatestViewDate().getTime();
@@ -90,16 +90,13 @@ public class BoardService {
 		
 		if(result) {
 			data.setViewCnt(data.getViewCnt() + 1);
-			dao.commit();
-			dao.close();
 		}
-		dao.rollback();
-		dao.close();
 	}
 	
 	public void incLike(HttpSession session, BoardDTO data) {
-		EmpsDTO empData = (EmpsDTO)session.getAttribute("loginData");
-		BoardDAO dao = new BoardDAO();
+		logger.info("incLike(data={})", data);
+		
+		EmpDTO empData = (EmpDTO)session.getAttribute("loginData");
 		
 		BoardStaticsDTO staticsData = new BoardStaticsDTO();
 		staticsData.setbId(data.getId());
@@ -120,14 +117,6 @@ public class BoardService {
 		
 		dao.updateStaticsLike(staticsData);
 		boolean result = dao.updateLike(data);
-		
-		if(result) {
-			dao.commit();
-		} else {
-			dao.rollback();
-		}
-		dao.close();
 	}
-	*/
 
 }

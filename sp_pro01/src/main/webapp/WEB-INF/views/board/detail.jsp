@@ -13,20 +13,6 @@
 	<script type="text/javascript" src="/static/bs5/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
 </head>
-<script type="text/javascript">
-	function ajaxLike(element, id) {
-		$.ajax({
-			type: "post",
-			url: "/ajax/board/like",
-			data: {
-				id: id
-			},
-			success: function(data) {
-				element.innerText = data.like;
-			}
-		});
-	}
-</script>
 <body>
 	<header></header>
 	<section class="container">
@@ -233,6 +219,23 @@
 						alert("권한이 오류");
 					} else if(data.code === "notExists") {
 						alert("이미 삭제되었습니다.")
+					}
+				}
+			});
+		}
+		function ajaxLike(element, id) {
+			$.ajax({
+				type: "post",
+				url: "${boardUrl}/like",
+				data: {
+					id: id
+				},
+				success: function(data) {
+					if(data.code === "success") {
+						element.innerText = data.like;
+					} else if(data.code === "noData") {
+						alert(data.message);
+						location.href = "${boardUrl}";
 					}
 				}
 			});

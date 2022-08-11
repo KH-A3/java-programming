@@ -61,19 +61,20 @@ public class BoardController {
 	
 	@GetMapping(value="/detail")
 	public String getDetail(Model model
+			, HttpSession session
 			, @RequestParam int id) {
 		logger.info("getDetail(id={})", id);
 		
 		BoardDTO data = service.getData(id);
 		
 		if(data != null) {
+			service.incViewCnt(session, data);
 			model.addAttribute("data", data);
-			return "board/detail";			
+			return "board/detail";
 		} else {
 			model.addAttribute("error", "해당 데이터가 존재하지 않습니다.");
 			return "error/notExists";
 		}
-			
 	}
 	
 	@GetMapping(value="/add")
@@ -184,4 +185,26 @@ public class BoardController {
 		
 		return json.toJSONString();
 	}
+	
+	@PostMapping(value="/like", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public String like(HttpSession session
+			, @RequestParam int id) {
+		logger.info("like(id={})", id);
+		
+		BoardDTO data = service.getData(id);
+		JSONObject json = new JSONObject();
+		
+		if(data == null) {
+			// 존재하지 않음.
+			json.put("code", "noData");
+			json.put("message", "해당 데이터가 존재하지 않습니다.");
+		} else {
+			service.incLike(session, data);
+			json.put("code", "success");
+			json.put("like", data.getLike());
+		}
+		return json.toJSONString();
+	}
+	
 }
