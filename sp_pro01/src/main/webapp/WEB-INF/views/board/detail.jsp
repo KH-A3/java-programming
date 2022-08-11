@@ -62,22 +62,22 @@
 		<nav>
 			<div>
 				<ul class="pagination justify-content-center">
-					<c:url var="boardUrl" value="/board/detail">
+					<c:url var="boardDetailUrl" value="/board/detail">
 						<c:param name="id">${data.id}</c:param>
 					</c:url>
 					<c:if test="${commentPage.hasPrevPage()}">
 						<li class="page-item">
-							<a class="page-link" href="${boardUrl}&page=${commentPage.prevPageNumber}">Prev</a>
+							<a class="page-link" href="${boardDetailUrl}&page=${commentPage.prevPageNumber}">Prev</a>
 						</li>
 					</c:if>
 					<c:forEach items="${commentPage.getPageNumberList(commentPage.currentPageNumber - 2, commentPage.currentPageNumber + 2)}" var="num">
 						<li class="page-item ${commentPage.currentPageNumber eq num ? 'active' : ''}">
-							<a class="page-link" href="${boardUrl}&page=${num}">${num}</a>
+							<a class="page-link" href="${boardDetailUrl}&page=${num}">${num}</a>
 						</li>
 					</c:forEach>
 					<c:if test="${commentPage.hasNextPage()}">
 						<li class="page-item">
-							<a class="page-link" href="${boardUrl}&page=${commentPage.nextPageNumber}">Next</a>
+							<a class="page-link" href="${boardDetailUrl}&page=${commentPage.nextPageNumber}">Next</a>
 						</li>
 					</c:if>
 				</ul>
@@ -219,7 +219,7 @@
 		}
 		function deleteBoard(boardId) {
 			$.ajax({
-				url: "/board/delete",
+				url: "${boardUrl}/delete",
 				type: "post",
 				data: {
 					id: boardId
@@ -228,7 +228,7 @@
 				success: function(data) {
 					if(data.code === "success") {
 						alert("삭제 완료");
-						location.href = "/board";
+						location.href = "${boardUrl}";
 					} else if(data.code === "permissionError") {
 						alert("권한이 오류");
 					} else if(data.code === "notExists") {

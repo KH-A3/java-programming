@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.myhome.web.board.model.BoardDAO;
 import com.myhome.web.board.model.BoardDTO;
+import com.myhome.web.board.model.BoardStaticsDTO;
 
 @Service
 public class BoardService {
@@ -44,7 +45,19 @@ public class BoardService {
 	}
 	
 	public boolean modify(BoardDTO data) {
+		logger.info("modify(data={})", data);
 		boolean result = dao.updateData(data);
+		return result;
+	}
+	
+	public boolean remove(BoardDTO data) {
+		logger.info("remove(data={})", data);
+		BoardStaticsDTO staticsData = new BoardStaticsDTO();
+		staticsData.setbId(data.getId());
+		
+		dao.deleteStaticsData(staticsData);
+		boolean result = dao.deleteData(data);
+		
 		return result;
 	}
 	
@@ -114,24 +127,6 @@ public class BoardService {
 			dao.rollback();
 		}
 		dao.close();
-	}
-
-	public boolean remove(BoardDTO data) {
-		BoardDAO dao = new BoardDAO();
-		
-		BoardStaticsDTO staticsData = new BoardStaticsDTO();
-		staticsData.setbId(data.getId());
-		
-		dao.deleteStaticsData(staticsData);
-		boolean result = dao.deleteData(data);
-		
-		if(result) {
-			dao.commit();
-		} else {
-			dao.rollback();
-		}
-		dao.close();
-		return result;
 	}
 	*/
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.myhome.web.board.model.BoardDTO;
@@ -135,7 +137,7 @@ public class BoardController {
 				if(result) {
 					return "redirect:/board/detail?id=" + data.getId();
 				} else {
-					return "board/modify";
+					return modify(model, empDto, boardVo.getId());
 				}
 			} else {
 				model.addAttribute("error", "해당 작업을 수행할 권한이 없습니다.");
@@ -145,5 +147,41 @@ public class BoardController {
 			model.addAttribute("error", "해당 데이터가 존재하지 않습니다.");
 			return "error/noExists";
 		}
+	}
+	
+	@PostMapping(value="/delete", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public String delete(@SessionAttribute("loginData") EmpDTO empDto
+			, @RequestParam int id) {
+		logger.info("delete(empDto={}, id={})", empDto, id);
+		
+		BoardDTO data = service.getData(id);
+		
+		JSONObject json = new JSONObject();
+		
+		if(data == null) {
+			// 삭제할 데이터 없음
+			json.put("code", "notExists");
+			json.put("message", "이미 삭제 된 데이터 입니다.");
+		} else {
+			if(data.getEmpId() == empDto.getEmpId()) {
+				// 작성자, 수정자 동일인
+				boolean result = service.remove(data);
+				if(result) {
+					json.put("code", "success");
+					json.put("message", "삭제가 완료되었습니다.");
+				} else {
+					// 삭제 실패
+					json.put("code", "fail");
+					json.put("message", "삭제 작업 중 문제가 발생하였습니다.");
+				}
+			} else {
+				// 작성자, 수정자 동일인 아님 - 권한 없음
+				json.put("code", "permissionError");
+				json.put("message", "삭제 할 권한이 없습니다.");
+			}
+		}
+		
+		return json.toJSONString();
 	}
 }

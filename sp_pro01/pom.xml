@@ -163,6 +163,15 @@
 			<artifactId>osdt_core</artifactId>
 			<version>${com.oracle.database.security}</version>
 		</dependency>
+		
+		<!-- JSON -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
