@@ -104,7 +104,7 @@
 				</div>
 			</c:forEach>
 			<div class="mb-1">
-				<form action="/comment/add" method="post">
+				<form action="${boardUrl}/comment/add" method="post">
 					<input type="hidden" name="bid" value="${data.id}">
 					<div class="input-group">
 						<textarea class="form-control" name="content" rows="2"></textarea>

@@ -8,8 +8,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>게시글 수정 - ${data.title}</title>
-	<link rel="stylesheet" type="text/css" href="/static/bs5/css/bootstrap.min.css">
-	<script type="text/javascript" src="/static/bs5/js/bootstrap.min.js"></script>
+	<%@ include file="../module/head.jsp" %>
+	<c:url var="ckeditor" value="/static/ckeditor" />
+	<script type="text/javascript" src="${ckeditor}/ckeditor.js"></script>
 </head>
 <script type="text/javascript">
 	function formCheck(form) {
@@ -62,5 +63,11 @@
 		</div>
 	</section>
 	<footer></footer>
+	<c:url var="upload" value="/upload/image" />
+	<script type="text/javascript">
+		CKEDITOR.replace("content", {
+			filebrowserUploadUrl: "${upload}?type=image"
+		})
+	</script>
 </body>
 </html>
