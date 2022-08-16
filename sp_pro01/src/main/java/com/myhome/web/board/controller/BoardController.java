@@ -2,6 +2,7 @@ package com.myhome.web.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -18,12 +19,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.myhome.web.board.model.BoardDTO;
 import com.myhome.web.board.service.BoardService;
 import com.myhome.web.board.vo.BoardVO;
 import com.myhome.web.common.util.Paging;
 import com.myhome.web.emp.model.EmpDTO;
+import com.myhome.web.upload.model.FileUploadDTO;
+import com.myhome.web.upload.service.FileUploadService;
 
 @Controller
 @RequestMapping(value="/board")
@@ -33,6 +37,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private FileUploadService fileUploadService;
 	
 	@RequestMapping(value="", method=RequestMethod.GET)
 	public String getList(Model model, HttpSession session
@@ -84,8 +91,10 @@ public class BoardController {
 	}
 	
 	@PostMapping(value="/add")
-	public String add(@SessionAttribute("loginData") EmpDTO empDto
-			, @ModelAttribute BoardVO boardVo) {
+	public String add(HttpServletRequest request
+			, @SessionAttribute("loginData") EmpDTO empDto
+			, @ModelAttribute BoardVO boardVo
+			, @RequestParam("fileUpload") MultipartFile[] files) {
 		logger.info("add(boardVo={})", boardVo);
 		
 		BoardDTO data = new BoardDTO();
@@ -94,9 +103,30 @@ public class BoardController {
 		data.setEmpId(empDto.getEmpId());
 		
 		int id = service.add(data);
+		
+		for(MultipartFile file: files) {
+			FileUploadDTO fileData = new FileUploadDTO();
+			fileData.setbId(id);
+			fileData.setLocation(request.getServletContext().getRealPath("/resources/board/upload"));
+			fileData.setUrl(request.getContextPath() + "/static/board/upload");
+			
+			try {
+				int fileResult = fileUploadService.upload(file, fileData);
+				if(fileResult == -1) {
+					request.setAttribute("error", "파일 업로드 수량을 초과하였습니다.");
+					return "board/add";
+				}
+			} catch(Exception e) {
+				request.setAttribute("error", "파일 업로드 작업중 예상치 못한 에러가 발생하였습니다.");
+				return "board/add";
+			}
+			
+		}
+		
 		if(id != -1) {
 			return "redirect:/board/detail?id=" + id;			
 		} else {
+			request.setAttribute("error", "게시글 저장 실패!");
 			return "board/add";
 		}
 	}

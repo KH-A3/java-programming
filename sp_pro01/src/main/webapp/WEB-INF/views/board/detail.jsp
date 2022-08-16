@@ -8,10 +8,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>${data.title}</title>
-	<link rel="stylesheet" type="text/css" href="/static/bs5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-	<script type="text/javascript" src="/static/bs5/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+	<%@ include file="../module/head.jsp" %>
 </head>
 <body>
 	<header></header>

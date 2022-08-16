@@ -1,0 +1,62 @@
+package com.myhome.web.upload.service;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.myhome.web.upload.model.FileUploadDAO;
+import com.myhome.web.upload.model.FileUploadDTO;
+
+@Service
+public class FileUploadService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(FileUploadService.class);
+
+	@Autowired
+	private FileUploadDAO dao;
+	
+	@Transactional
+	public int upload(MultipartFile file, FileUploadDTO data) throws Exception {
+		logger.info("upload(file={}, data={})", file, data);
+		
+		File folder = new File(data.getLocation());
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		data.setFileName(file.getOriginalFilename());
+		data.setFileSize((int)file.getSize());
+		data.setContentType(file.getContentType());
+		data.setLocation(data.getLocation() + File.separatorChar + data.getFileName());
+		data.setUrl(data.getUrl() + "/" + data.getFileName());
+		
+		int count = dao.getCount(data.getbId());
+		
+		if(count >= 3) {
+			// 업로드 수량 초과.
+			return -1;
+		}
+		
+		boolean result = dao.insertData(data);
+		System.out.println(result);
+		if(result) {
+			try {
+				System.out.println(data);
+				file.transferTo(new File(data.getLocation()));
+				System.out.println(data);
+				return 1;
+			} catch (IOException e) {
+				throw new Exception("서버에 파일 업로드를 실패하였습니다.");
+			}
+		} else {
+			// 업로드 실패
+			return 0;
+		}
+	}
+}
