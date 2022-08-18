@@ -73,10 +73,12 @@ public class BoardController {
 		logger.info("getDetail(id={})", id);
 		
 		BoardDTO data = service.getData(id);
+		List<FileUploadDTO> fileDatas = fileUploadService.getDatas(id);
 		
 		if(data != null) {
 			service.incViewCnt(session, data);
 			model.addAttribute("data", data);
+			model.addAttribute("fileDatas", fileDatas);
 			return "board/detail";
 		} else {
 			model.addAttribute("error", "해당 데이터가 존재하지 않습니다.");
@@ -105,10 +107,9 @@ public class BoardController {
 		int id = service.add(data);
 		
 		for(MultipartFile file: files) {
-			FileUploadDTO fileData = new FileUploadDTO();
-			fileData.setbId(id);
-			fileData.setLocation(request.getServletContext().getRealPath("/resources/board/upload"));
-			fileData.setUrl(request.getContextPath() + "/static/board/upload");
+			String location = request.getServletContext().getRealPath("/resources/board/upload");
+			String url = "/static/board/upload";
+			FileUploadDTO fileData = new FileUploadDTO(id, location, url);
 			
 			try {
 				int fileResult = fileUploadService.upload(file, fileData);

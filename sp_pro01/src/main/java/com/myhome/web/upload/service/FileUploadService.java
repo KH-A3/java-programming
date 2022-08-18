@@ -2,6 +2,8 @@ package com.myhome.web.upload.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +32,12 @@ public class FileUploadService {
 			folder.mkdirs();
 		}
 		
+		UUID uuid = UUID.nameUUIDFromBytes(file.getBytes());
+		
 		data.setFileName(file.getOriginalFilename());
+		data.setUuidName(uuid.toString());
 		data.setFileSize((int)file.getSize());
 		data.setContentType(file.getContentType());
-		data.setLocation(data.getLocation() + File.separatorChar + data.getFileName());
-		data.setUrl(data.getUrl() + "/" + data.getFileName());
 		
 		int count = dao.getCount(data.getbId());
 		
@@ -44,12 +47,9 @@ public class FileUploadService {
 		}
 		
 		boolean result = dao.insertData(data);
-		System.out.println(result);
 		if(result) {
 			try {
-				System.out.println(data);
-				file.transferTo(new File(data.getLocation()));
-				System.out.println(data);
+				file.transferTo(new File(data.getLocation() + File.separatorChar + data.getUuidName()));
 				return 1;
 			} catch (IOException e) {
 				throw new Exception("서버에 파일 업로드를 실패하였습니다.");
@@ -58,5 +58,10 @@ public class FileUploadService {
 			// 업로드 실패
 			return 0;
 		}
+	}
+
+	public List<FileUploadDTO> getDatas(int bId) {
+		List<FileUploadDTO> datas = dao.selectDatas(bId);
+		return datas;
 	}
 }

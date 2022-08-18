@@ -11,7 +11,14 @@
 	<insert id="insertData" parameterType="fileUploadDto">
 		INSERT INTO FILEUPLOAD
 		     VALUES(FILEUPLOAD_SEQ.NEXTVAL, #{bId}
-		          , #{fileName}, #{location}, #{url}
+		          , #{fileName}, #{uuidName}
+		          , #{location}, #{url}
 		          , #{fileSize}, #{contentType})
 	</insert>
+	
+	<select id="selectDatas" resultType="fileUploadDto">
+		SELECT *
+		  FROM FILEUPLOAD
+		 WHERE BID = #{bId}
+	</select>
 </mapper>
