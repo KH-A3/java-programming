@@ -32,8 +32,6 @@ import com.myhome.web.upload.service.FileUploadService;
 @Controller
 @RequestMapping(value="/board")
 public class BoardController {
-
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
 	private BoardService service;
@@ -45,8 +43,6 @@ public class BoardController {
 	public String getList(Model model, HttpSession session
 			, @RequestParam(defaultValue="1", required=false) int page
 			, @RequestParam(defaultValue="0", required=false) int pageCount) {
-		logger.info("getList(page={}, pageCount={})", page, pageCount);
-		
 		List datas = service.getAll();
 		
 		if(session.getAttribute("pageCount") == null) {
@@ -70,8 +66,6 @@ public class BoardController {
 	public String getDetail(Model model
 			, HttpSession session
 			, @RequestParam int id) {
-		logger.info("getDetail(id={})", id);
-		
 		BoardDTO data = service.getData(id);
 		List<FileUploadDTO> fileDatas = fileUploadService.getDatas(id);
 		
@@ -88,7 +82,6 @@ public class BoardController {
 	
 	@GetMapping(value="/add")
 	public String add() {
-		logger.info("add()");
 		return "board/add";
 	}
 	
@@ -97,8 +90,6 @@ public class BoardController {
 			, @SessionAttribute("loginData") EmpDTO empDto
 			, @ModelAttribute BoardVO boardVo
 			, @RequestParam("fileUpload") MultipartFile[] files) {
-		logger.info("add(boardVo={})", boardVo);
-		
 		BoardDTO data = new BoardDTO();
 		data.setTitle(boardVo.getTitle());
 		data.setContent(boardVo.getContent());
@@ -136,12 +127,13 @@ public class BoardController {
 	public String modify(Model model
 			, @SessionAttribute("loginData") EmpDTO empDto
 			, @RequestParam int id) {
-		logger.info("modify(empDto={}, id={})", empDto, id);
-		
 		BoardDTO data = service.getData(id);
+		List<FileUploadDTO> fileDatas = fileUploadService.getDatas(id);
+		
 		if(data != null) {
 			if(data.getEmpId() == empDto.getEmpId()) {
 				model.addAttribute("data", data);
+				model.addAttribute("fileDatas", fileDatas);
 				return "board/modify";
 			} else {
 				model.addAttribute("error", "해당 작업을 수행할 권한이 없습니다.");
@@ -157,8 +149,6 @@ public class BoardController {
 	public String modify(Model model
 			, @SessionAttribute("loginData") EmpDTO empDto
 			, @ModelAttribute BoardVO boardVo) {
-		logger.info("modify(empDto={}, boardVo={})", empDto, boardVo);
-		
 		BoardDTO data = service.getData(boardVo.getId());
 		
 		if(data != null) {
@@ -185,8 +175,6 @@ public class BoardController {
 	@ResponseBody
 	public String delete(@SessionAttribute("loginData") EmpDTO empDto
 			, @RequestParam int id) {
-		logger.info("delete(empDto={}, id={})", empDto, id);
-		
 		BoardDTO data = service.getData(id);
 		
 		JSONObject json = new JSONObject();
@@ -221,8 +209,6 @@ public class BoardController {
 	@ResponseBody
 	public String like(HttpSession session
 			, @RequestParam int id) {
-		logger.info("like(id={})", id);
-		
 		BoardDTO data = service.getData(id);
 		JSONObject json = new JSONObject();
 		

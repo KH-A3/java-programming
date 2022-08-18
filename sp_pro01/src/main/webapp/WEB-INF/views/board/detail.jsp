@@ -32,11 +32,15 @@
 					<label id="id_like" class="text-secondary text-opacity-75">${data.like}</label>
 				</div>
 			</div>
-			<div>
+			<div class="row mb-1">
+				<ul class="col-4 ms-auto list-group">
 				<c:forEach items="${fileDatas}" var="file">
 					<c:url var="downUrl" value="${file.url}/${file.uuidName}" />
-					<a href="${downUrl}" download="${file.fileName}">${file.fileName}</a><br>
+					<li class="list-group-item text-truncate">
+						<a class="text-info text-decoration-none" href="${downUrl}" download="${file.fileName}">${file.fileName}</a>
+					</li>
 				</c:forEach>
+				</ul>
 			</div>
 			<div class="mb-1 text-end">
 				<c:url var="boardUrl" value="/board" />
