@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,14 +16,11 @@ import com.myhome.web.upload.model.FileUploadDTO;
 @Service
 public class FileUploadService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(FileUploadService.class);
-
 	@Autowired
 	private FileUploadDAO dao;
 	
 	@Transactional
 	public int upload(MultipartFile file, FileUploadDTO data) throws Exception {
-		logger.info("upload(file={}, data={})", file, data);
 		
 		File folder = new File(data.getLocation());
 		if(!folder.exists()) {

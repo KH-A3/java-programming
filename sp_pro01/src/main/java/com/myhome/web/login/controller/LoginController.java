@@ -5,8 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +19,6 @@ import com.myhome.web.login.vo.LoginVO;
 
 @Controller
 public class LoginController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private LoginService service;
@@ -32,7 +28,6 @@ public class LoginController {
 	
 	@GetMapping(value="/login")
 	public String login(Model model) {
-		logger.info("login()");
 		List<DeptDTO> deptDatas = deptService.getAll();
 		model.addAttribute("deptDatas", deptDatas);
 		return "login/login";
@@ -42,7 +37,6 @@ public class LoginController {
 	public String login(LoginVO loginVo, String url
 			, HttpServletRequest request
 			, HttpSession session, Model model) {
-		logger.info("login({}, {}, {})", loginVo.getEmpId(), loginVo.getDeptId(), loginVo.getEmpName());
 		
 		boolean result = service.getLogin(session, loginVo);
 		
