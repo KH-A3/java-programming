@@ -46,6 +46,11 @@
 		<filter-name>EncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- error-page>
+		<error-code>403</error-code>
+		<location>/WEB-INF/views/error/permission.jsp</location>
+	</error-page -->
 
 	<!-- error-page>
 		<exception-type>org.springframework.dao.PermissionDeniedDataAccessException</exception-type>

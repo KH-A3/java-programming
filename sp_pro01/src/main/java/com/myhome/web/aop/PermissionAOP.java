@@ -10,9 +10,11 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.PermissionDeniedDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.myhome.web.emp.model.EmpDTO;
 import com.myhome.web.login.model.PermDTO;
@@ -42,7 +44,7 @@ public class PermissionAOP {
 	private void permDeleteCut() {}
 	
 	@Before(value="permSelectCut()")
-	public void beforePermSelect(JoinPoint joinPoint) throws Exception {
+	public void beforePermSelect(JoinPoint joinPoint) throws Throwable {
 		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpServletResponse resp = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
 		HttpSession session = req.getSession();
@@ -59,16 +61,14 @@ public class PermissionAOP {
 		}
 		
 		boolean result = dao.selectData(data);
-		
 		if(result) {
-			if(data.ispRead()) {
-				System.out.println("읽기 권한 있음");
-			} else {
-				 System.out.println("읽기 권한 없음");
-				 throw new PermissionDeniedDataAccessException("권한이 없습니다.", null);
+			if(!data.ispRead()) {
+				throw new PermissionDeniedDataAccessException("권한이 없습니다.", null);
+				// throw new ResponseStatusException(HttpStatus.FORBIDDEN, "권한이 없습니다.", null);
 			}
 		} else {
-			System.out.println("권한 정보를 찾을 수 없음.");
+			throw new PermissionDeniedDataAccessException("권한 정보가 없습니다.", null);
+			// throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "권한이 없습니다.", null);
 		}
 	}
 	

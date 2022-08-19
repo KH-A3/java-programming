@@ -13,6 +13,7 @@
 <body>
 	<c:set var="e" value="<%=exception %>" />
 	${e.message}<br>
-	${exception}
+	${exception}<br>
+	${error}
 </body>
 </html>

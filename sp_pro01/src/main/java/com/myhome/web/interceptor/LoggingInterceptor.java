@@ -1,5 +1,6 @@
 package com.myhome.web.interceptor;
 
+import java.lang.reflect.Parameter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.MethodParameter;
+import org.springframework.ui.Model;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,6 +43,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
 		logger.info("[{}] - {} 내부 로직 동작 시간 -> {}초", dateFormat.format(date), request.getRequestURI(), timer / 1000.0);
+		logger.info("[{}] - {} 뷰로 포워드", dateFormat.format(date), modelAndView.getViewName());
 		
 		request.setAttribute("timer", date);
 	}
@@ -52,7 +57,7 @@ public class LoggingInterceptor implements HandlerInterceptor {
 		long timer = date.getTime() - oldDate.getTime();
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
-		logger.info("[{}] - {} 뷰 랜더링 시간 -> {}초", dateFormat.format(date), request.getRequestURI(), timer / 1000.0);
+		logger.info("[{}] - 뷰 랜더링 완료 {}초", dateFormat.format(date), timer / 1000.0);
 		
 		request.setAttribute("timer", date);
 	}
