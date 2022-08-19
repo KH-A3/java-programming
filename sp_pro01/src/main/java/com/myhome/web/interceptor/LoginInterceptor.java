@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.myhome.web.emp.model.EmpDTO;
+
 public class LoginInterceptor implements HandlerInterceptor {
 
 	@Override
@@ -18,6 +20,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 			if(request.getQueryString() != null) {
 				qs = "?" + request.getQueryString();
 			}
+			EmpDTO empData = new EmpDTO();
+			session.setAttribute("loginData", empData);
 			response.sendRedirect(request.getContextPath() + "/login?url=" + request.getRequestURI() + qs);
 			return false;
 		} else {

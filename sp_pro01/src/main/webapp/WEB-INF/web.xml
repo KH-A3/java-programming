@@ -47,8 +47,12 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- error-page>
+		<exception-type>org.springframework.dao.PermissionDeniedDataAccessException</exception-type>
+		<location>/WEB-INF/views/error/permission.jsp</location>
+	</error-page>
 	<error-page>
 		<exception-type>java.lang.RuntimeException</exception-type>
 		<location>/WEB-INF/views/error/RuntimeException.jsp</location>
-	</error-page>
+	</error-page-->
 </web-app>

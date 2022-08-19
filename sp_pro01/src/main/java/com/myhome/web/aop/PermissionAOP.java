@@ -9,6 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.PermissionDeniedDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -41,34 +42,33 @@ public class PermissionAOP {
 	private void permDeleteCut() {}
 	
 	@Before(value="permSelectCut()")
-	public void beforePermSelect(JoinPoint joinPoint) {
+	public void beforePermSelect(JoinPoint joinPoint) throws Exception {
 		HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		HttpServletResponse resp = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
 		HttpSession session = req.getSession();
 		EmpDTO empData = (EmpDTO)session.getAttribute("loginData");
-		System.out.println(empData);
-		if(empData == null) {
-			empData = new EmpDTO();
-			empData.setEmpId(0);
-		}
-		System.out.println(empData);
-		System.out.println("1:" + joinPoint.getSignature().toShortString());
+		
 		String serviceName = joinPoint.getSignature().toShortString().split("\\.")[0];
-		System.out.println("2:" + serviceName);
 		serviceName = serviceName.split("Service")[0].toLowerCase();
-		System.out.println("3:" + serviceName);
 		
 		PermDTO data = new PermDTO();
-		data.setEmpId(empData.getEmpId());
-		data.setTableName(serviceName);
-		
-		if(empData.getEmpId() == 0) {
-			data.setTableName("other");
+		data.setTableName("other");
+		if(empData != null) {
+			data.setEmpId(empData.getEmpId());
+			data.setTableName(serviceName);
 		}
 		
 		boolean result = dao.selectData(data);
+		
 		if(result) {
-			System.out.println("읽기 권한 ? -> " + data.ispRead());
+			if(data.ispRead()) {
+				System.out.println("읽기 권한 있음");
+			} else {
+				 System.out.println("읽기 권한 없음");
+				 throw new PermissionDeniedDataAccessException("권한이 없습니다.", null);
+			}
+		} else {
+			System.out.println("권한 정보를 찾을 수 없음.");
 		}
 	}
 	
